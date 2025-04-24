@@ -1,0 +1,1 @@
+import './QRWidget/index';
