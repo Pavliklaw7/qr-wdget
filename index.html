@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>QR Widget</title>
+    <script type="module" src="./qr-widget.js"></script>
+    <script defer>
+      window.addEventListener('DOMContentLoaded', () => {
+        const qrWidget = document.querySelector('qr-widget');
+        setTimeout(() => {
+          qrWidget.toggleCamera();
+        }, 3000);
+      });
+    </script>
+  </head>
+  <body>
+    <qr-widget> </qr-widget>
+  </body>
+</html>
