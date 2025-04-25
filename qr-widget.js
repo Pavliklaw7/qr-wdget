@@ -22437,7 +22437,7 @@ const sr = class sr extends Kt {
   }
   update(c) {
     super.update(c), c.has("showScanner") && this.showScanner && (this.scanner = new Ri("scanner"), this._checkIfMobile(), Ri.getCameras().then((h) => {
-      this.cameras = h, this._showNotification(JSON.stringify(h), "success");
+      this.cameras = h;
       const w = h.find((A) => /back|rear|environment/i.test(A.label));
       this.camIndex = h.indexOf(w || h[0]), this._startCamera();
     }).catch((h) => this._showNotification("No cameras: " + h, "danger")));
