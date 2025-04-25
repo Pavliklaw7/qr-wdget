@@ -1,13 +1,13 @@
 function Es(x, c) {
   for (var h = 0; h < c.length; h++) {
-    const w = c[h];
-    if (typeof w != "string" && !Array.isArray(w)) {
-      for (const E in w)
+    const g = c[h];
+    if (typeof g != "string" && !Array.isArray(g)) {
+      for (const E in g)
         if (E !== "default" && !(E in x)) {
-          const g = Object.getOwnPropertyDescriptor(w, E);
-          g && Object.defineProperty(x, E, g.get ? g : {
+          const w = Object.getOwnPropertyDescriptor(g, E);
+          w && Object.defineProperty(x, E, w.get ? w : {
             enumerable: !0,
-            get: () => w[E]
+            get: () => g[E]
           });
         }
     }
@@ -21,16 +21,16 @@ function Es(x, c) {
  */
 const Qn = globalThis, Br = Qn.ShadowRoot && (Qn.ShadyCSS === void 0 || Qn.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, Pr = Symbol(), hi = /* @__PURE__ */ new WeakMap();
 let vi = class {
-  constructor(c, h, w) {
-    if (this._$cssResult$ = !0, w !== Pr) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+  constructor(c, h, g) {
+    if (this._$cssResult$ = !0, g !== Pr) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
     this.cssText = c, this.t = h;
   }
   get styleSheet() {
     let c = this.o;
     const h = this.t;
     if (Br && c === void 0) {
-      const w = h !== void 0 && h.length === 1;
-      w && (c = hi.get(h)), c === void 0 && ((this.o = c = new CSSStyleSheet()).replaceSync(this.cssText), w && hi.set(h, c));
+      const g = h !== void 0 && h.length === 1;
+      g && (c = hi.get(h)), c === void 0 && ((this.o = c = new CSSStyleSheet()).replaceSync(this.cssText), g && hi.set(h, c));
     }
     return c;
   }
@@ -39,21 +39,21 @@ let vi = class {
   }
 };
 const Cs = (x) => new vi(typeof x == "string" ? x : x + "", void 0, Pr), Lr = (x, ...c) => {
-  const h = x.length === 1 ? x[0] : c.reduce((w, E, g) => w + ((b) => {
+  const h = x.length === 1 ? x[0] : c.reduce((g, E, w) => g + ((b) => {
     if (b._$cssResult$ === !0) return b.cssText;
     if (typeof b == "number") return b;
     throw Error("Value passed to 'css' function must be a 'css' function result: " + b + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
-  })(E) + x[g + 1], x[0]);
+  })(E) + x[w + 1], x[0]);
   return new vi(h, x, Pr);
 }, ps = (x, c) => {
   if (Br) x.adoptedStyleSheets = c.map((h) => h instanceof CSSStyleSheet ? h : h.styleSheet);
   else for (const h of c) {
-    const w = document.createElement("style"), E = Qn.litNonce;
-    E !== void 0 && w.setAttribute("nonce", E), w.textContent = h.cssText, x.appendChild(w);
+    const g = document.createElement("style"), E = Qn.litNonce;
+    E !== void 0 && g.setAttribute("nonce", E), g.textContent = h.cssText, x.appendChild(g);
   }
 }, ui = Br ? (x) => x : (x) => x instanceof CSSStyleSheet ? ((c) => {
   let h = "";
-  for (const w of c.cssRules) h += w.cssText;
+  for (const g of c.cssRules) h += g.cssText;
   return Cs(h);
 })(x) : x;
 /**
@@ -91,7 +91,7 @@ const { is: ms, defineProperty: Is, getOwnPropertyDescriptor: bs, getOwnProperty
   return h;
 } }, Fr = (x, c) => !ms(x, c), di = { attribute: !0, type: String, converter: $n, reflect: !1, useDefault: !1, hasChanged: Fr };
 Symbol.metadata ?? (Symbol.metadata = Symbol("metadata")), kt.litPropertyMetadata ?? (kt.litPropertyMetadata = /* @__PURE__ */ new WeakMap());
-let cn = class extends HTMLElement {
+let un = class extends HTMLElement {
   static addInitializer(c) {
     this._$Ei(), (this.l ?? (this.l = [])).push(c);
   }
@@ -100,19 +100,19 @@ let cn = class extends HTMLElement {
   }
   static createProperty(c, h = di) {
     if (h.state && (h.attribute = !1), this._$Ei(), this.prototype.hasOwnProperty(c) && ((h = Object.create(h)).wrapped = !0), this.elementProperties.set(c, h), !h.noAccessor) {
-      const w = Symbol(), E = this.getPropertyDescriptor(c, w, h);
+      const g = Symbol(), E = this.getPropertyDescriptor(c, g, h);
       E !== void 0 && Is(this.prototype, c, E);
     }
   }
-  static getPropertyDescriptor(c, h, w) {
-    const { get: E, set: g } = bs(this.prototype, c) ?? { get() {
+  static getPropertyDescriptor(c, h, g) {
+    const { get: E, set: w } = bs(this.prototype, c) ?? { get() {
       return this[h];
     }, set(b) {
       this[h] = b;
     } };
     return { get: E, set(b) {
       const M = E == null ? void 0 : E.call(this);
-      g == null || g.call(this, b), this.requestUpdate(c, M, w);
+      w == null || w.call(this, b), this.requestUpdate(c, M, g);
     }, configurable: !0, enumerable: !0 };
   }
   static getPropertyOptions(c) {
@@ -126,17 +126,17 @@ let cn = class extends HTMLElement {
   static finalize() {
     if (this.hasOwnProperty(Rn("finalized"))) return;
     if (this.finalized = !0, this._$Ei(), this.hasOwnProperty(Rn("properties"))) {
-      const h = this.properties, w = [...ys(h), ..._s(h)];
-      for (const E of w) this.createProperty(E, h[E]);
+      const h = this.properties, g = [...ys(h), ..._s(h)];
+      for (const E of g) this.createProperty(E, h[E]);
     }
     const c = this[Symbol.metadata];
     if (c !== null) {
       const h = litPropertyMetadata.get(c);
-      if (h !== void 0) for (const [w, E] of h) this.elementProperties.set(w, E);
+      if (h !== void 0) for (const [g, E] of h) this.elementProperties.set(g, E);
     }
     this._$Eh = /* @__PURE__ */ new Map();
-    for (const [h, w] of this.elementProperties) {
-      const E = this._$Eu(h, w);
+    for (const [h, g] of this.elementProperties) {
+      const E = this._$Eu(h, g);
       E !== void 0 && this._$Eh.set(E, h);
     }
     this.elementStyles = this.finalizeStyles(this.styles);
@@ -144,14 +144,14 @@ let cn = class extends HTMLElement {
   static finalizeStyles(c) {
     const h = [];
     if (Array.isArray(c)) {
-      const w = new Set(c.flat(1 / 0).reverse());
-      for (const E of w) h.unshift(ui(E));
+      const g = new Set(c.flat(1 / 0).reverse());
+      for (const E of g) h.unshift(ui(E));
     } else c !== void 0 && h.push(ui(c));
     return h;
   }
   static _$Eu(c, h) {
-    const w = h.attribute;
-    return w === !1 ? void 0 : typeof w == "string" ? w : typeof c == "string" ? c.toLowerCase() : void 0;
+    const g = h.attribute;
+    return g === !1 ? void 0 : typeof g == "string" ? g : typeof c == "string" ? c.toLowerCase() : void 0;
   }
   constructor() {
     super(), this._$Ep = void 0, this.isUpdatePending = !1, this.hasUpdated = !1, this._$Em = null, this._$Ev();
@@ -170,7 +170,7 @@ let cn = class extends HTMLElement {
   }
   _$E_() {
     const c = /* @__PURE__ */ new Map(), h = this.constructor.elementProperties;
-    for (const w of h.keys()) this.hasOwnProperty(w) && (c.set(w, this[w]), delete this[w]);
+    for (const g of h.keys()) this.hasOwnProperty(g) && (c.set(g, this[g]), delete this[g]);
     c.size > 0 && (this._$Ep = c);
   }
   createRenderRoot() {
@@ -180,8 +180,8 @@ let cn = class extends HTMLElement {
   connectedCallback() {
     var c;
     this.renderRoot ?? (this.renderRoot = this.createRenderRoot()), this.enableUpdating(!0), (c = this._$EO) == null || c.forEach((h) => {
-      var w;
-      return (w = h.hostConnected) == null ? void 0 : w.call(h);
+      var g;
+      return (g = h.hostConnected) == null ? void 0 : g.call(h);
     });
   }
   enableUpdating(c) {
@@ -189,40 +189,40 @@ let cn = class extends HTMLElement {
   disconnectedCallback() {
     var c;
     (c = this._$EO) == null || c.forEach((h) => {
-      var w;
-      return (w = h.hostDisconnected) == null ? void 0 : w.call(h);
+      var g;
+      return (g = h.hostDisconnected) == null ? void 0 : g.call(h);
     });
   }
-  attributeChangedCallback(c, h, w) {
-    this._$AK(c, w);
+  attributeChangedCallback(c, h, g) {
+    this._$AK(c, g);
   }
   _$ET(c, h) {
-    var g;
-    const w = this.constructor.elementProperties.get(c), E = this.constructor._$Eu(c, w);
-    if (E !== void 0 && w.reflect === !0) {
-      const b = (((g = w.converter) == null ? void 0 : g.toAttribute) !== void 0 ? w.converter : $n).toAttribute(h, w.type);
+    var w;
+    const g = this.constructor.elementProperties.get(c), E = this.constructor._$Eu(c, g);
+    if (E !== void 0 && g.reflect === !0) {
+      const b = (((w = g.converter) == null ? void 0 : w.toAttribute) !== void 0 ? g.converter : $n).toAttribute(h, g.type);
       this._$Em = c, b == null ? this.removeAttribute(E) : this.setAttribute(E, b), this._$Em = null;
     }
   }
   _$AK(c, h) {
-    var g, b;
-    const w = this.constructor, E = w._$Eh.get(c);
+    var w, b;
+    const g = this.constructor, E = g._$Eh.get(c);
     if (E !== void 0 && this._$Em !== E) {
-      const M = w.getPropertyOptions(E), O = typeof M.converter == "function" ? { fromAttribute: M.converter } : ((g = M.converter) == null ? void 0 : g.fromAttribute) !== void 0 ? M.converter : $n;
+      const M = g.getPropertyOptions(E), O = typeof M.converter == "function" ? { fromAttribute: M.converter } : ((w = M.converter) == null ? void 0 : w.fromAttribute) !== void 0 ? M.converter : $n;
       this._$Em = E, this[E] = O.fromAttribute(h, M.type) ?? ((b = this._$Ej) == null ? void 0 : b.get(E)) ?? null, this._$Em = null;
     }
   }
-  requestUpdate(c, h, w) {
+  requestUpdate(c, h, g) {
     var E;
     if (c !== void 0) {
-      const g = this.constructor, b = this[c];
-      if (w ?? (w = g.getPropertyOptions(c)), !((w.hasChanged ?? Fr)(b, h) || w.useDefault && w.reflect && b === ((E = this._$Ej) == null ? void 0 : E.get(c)) && !this.hasAttribute(g._$Eu(c, w)))) return;
-      this.C(c, h, w);
+      const w = this.constructor, b = this[c];
+      if (g ?? (g = w.getPropertyOptions(c)), !((g.hasChanged ?? Fr)(b, h) || g.useDefault && g.reflect && b === ((E = this._$Ej) == null ? void 0 : E.get(c)) && !this.hasAttribute(w._$Eu(c, g)))) return;
+      this.C(c, h, g);
     }
     this.isUpdatePending === !1 && (this._$ES = this._$EP());
   }
-  C(c, h, { useDefault: w, reflect: E, wrapped: g }, b) {
-    w && !(this._$Ej ?? (this._$Ej = /* @__PURE__ */ new Map())).has(c) && (this._$Ej.set(c, b ?? h ?? this[c]), g !== !0 || b !== void 0) || (this._$AL.has(c) || (this.hasUpdated || w || (h = void 0), this._$AL.set(c, h)), E === !0 && this._$Em !== c && (this._$Eq ?? (this._$Eq = /* @__PURE__ */ new Set())).add(c));
+  C(c, h, { useDefault: g, reflect: E, wrapped: w }, b) {
+    g && !(this._$Ej ?? (this._$Ej = /* @__PURE__ */ new Map())).has(c) && (this._$Ej.set(c, b ?? h ?? this[c]), w !== !0 || b !== void 0) || (this._$AL.has(c) || (this.hasUpdated || g || (h = void 0), this._$AL.set(c, h)), E === !0 && this._$Em !== c && (this._$Eq ?? (this._$Eq = /* @__PURE__ */ new Set())).add(c));
   }
   async _$EP() {
     this.isUpdatePending = !0;
@@ -238,25 +238,25 @@ let cn = class extends HTMLElement {
     return this.performUpdate();
   }
   performUpdate() {
-    var w;
+    var g;
     if (!this.isUpdatePending) return;
     if (!this.hasUpdated) {
       if (this.renderRoot ?? (this.renderRoot = this.createRenderRoot()), this._$Ep) {
-        for (const [g, b] of this._$Ep) this[g] = b;
+        for (const [w, b] of this._$Ep) this[w] = b;
         this._$Ep = void 0;
       }
       const E = this.constructor.elementProperties;
-      if (E.size > 0) for (const [g, b] of E) {
-        const { wrapped: M } = b, O = this[g];
-        M !== !0 || this._$AL.has(g) || O === void 0 || this.C(g, void 0, b, O);
+      if (E.size > 0) for (const [w, b] of E) {
+        const { wrapped: M } = b, O = this[w];
+        M !== !0 || this._$AL.has(w) || O === void 0 || this.C(w, void 0, b, O);
       }
     }
     let c = !1;
     const h = this._$AL;
     try {
-      c = this.shouldUpdate(h), c ? (this.willUpdate(h), (w = this._$EO) == null || w.forEach((E) => {
-        var g;
-        return (g = E.hostUpdate) == null ? void 0 : g.call(E);
+      c = this.shouldUpdate(h), c ? (this.willUpdate(h), (g = this._$EO) == null || g.forEach((E) => {
+        var w;
+        return (w = E.hostUpdate) == null ? void 0 : w.call(E);
       }), this.update(h)) : this._$EM();
     } catch (E) {
       throw c = !1, this._$EM(), E;
@@ -267,9 +267,9 @@ let cn = class extends HTMLElement {
   }
   _$AE(c) {
     var h;
-    (h = this._$EO) == null || h.forEach((w) => {
+    (h = this._$EO) == null || h.forEach((g) => {
       var E;
-      return (E = w.hostUpdated) == null ? void 0 : E.call(w);
+      return (E = g.hostUpdated) == null ? void 0 : E.call(g);
     }), this.hasUpdated || (this.hasUpdated = !0, this.firstUpdated(c)), this.updated(c);
   }
   _$EM() {
@@ -292,7 +292,7 @@ let cn = class extends HTMLElement {
   firstUpdated(c) {
   }
 };
-cn.elementStyles = [], cn.shadowRootOptions = { mode: "open" }, cn[Rn("elementProperties")] = /* @__PURE__ */ new Map(), cn[Rn("finalized")] = /* @__PURE__ */ new Map(), Or == null || Or({ ReactiveElement: cn }), (kt.reactiveElementVersions ?? (kt.reactiveElementVersions = [])).push("2.1.0");
+un.elementStyles = [], un.shadowRootOptions = { mode: "open" }, un[Rn("elementProperties")] = /* @__PURE__ */ new Map(), un[Rn("finalized")] = /* @__PURE__ */ new Map(), Or == null || Or({ ReactiveElement: un }), (kt.reactiveElementVersions ?? (kt.reactiveElementVersions = [])).push("2.1.0");
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -300,30 +300,30 @@ cn.elementStyles = [], cn.shadowRootOptions = { mode: "open" }, cn[Rn("elementPr
  */
 const Dn = globalThis, Jn = Dn.trustedTypes, xi = Jn ? Jn.createPolicy("lit-html", { createHTML: (x) => x }) : void 0, Bi = "$lit$", Ft = `lit$${Math.random().toFixed(9).slice(2)}$`, Pi = "?" + Ft, Ns = `<${Pi}>`, qt = document, vn = () => qt.createComment(""), Bn = (x) => x === null || typeof x != "object" && typeof x != "function", kr = Array.isArray, Os = (x) => kr(x) || typeof (x == null ? void 0 : x[Symbol.iterator]) == "function", Rr = `[ 	
 \f\r]`, Nn = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, gi = /-->/g, wi = />/g, Yt = RegExp(`>|${Rr}(?:([^\\s"'>=/]+)(${Rr}*=${Rr}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), Ai = /'/g, Ei = /"/g, Li = /^(?:script|style|textarea|title)$/i, Rs = (x) => (c, ...h) => ({ _$litType$: x, strings: c, values: h }), Mn = Rs(1), un = Symbol.for("lit-noChange"), Ge = Symbol.for("lit-nothing"), Ci = /* @__PURE__ */ new WeakMap(), Zt = qt.createTreeWalker(qt, 129);
+\f\r"'\`<>=]|("|')|))|$)`, "g"), Ai = /'/g, Ei = /"/g, Li = /^(?:script|style|textarea|title)$/i, Rs = (x) => (c, ...h) => ({ _$litType$: x, strings: c, values: h }), Mn = Rs(1), dn = Symbol.for("lit-noChange"), Ge = Symbol.for("lit-nothing"), Ci = /* @__PURE__ */ new WeakMap(), Zt = qt.createTreeWalker(qt, 129);
 function Fi(x, c) {
   if (!kr(x) || !x.hasOwnProperty("raw")) throw Error("invalid template strings array");
   return xi !== void 0 ? xi.createHTML(c) : c;
 }
 const Ds = (x, c) => {
-  const h = x.length - 1, w = [];
-  let E, g = c === 2 ? "<svg>" : c === 3 ? "<math>" : "", b = Nn;
+  const h = x.length - 1, g = [];
+  let E, w = c === 2 ? "<svg>" : c === 3 ? "<math>" : "", b = Nn;
   for (let M = 0; M < h; M++) {
     const O = x[M];
     let m, v, R = -1, ne = 0;
     for (; ne < O.length && (b.lastIndex = ne, v = b.exec(O), v !== null); ) ne = b.lastIndex, b === Nn ? v[1] === "!--" ? b = gi : v[1] !== void 0 ? b = wi : v[2] !== void 0 ? (Li.test(v[2]) && (E = RegExp("</" + v[2], "g")), b = Yt) : v[3] !== void 0 && (b = Yt) : b === Yt ? v[0] === ">" ? (b = E ?? Nn, R = -1) : v[1] === void 0 ? R = -2 : (R = b.lastIndex - v[2].length, m = v[1], b = v[3] === void 0 ? Yt : v[3] === '"' ? Ei : Ai) : b === Ei || b === Ai ? b = Yt : b === gi || b === wi ? b = Nn : (b = Yt, E = void 0);
     const q = b === Yt && x[M + 1].startsWith("/>") ? " " : "";
-    g += b === Nn ? O + Ns : R >= 0 ? (w.push(m), O.slice(0, R) + Bi + O.slice(R) + Ft + q) : O + Ft + (R === -2 ? M : q);
+    w += b === Nn ? O + Ns : R >= 0 ? (g.push(m), O.slice(0, R) + Bi + O.slice(R) + Ft + q) : O + Ft + (R === -2 ? M : q);
   }
-  return [Fi(x, g + (x[h] || "<?>") + (c === 2 ? "</svg>" : c === 3 ? "</math>" : "")), w];
+  return [Fi(x, w + (x[h] || "<?>") + (c === 2 ? "</svg>" : c === 3 ? "</math>" : "")), g];
 };
 class Pn {
-  constructor({ strings: c, _$litType$: h }, w) {
+  constructor({ strings: c, _$litType$: h }, g) {
     let E;
     this.parts = [];
-    let g = 0, b = 0;
+    let w = 0, b = 0;
     const M = c.length - 1, O = this.parts, [m, v] = Ds(c, h);
-    if (this.el = Pn.createElement(m, w), Zt.currentNode = this.el.content, h === 2 || h === 3) {
+    if (this.el = Pn.createElement(m, g), Zt.currentNode = this.el.content, h === 2 || h === 3) {
       const R = this.el.content.firstChild;
       R.replaceWith(...R.childNodes);
     }
@@ -331,35 +331,35 @@ class Pn {
       if (E.nodeType === 1) {
         if (E.hasAttributes()) for (const R of E.getAttributeNames()) if (R.endsWith(Bi)) {
           const ne = v[b++], q = E.getAttribute(R).split(Ft), Me = /([.?@])?(.*)/.exec(ne);
-          O.push({ type: 1, index: g, name: Me[2], strings: q, ctor: Me[1] === "." ? vs : Me[1] === "?" ? Bs : Me[1] === "@" ? Ps : or }), E.removeAttribute(R);
-        } else R.startsWith(Ft) && (O.push({ type: 6, index: g }), E.removeAttribute(R));
+          O.push({ type: 1, index: w, name: Me[2], strings: q, ctor: Me[1] === "." ? vs : Me[1] === "?" ? Bs : Me[1] === "@" ? Ps : or }), E.removeAttribute(R);
+        } else R.startsWith(Ft) && (O.push({ type: 6, index: w }), E.removeAttribute(R));
         if (Li.test(E.tagName)) {
           const R = E.textContent.split(Ft), ne = R.length - 1;
           if (ne > 0) {
             E.textContent = Jn ? Jn.emptyScript : "";
-            for (let q = 0; q < ne; q++) E.append(R[q], vn()), Zt.nextNode(), O.push({ type: 2, index: ++g });
+            for (let q = 0; q < ne; q++) E.append(R[q], vn()), Zt.nextNode(), O.push({ type: 2, index: ++w });
             E.append(R[ne], vn());
           }
         }
-      } else if (E.nodeType === 8) if (E.data === Pi) O.push({ type: 2, index: g });
+      } else if (E.nodeType === 8) if (E.data === Pi) O.push({ type: 2, index: w });
       else {
         let R = -1;
-        for (; (R = E.data.indexOf(Ft, R + 1)) !== -1; ) O.push({ type: 7, index: g }), R += Ft.length - 1;
+        for (; (R = E.data.indexOf(Ft, R + 1)) !== -1; ) O.push({ type: 7, index: w }), R += Ft.length - 1;
       }
-      g++;
+      w++;
     }
   }
   static createElement(c, h) {
-    const w = qt.createElement("template");
-    return w.innerHTML = c, w;
+    const g = qt.createElement("template");
+    return g.innerHTML = c, g;
   }
 }
-function fn(x, c, h = x, w) {
+function xn(x, c, h = x, g) {
   var b, M;
-  if (c === un) return c;
-  let E = w !== void 0 ? (b = h._$Co) == null ? void 0 : b[w] : h._$Cl;
-  const g = Bn(c) ? void 0 : c._$litDirective$;
-  return (E == null ? void 0 : E.constructor) !== g && ((M = E == null ? void 0 : E._$AO) == null || M.call(E, !1), g === void 0 ? E = void 0 : (E = new g(x), E._$AT(x, h, w)), w !== void 0 ? (h._$Co ?? (h._$Co = []))[w] = E : h._$Cl = E), E !== void 0 && (c = fn(x, E._$AS(x, c.values), E, w)), c;
+  if (c === dn) return c;
+  let E = g !== void 0 ? (b = h._$Co) == null ? void 0 : b[g] : h._$Cl;
+  const w = Bn(c) ? void 0 : c._$litDirective$;
+  return (E == null ? void 0 : E.constructor) !== w && ((M = E == null ? void 0 : E._$AO) == null || M.call(E, !1), w === void 0 ? E = void 0 : (E = new w(x), E._$AT(x, h, g)), g !== void 0 ? (h._$Co ?? (h._$Co = []))[g] = E : h._$Cl = E), E !== void 0 && (c = xn(x, E._$AS(x, c.values), E, g)), c;
 }
 class Ms {
   constructor(c, h) {
@@ -372,21 +372,21 @@ class Ms {
     return this._$AM._$AU;
   }
   u(c) {
-    const { el: { content: h }, parts: w } = this._$AD, E = ((c == null ? void 0 : c.creationScope) ?? qt).importNode(h, !0);
+    const { el: { content: h }, parts: g } = this._$AD, E = ((c == null ? void 0 : c.creationScope) ?? qt).importNode(h, !0);
     Zt.currentNode = E;
-    let g = Zt.nextNode(), b = 0, M = 0, O = w[0];
+    let w = Zt.nextNode(), b = 0, M = 0, O = g[0];
     for (; O !== void 0; ) {
       if (b === O.index) {
         let m;
-        O.type === 2 ? m = new Ln(g, g.nextSibling, this, c) : O.type === 1 ? m = new O.ctor(g, O.name, O.strings, this, c) : O.type === 6 && (m = new Ls(g, this, c)), this._$AV.push(m), O = w[++M];
+        O.type === 2 ? m = new Ln(w, w.nextSibling, this, c) : O.type === 1 ? m = new O.ctor(w, O.name, O.strings, this, c) : O.type === 6 && (m = new Ls(w, this, c)), this._$AV.push(m), O = g[++M];
       }
-      b !== (O == null ? void 0 : O.index) && (g = Zt.nextNode(), b++);
+      b !== (O == null ? void 0 : O.index) && (w = Zt.nextNode(), b++);
     }
     return Zt.currentNode = qt, E;
   }
   p(c) {
     let h = 0;
-    for (const w of this._$AV) w !== void 0 && (w.strings !== void 0 ? (w._$AI(c, w, h), h += w.strings.length - 2) : w._$AI(c[h])), h++;
+    for (const g of this._$AV) g !== void 0 && (g.strings !== void 0 ? (g._$AI(c, g, h), h += g.strings.length - 2) : g._$AI(c[h])), h++;
   }
 }
 class Ln {
@@ -394,8 +394,8 @@ class Ln {
     var c;
     return ((c = this._$AM) == null ? void 0 : c._$AU) ?? this._$Cv;
   }
-  constructor(c, h, w, E) {
-    this.type = 2, this._$AH = Ge, this._$AN = void 0, this._$AA = c, this._$AB = h, this._$AM = w, this.options = E, this._$Cv = (E == null ? void 0 : E.isConnected) ?? !0;
+  constructor(c, h, g, E) {
+    this.type = 2, this._$AH = Ge, this._$AN = void 0, this._$AA = c, this._$AB = h, this._$AM = g, this.options = E, this._$Cv = (E == null ? void 0 : E.isConnected) ?? !0;
   }
   get parentNode() {
     let c = this._$AA.parentNode;
@@ -409,7 +409,7 @@ class Ln {
     return this._$AB;
   }
   _$AI(c, h = this) {
-    c = fn(this, c, h), Bn(c) ? c === Ge || c == null || c === "" ? (this._$AH !== Ge && this._$AR(), this._$AH = Ge) : c !== this._$AH && c !== un && this._(c) : c._$litType$ !== void 0 ? this.$(c) : c.nodeType !== void 0 ? this.T(c) : Os(c) ? this.k(c) : this._(c);
+    c = xn(this, c, h), Bn(c) ? c === Ge || c == null || c === "" ? (this._$AH !== Ge && this._$AR(), this._$AH = Ge) : c !== this._$AH && c !== dn && this._(c) : c._$litType$ !== void 0 ? this.$(c) : c.nodeType !== void 0 ? this.T(c) : Os(c) ? this.k(c) : this._(c);
   }
   O(c) {
     return this._$AA.parentNode.insertBefore(c, this._$AB);
@@ -421,9 +421,9 @@ class Ln {
     this._$AH !== Ge && Bn(this._$AH) ? this._$AA.nextSibling.data = c : this.T(qt.createTextNode(c)), this._$AH = c;
   }
   $(c) {
-    var g;
-    const { values: h, _$litType$: w } = c, E = typeof w == "number" ? this._$AC(c) : (w.el === void 0 && (w.el = Pn.createElement(Fi(w.h, w.h[0]), this.options)), w);
-    if (((g = this._$AH) == null ? void 0 : g._$AD) === E) this._$AH.p(h);
+    var w;
+    const { values: h, _$litType$: g } = c, E = typeof g == "number" ? this._$AC(c) : (g.el === void 0 && (g.el = Pn.createElement(Fi(g.h, g.h[0]), this.options)), g);
+    if (((w = this._$AH) == null ? void 0 : w._$AD) === E) this._$AH.p(h);
     else {
       const b = new Ms(E, this), M = b.u(this.options);
       b.p(h), this.T(M), this._$AH = b;
@@ -436,13 +436,13 @@ class Ln {
   k(c) {
     kr(this._$AH) || (this._$AH = [], this._$AR());
     const h = this._$AH;
-    let w, E = 0;
-    for (const g of c) E === h.length ? h.push(w = new Ln(this.O(vn()), this.O(vn()), this, this.options)) : w = h[E], w._$AI(g), E++;
-    E < h.length && (this._$AR(w && w._$AB.nextSibling, E), h.length = E);
+    let g, E = 0;
+    for (const w of c) E === h.length ? h.push(g = new Ln(this.O(vn()), this.O(vn()), this, this.options)) : g = h[E], g._$AI(w), E++;
+    E < h.length && (this._$AR(g && g._$AB.nextSibling, E), h.length = E);
   }
   _$AR(c = this._$AA.nextSibling, h) {
-    var w;
-    for ((w = this._$AP) == null ? void 0 : w.call(this, !1, !0, h); c && c !== this._$AB; ) {
+    var g;
+    for ((g = this._$AP) == null ? void 0 : g.call(this, !1, !0, h); c && c !== this._$AB; ) {
       const E = c.nextSibling;
       c.remove(), c = E;
     }
@@ -459,17 +459,17 @@ class or {
   get _$AU() {
     return this._$AM._$AU;
   }
-  constructor(c, h, w, E, g) {
-    this.type = 1, this._$AH = Ge, this._$AN = void 0, this.element = c, this.name = h, this._$AM = E, this.options = g, w.length > 2 || w[0] !== "" || w[1] !== "" ? (this._$AH = Array(w.length - 1).fill(new String()), this.strings = w) : this._$AH = Ge;
+  constructor(c, h, g, E, w) {
+    this.type = 1, this._$AH = Ge, this._$AN = void 0, this.element = c, this.name = h, this._$AM = E, this.options = w, g.length > 2 || g[0] !== "" || g[1] !== "" ? (this._$AH = Array(g.length - 1).fill(new String()), this.strings = g) : this._$AH = Ge;
   }
-  _$AI(c, h = this, w, E) {
-    const g = this.strings;
+  _$AI(c, h = this, g, E) {
+    const w = this.strings;
     let b = !1;
-    if (g === void 0) c = fn(this, c, h, 0), b = !Bn(c) || c !== this._$AH && c !== un, b && (this._$AH = c);
+    if (w === void 0) c = xn(this, c, h, 0), b = !Bn(c) || c !== this._$AH && c !== dn, b && (this._$AH = c);
     else {
       const M = c;
       let O, m;
-      for (c = g[0], O = 0; O < g.length - 1; O++) m = fn(this, M[w + O], h, O), m === un && (m = this._$AH[O]), b || (b = !Bn(m) || m !== this._$AH[O]), m === Ge ? c = Ge : c !== Ge && (c += (m ?? "") + g[O + 1]), this._$AH[O] = m;
+      for (c = w[0], O = 0; O < w.length - 1; O++) m = xn(this, M[g + O], h, O), m === dn && (m = this._$AH[O]), b || (b = !Bn(m) || m !== this._$AH[O]), m === Ge ? c = Ge : c !== Ge && (c += (m ?? "") + w[O + 1]), this._$AH[O] = m;
     }
     b && !E && this.j(c);
   }
@@ -494,13 +494,13 @@ class Bs extends or {
   }
 }
 class Ps extends or {
-  constructor(c, h, w, E, g) {
-    super(c, h, w, E, g), this.type = 5;
+  constructor(c, h, g, E, w) {
+    super(c, h, g, E, w), this.type = 5;
   }
   _$AI(c, h = this) {
-    if ((c = fn(this, c, h, 0) ?? Ge) === un) return;
-    const w = this._$AH, E = c === Ge && w !== Ge || c.capture !== w.capture || c.once !== w.once || c.passive !== w.passive, g = c !== Ge && (w === Ge || E);
-    E && this.element.removeEventListener(this.name, this, w), g && this.element.addEventListener(this.name, this, c), this._$AH = c;
+    if ((c = xn(this, c, h, 0) ?? Ge) === dn) return;
+    const g = this._$AH, E = c === Ge && g !== Ge || c.capture !== g.capture || c.once !== g.once || c.passive !== g.passive, w = c !== Ge && (g === Ge || E);
+    E && this.element.removeEventListener(this.name, this, g), w && this.element.addEventListener(this.name, this, c), this._$AH = c;
   }
   handleEvent(c) {
     var h;
@@ -508,24 +508,24 @@ class Ps extends or {
   }
 }
 class Ls {
-  constructor(c, h, w) {
-    this.element = c, this.type = 6, this._$AN = void 0, this._$AM = h, this.options = w;
+  constructor(c, h, g) {
+    this.element = c, this.type = 6, this._$AN = void 0, this._$AM = h, this.options = g;
   }
   get _$AU() {
     return this._$AM._$AU;
   }
   _$AI(c) {
-    fn(this, c);
+    xn(this, c);
   }
 }
 const Dr = Dn.litHtmlPolyfillSupport;
 Dr == null || Dr(Pn, Ln), (Dn.litHtmlVersions ?? (Dn.litHtmlVersions = [])).push("3.3.0");
 const Fs = (x, c, h) => {
-  const w = (h == null ? void 0 : h.renderBefore) ?? c;
-  let E = w._$litPart$;
+  const g = (h == null ? void 0 : h.renderBefore) ?? c;
+  let E = g._$litPart$;
   if (E === void 0) {
-    const g = (h == null ? void 0 : h.renderBefore) ?? null;
-    w._$litPart$ = E = new Ln(c.insertBefore(vn(), g), g, void 0, h ?? {});
+    const w = (h == null ? void 0 : h.renderBefore) ?? null;
+    g._$litPart$ = E = new Ln(c.insertBefore(vn(), w), w, void 0, h ?? {});
   }
   return E._$AI(x), E;
 };
@@ -535,7 +535,7 @@ const Fs = (x, c, h) => {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 const jt = globalThis;
-class Kt extends cn {
+class Kt extends un {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
   }
@@ -557,7 +557,7 @@ class Kt extends cn {
     super.disconnectedCallback(), (c = this._$Do) == null || c.setConnected(!1);
   }
   render() {
-    return un;
+    return dn;
   }
 }
 var Mi;
@@ -571,9 +571,9 @@ Mr == null || Mr({ LitElement: Kt });
  * SPDX-License-Identifier: BSD-3-Clause
  */
 const ks = { attribute: !0, type: String, converter: $n, reflect: !1, hasChanged: Fr }, Us = (x = ks, c, h) => {
-  const { kind: w, metadata: E } = h;
-  let g = globalThis.litPropertyMetadata.get(E);
-  if (g === void 0 && globalThis.litPropertyMetadata.set(E, g = /* @__PURE__ */ new Map()), w === "setter" && ((x = Object.create(x)).wrapped = !0), g.set(h.name, x), w === "accessor") {
+  const { kind: g, metadata: E } = h;
+  let w = globalThis.litPropertyMetadata.get(E);
+  if (w === void 0 && globalThis.litPropertyMetadata.set(E, w = /* @__PURE__ */ new Map()), g === "setter" && ((x = Object.create(x)).wrapped = !0), w.set(h.name, x), g === "accessor") {
     const { name: b } = h;
     return { set(M) {
       const O = c.get.call(this);
@@ -582,19 +582,19 @@ const ks = { attribute: !0, type: String, converter: $n, reflect: !1, hasChanged
       return M !== void 0 && this.C(b, void 0, x, M), M;
     } };
   }
-  if (w === "setter") {
+  if (g === "setter") {
     const { name: b } = h;
     return function(M) {
       const O = this[b];
       c.call(this, M), this.requestUpdate(b, O, x);
     };
   }
-  throw Error("Unsupported decorator location: " + w);
+  throw Error("Unsupported decorator location: " + g);
 };
 function Ur(x) {
-  return (c, h) => typeof h == "object" ? Us(x, c, h) : ((w, E, g) => {
-    const b = E.hasOwnProperty(g);
-    return E.constructor.createProperty(g, w), b ? Object.getOwnPropertyDescriptor(E, g) : void 0;
+  return (c, h) => typeof h == "object" ? Us(x, c, h) : ((g, E, w) => {
+    const b = E.hasOwnProperty(w);
+    return E.constructor.createProperty(w, g), b ? Object.getOwnPropertyDescriptor(E, w) : void 0;
   })(x, c, h);
 }
 /**
@@ -602,7 +602,7 @@ function Ur(x) {
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-function dn(x) {
+function Qt(x) {
   return Ur({ ...x, state: !0, attribute: !1 });
 }
 var G;
@@ -702,10 +702,10 @@ var Gs = function() {
     this.verbose && console.error(c);
   }, x;
 }();
-function yt(x) {
+function _t(x) {
   return typeof x > "u" || x === null;
 }
-var hn = function() {
+var fn = function() {
   function x() {
   }
   return x.codeParseError = function(c) {
@@ -728,8 +728,8 @@ var hn = function() {
   }
   return x.isMediaStreamConstraintsValid = function(c, h) {
     if (typeof c != "object") {
-      var w = typeof c;
-      return h.logError("videoConstraints should be of type object, the " + "object passed is of type ".concat(w, "."), !0), !1;
+      var g = typeof c;
+      return h.logError("videoConstraints should be of type object, the " + "object passed is of type ".concat(g, "."), !0), !1;
     }
     for (var E = [
       "autoGainControl",
@@ -740,9 +740,9 @@ var hn = function() {
       "sampleRate",
       "sampleSize",
       "volume"
-    ], g = new Set(E), b = Object.keys(c), M = 0, O = b; M < O.length; M++) {
+    ], w = new Set(E), b = Object.keys(c), M = 0, O = b; M < O.length; M++) {
       var m = O[M];
-      if (g.has(m))
+      if (w.has(m))
         return h.logError("".concat(m, " is not supported videoConstaints."), !0), !1;
     }
     return !0;
@@ -754,10 +754,10 @@ function Xs(x) {
 var On = { exports: {} }, zs = On.exports, bi;
 function Ys() {
   return bi || (bi = 1, function(x, c) {
-    (function(h, w) {
-      w(c);
+    (function(h, g) {
+      g(c);
     })(zs, function(h) {
-      function w(f) {
+      function g(f) {
         return f == null;
       }
       var E = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(f, e) {
@@ -765,7 +765,7 @@ function Ys() {
       } || function(f, e) {
         for (var t in e) e.hasOwnProperty(t) && (f[t] = e[t]);
       };
-      function g(f, e) {
+      function w(f, e) {
         E(f, e);
         function t() {
           this.constructor = f;
@@ -782,7 +782,7 @@ function Ys() {
         t && t(f, e);
       }
       var O = function(f) {
-        g(e, f);
+        w(e, f);
         function e(t) {
           var n = this.constructor, r = f.call(this, t) || this;
           return Object.defineProperty(r, "name", {
@@ -1439,9 +1439,9 @@ function Ys() {
         }
       }
       k.VALUE_IDENTIFIER_TO_ECI = /* @__PURE__ */ new Map(), k.VALUES_TO_ECI = /* @__PURE__ */ new Map(), k.NAME_TO_ECI = /* @__PURE__ */ new Map(), k.Cp437 = new k(de.Cp437, Int32Array.from([0, 2]), "Cp437"), k.ISO8859_1 = new k(de.ISO8859_1, Int32Array.from([1, 3]), "ISO-8859-1", "ISO88591", "ISO8859_1"), k.ISO8859_2 = new k(de.ISO8859_2, 4, "ISO-8859-2", "ISO88592", "ISO8859_2"), k.ISO8859_3 = new k(de.ISO8859_3, 5, "ISO-8859-3", "ISO88593", "ISO8859_3"), k.ISO8859_4 = new k(de.ISO8859_4, 6, "ISO-8859-4", "ISO88594", "ISO8859_4"), k.ISO8859_5 = new k(de.ISO8859_5, 7, "ISO-8859-5", "ISO88595", "ISO8859_5"), k.ISO8859_6 = new k(de.ISO8859_6, 8, "ISO-8859-6", "ISO88596", "ISO8859_6"), k.ISO8859_7 = new k(de.ISO8859_7, 9, "ISO-8859-7", "ISO88597", "ISO8859_7"), k.ISO8859_8 = new k(de.ISO8859_8, 10, "ISO-8859-8", "ISO88598", "ISO8859_8"), k.ISO8859_9 = new k(de.ISO8859_9, 11, "ISO-8859-9", "ISO88599", "ISO8859_9"), k.ISO8859_10 = new k(de.ISO8859_10, 12, "ISO-8859-10", "ISO885910", "ISO8859_10"), k.ISO8859_11 = new k(de.ISO8859_11, 13, "ISO-8859-11", "ISO885911", "ISO8859_11"), k.ISO8859_13 = new k(de.ISO8859_13, 15, "ISO-8859-13", "ISO885913", "ISO8859_13"), k.ISO8859_14 = new k(de.ISO8859_14, 16, "ISO-8859-14", "ISO885914", "ISO8859_14"), k.ISO8859_15 = new k(de.ISO8859_15, 17, "ISO-8859-15", "ISO885915", "ISO8859_15"), k.ISO8859_16 = new k(de.ISO8859_16, 18, "ISO-8859-16", "ISO885916", "ISO8859_16"), k.SJIS = new k(de.SJIS, 20, "SJIS", "Shift_JIS"), k.Cp1250 = new k(de.Cp1250, 21, "Cp1250", "windows-1250"), k.Cp1251 = new k(de.Cp1251, 22, "Cp1251", "windows-1251"), k.Cp1252 = new k(de.Cp1252, 23, "Cp1252", "windows-1252"), k.Cp1256 = new k(de.Cp1256, 24, "Cp1256", "windows-1256"), k.UnicodeBigUnmarked = new k(de.UnicodeBigUnmarked, 25, "UnicodeBigUnmarked", "UTF-16BE", "UnicodeBig"), k.UTF8 = new k(de.UTF8, 26, "UTF8", "UTF-8"), k.ASCII = new k(de.ASCII, Int32Array.from([27, 170]), "ASCII", "US-ASCII"), k.Big5 = new k(de.Big5, 28, "Big5"), k.GB18030 = new k(de.GB18030, 29, "GB18030", "GB2312", "EUC_CN", "GBK"), k.EUC_KR = new k(de.EUC_KR, 30, "EUC_KR", "EUC-KR");
-      class Qt extends m {
+      class Jt extends m {
       }
-      Qt.kind = "UnsupportedOperationException";
+      Jt.kind = "UnsupportedOperationException";
       class Je {
         /**
          * Decodes some Uint8Array to a string format.
@@ -1496,7 +1496,7 @@ function Ys() {
           }
           if (n.equals(k.UnicodeBigUnmarked))
             return String.fromCharCode.apply(null, new Uint16Array(e.buffer));
-          throw new Qt(`Encoding ${this.encodingName(t)} not supported by fallback.`);
+          throw new Jt(`Encoding ${this.encodingName(t)} not supported by fallback.`);
         }
         static isDecodeFallbackSupported(e) {
           return e.equals(k.UTF8) || e.equals(k.ISO8859_1) || e.equals(k.ASCII);
@@ -2209,7 +2209,7 @@ function Ys() {
          * @return A cropped version of this object.
          */
         crop(e, t, n, r) {
-          throw new Qt("This luminance source does not support cropping.");
+          throw new Jt("This luminance source does not support cropping.");
         }
         /**
          * @return Whether this subclass supports counter-clockwise rotation.
@@ -2224,7 +2224,7 @@ function Ys() {
          * @return A rotated version of this object.
          */
         rotateCounterClockwise() {
-          throw new Qt("This luminance source does not support rotation by 90 degrees.");
+          throw new Jt("This luminance source does not support rotation by 90 degrees.");
         }
         /**
          * Returns a new object with rotated image data by 45 degrees counterclockwise.
@@ -2233,7 +2233,7 @@ function Ys() {
          * @return A rotated version of this object.
          */
         rotateCounterClockwise45() {
-          throw new Qt("This luminance source does not support rotation by 45 degrees.");
+          throw new Jt("This luminance source does not support rotation by 45 degrees.");
         }
         /*@Override*/
         toString() {
@@ -3482,9 +3482,9 @@ function Ys() {
         }
       }
       ce.AZTEC_DATA_12 = new ce(4201, 4096, 1), ce.AZTEC_DATA_10 = new ce(1033, 1024, 1), ce.AZTEC_DATA_6 = new ce(67, 64, 1), ce.AZTEC_PARAM = new ce(19, 16, 1), ce.QR_CODE_FIELD_256 = new ce(285, 256, 0), ce.DATA_MATRIX_FIELD_256 = new ce(301, 256, 1), ce.AZTEC_DATA_8 = ce.DATA_MATRIX_FIELD_256, ce.MAXICODE_FIELD_64 = ce.AZTEC_DATA_6;
-      class $t extends m {
+      class en extends m {
       }
-      $t.kind = "ReedSolomonException";
+      en.kind = "ReedSolomonException";
       class wt extends m {
       }
       wt.kind = "IllegalStateException";
@@ -3514,7 +3514,7 @@ function Ys() {
           for (let p = 0; p < d.length; p++) {
             const I = e.length - 1 - n.log(d[p]);
             if (I < 0)
-              throw new $t("Bad error location");
+              throw new en("Bad error location");
             e[I] = ce.addOrSubtract(e[I], A[p]);
           }
         }
@@ -3528,7 +3528,7 @@ function Ys() {
           for (; s.getDegree() >= (n / 2 | 0); ) {
             let p = i, I = o;
             if (i = s, o = a, i.isZero())
-              throw new $t("r_{i-1} was zero");
+              throw new en("r_{i-1} was zero");
             s = p;
             let y = r.getZero();
             const _ = i.getCoefficient(i.getDegree()), N = r.inverse(_);
@@ -3541,7 +3541,7 @@ function Ys() {
           }
           const l = a.getCoefficient(0);
           if (l === 0)
-            throw new $t("sigmaTilde(0) was zero");
+            throw new en("sigmaTilde(0) was zero");
           const u = r.inverse(l), d = a.multiplyScalar(u), A = s.multiplyScalar(u);
           return [d, A];
         }
@@ -3555,7 +3555,7 @@ function Ys() {
           for (let s = 1; s < i.getSize() && r < t; s++)
             e.evaluateAt(s) === 0 && (n[r] = i.inverse(s), r++);
           if (r !== t)
-            throw new $t("Error locator degree does not match number of roots");
+            throw new en("Error locator degree does not match number of roots");
           return n;
         }
         findErrorMagnitudes(e, t) {
@@ -4066,7 +4066,7 @@ function Ys() {
           return this.compact;
         }
       }
-      class bt {
+      class yt {
         // public constructor(private image: BitMatrix) /*throws NotFoundException*/ {
         //   this(image, INIT_SIZE, image.getWidth() / 2, image.getHeight() / 2)
         // }
@@ -4078,7 +4078,7 @@ function Ys() {
          * @throws NotFoundException if image is too small to accommodate {@code initSize}
          */
         constructor(e, t, n, r) {
-          this.image = e, this.height = e.getHeight(), this.width = e.getWidth(), t == null && (t = bt.INIT_SIZE), n == null && (n = e.getWidth() / 2 | 0), r == null && (r = e.getHeight() / 2 | 0);
+          this.image = e, this.height = e.getHeight(), this.width = e.getWidth(), t == null && (t = yt.INIT_SIZE), n == null && (n = e.getWidth() / 2 | 0), r == null && (r = e.getHeight() / 2 | 0);
           const i = t / 2 | 0;
           if (this.leftInit = n - i, this.rightInit = n + i, this.upInit = r - i, this.downInit = r + i, this.upInit < 0 || this.leftInit < 0 || this.downInit >= this.height || this.rightInit >= this.width)
             throw new D();
@@ -4181,7 +4181,7 @@ function Ys() {
          *         leftmost and the third, the rightmost
          */
         centerEdges(e, t, n, r) {
-          const i = e.getX(), s = e.getY(), o = t.getX(), a = t.getY(), l = n.getX(), u = n.getY(), d = r.getX(), A = r.getY(), p = bt.CORR;
+          const i = e.getX(), s = e.getY(), o = t.getX(), a = t.getY(), l = n.getX(), u = n.getY(), d = r.getX(), A = r.getY(), p = yt.CORR;
           return i < this.width / 2 ? [
             new W(d - p, A + p),
             new W(o + p, a + p),
@@ -4216,7 +4216,7 @@ function Ys() {
           return !1;
         }
       }
-      bt.INIT_SIZE = 10, bt.CORR = 1;
+      yt.INIT_SIZE = 10, yt.CORR = 1;
       class cr {
         /**
          * <p>Checks a set of points that have been transformed to sample points on an image against
@@ -4475,7 +4475,7 @@ function Ys() {
         getMatrixCenter() {
           let e, t, n, r;
           try {
-            let o = new bt(this.image).detect();
+            let o = new yt(this.image).detect();
             e = o[0], t = o[1], n = o[2], r = o[3];
           } catch {
             let a = this.image.getWidth() / 2, l = this.image.getHeight() / 2;
@@ -4483,7 +4483,7 @@ function Ys() {
           }
           let i = oe.round((e.getX() + r.getX() + t.getX() + n.getX()) / 4), s = oe.round((e.getY() + r.getY() + t.getY() + n.getY()) / 4);
           try {
-            let o = new bt(this.image, 15, i, s).detect();
+            let o = new yt(this.image, 15, i, s).detect();
             e = o[0], t = o[1], n = o[2], r = o[3];
           } catch {
             e = this.getFirstDifferent(new Qe(i + 7, s - 7), !1, 1, -1).toResultPoint(), t = this.getFirstDifferent(new Qe(i + 7, s + 7), !1, 1, 1).toResultPoint(), n = this.getFirstDifferent(new Qe(i - 7, s + 7), !1, -1, 1).toResultPoint(), r = this.getFirstDifferent(new Qe(i - 7, s - 7), !1, -1, -1).toResultPoint();
@@ -4875,7 +4875,7 @@ function Ys() {
           const y = Int32Array.from([0, 0, 0, 0, 0, 0]);
           let _ = 0, N = 0, L = s, F = 0, P = !0, re = !1, $ = !1;
           for (; !u; ) {
-            const ln = d;
+            const hn = d;
             switch (d = !1, _ = N, N = V.decodeCode(t, y, I), a[o++] = N, N !== V.CODE_STOP && (P = !0), N !== V.CODE_STOP && (F++, L += F * N), p = I, I += y.reduce((ws, As) => ws + As, 0), N) {
               case V.CODE_START_A:
               case V.CODE_START_B:
@@ -4961,7 +4961,7 @@ function Ys() {
                   }
                 break;
             }
-            ln && (l = l === V.CODE_CODE_A ? V.CODE_CODE_B : V.CODE_CODE_A);
+            hn && (l = l === V.CODE_CODE_A ? V.CODE_CODE_B : V.CODE_CODE_A);
           }
           const it = I - p;
           if (I = t.getNextUnset(I), !t.isRange(I, Math.min(t.getSize(), I + (I - p) / 2), !1))
@@ -4973,10 +4973,10 @@ function Ys() {
             throw new D();
           xt > 0 && P && (l === V.CODE_CODE_C ? A = A.substring(0, xt - 2) : A = A.substring(0, xt - 1));
           const st = (i[1] + i[0]) / 2, Ce = p + it / 2, Ye = a.length, ot = new Uint8Array(Ye);
-          for (let ln = 0; ln < Ye; ln++)
-            ot[ln] = a[ln];
-          const an = [new W(st, e), new W(Ce, e)];
-          return new qe(A, ot, 0, an, Y.CODE_128, (/* @__PURE__ */ new Date()).getTime());
+          for (let hn = 0; hn < Ye; hn++)
+            ot[hn] = a[hn];
+          const cn = [new W(st, e), new W(Ce, e)];
+          return new qe(A, ot, 0, cn, Y.CODE_128, (/* @__PURE__ */ new Date()).getTime());
         }
       }
       V.CODE_PATTERNS = [
@@ -6043,7 +6043,7 @@ function Ys() {
         constructor(e) {
           super();
           let t = e == null ? null : e.get(xe.POSSIBLE_FORMATS), n = [];
-          w(t) ? (n.push(new Vt()), n.push(new Kr()), n.push(new jr()), n.push(new dt())) : (t.indexOf(Y.EAN_13) > -1 && n.push(new Vt()), t.indexOf(Y.UPC_A) > -1 && n.push(new Kr()), t.indexOf(Y.EAN_8) > -1 && n.push(new jr()), t.indexOf(Y.UPC_E) > -1 && n.push(new dt())), this.readers = n;
+          g(t) ? (n.push(new Vt()), n.push(new Kr()), n.push(new jr()), n.push(new dt())) : (t.indexOf(Y.EAN_13) > -1 && n.push(new Vt()), t.indexOf(Y.UPC_A) > -1 && n.push(new Kr()), t.indexOf(Y.EAN_8) > -1 && n.push(new jr()), t.indexOf(Y.UPC_E) > -1 && n.push(new dt())), this.readers = n;
         }
         decodeRow(e, t, n) {
           for (let r of this.readers)
@@ -6129,7 +6129,7 @@ function Ys() {
         }
       }
       Ze.MAX_AVG_VARIANCE = 0.2, Ze.MAX_INDIVIDUAL_VARIANCE = 0.45, Ze.MIN_FINDER_PATTERN_RATIO = 9.5 / 12, Ze.MAX_FINDER_PATTERN_RATIO = 12.5 / 14;
-      class Jt {
+      class tn {
         constructor(e, t) {
           this.value = e, this.checksumPortion = t;
         }
@@ -6143,7 +6143,7 @@ function Ys() {
           return this.value + "(" + this.checksumPortion + ")";
         }
         equals(e) {
-          if (!(e instanceof Jt))
+          if (!(e instanceof tn))
             return !1;
           const t = e;
           return this.value === t.value && this.checksumPortion === t.checksumPortion;
@@ -6477,7 +6477,7 @@ function Ys() {
         ["8110", H.VARIABLE_LENGTH, 70],
         ["8200", H.VARIABLE_LENGTH, 70]
       ];
-      class en {
+      class nn {
         constructor(e) {
           this.buffer = new ge(), this.information = e;
         }
@@ -6508,7 +6508,7 @@ function Ys() {
           return new lt(e + 7, n, r);
         }
         extractNumericValueFromBitArray(e, t) {
-          return en.extractNumericValueFromBitArray(this.information, e, t);
+          return nn.extractNumericValueFromBitArray(this.information, e, t);
         }
         static extractNumericValueFromBitArray(e, t, n) {
           let r = 0;
@@ -6736,7 +6736,7 @@ function Ys() {
       }
       class dr {
         constructor(e) {
-          this.information = e, this.generalDecoder = new en(e);
+          this.information = e, this.generalDecoder = new nn(e);
         }
         getInformation() {
           return this.information;
@@ -6771,7 +6771,7 @@ function Ys() {
         }
       }
       nt.GTIN_SIZE = 40;
-      class tn extends nt {
+      class rn extends nt {
         // the second one is the encodation method, and the other two are for the variable length
         constructor(e) {
           super(e);
@@ -6779,11 +6779,11 @@ function Ys() {
         parseInformation() {
           let e = new ge();
           e.append("(01)");
-          let t = e.length(), n = this.getGeneralDecoder().extractNumericValueFromBitArray(tn.HEADER_SIZE, 4);
-          return e.append(n), this.encodeCompressedGtinWithoutAI(e, tn.HEADER_SIZE + 4, t), this.getGeneralDecoder().decodeAllCodes(e, tn.HEADER_SIZE + 44);
+          let t = e.length(), n = this.getGeneralDecoder().extractNumericValueFromBitArray(rn.HEADER_SIZE, 4);
+          return e.append(n), this.encodeCompressedGtinWithoutAI(e, rn.HEADER_SIZE + 4, t), this.getGeneralDecoder().decodeAllCodes(e, rn.HEADER_SIZE + 44);
         }
       }
-      tn.HEADER_SIZE = 4;
+      rn.HEADER_SIZE = 4;
       class Gn extends dr {
         constructor(e) {
           super(e);
@@ -6908,22 +6908,22 @@ function Ys() {
       function qr(f) {
         try {
           if (f.get(1))
-            return new tn(f);
+            return new rn(f);
           if (!f.get(2))
             return new Gn(f);
-          switch (en.extractNumericValueFromBitArray(f, 1, 4)) {
+          switch (nn.extractNumericValueFromBitArray(f, 1, 4)) {
             case 4:
               return new Wi(f);
             case 5:
               return new Xi(f);
           }
-          switch (en.extractNumericValueFromBitArray(f, 1, 5)) {
+          switch (nn.extractNumericValueFromBitArray(f, 1, 5)) {
             case 12:
               return new Ct(f);
             case 13:
               return new $e(f);
           }
-          switch (en.extractNumericValueFromBitArray(f, 1, 7)) {
+          switch (nn.extractNumericValueFromBitArray(f, 1, 7)) {
             case 56:
               return new _e(f, "310", "11");
             case 57:
@@ -7280,8 +7280,8 @@ function Ys() {
                 throw new D();
               ot = 8;
             }
-            let an = Ce / 2;
-            (Ce & 1) == 0 ? (l[an] = ot, d[an] = Ye - ot) : (u[an] = ot, A[an] = Ye - ot);
+            let cn = Ce / 2;
+            (Ce & 1) == 0 ? (l[cn] = ot, d[cn] = Ye - ot) : (u[cn] = ot, A[cn] = Ye - ot);
           }
           this.adjustOddEvenCounts(s);
           let p = 4 * t.getValue() + (n ? 0 : 2) + (r ? 0 : 1) - 1, I = 0, y = 0;
@@ -7302,7 +7302,7 @@ function Ys() {
           if ((I & 1) != 0 || I > 13 || I < 4)
             throw new D();
           let L = (13 - I) / 2, F = B.SYMBOL_WIDEST[L], P = 9 - F, re = At.getRSSvalue(l, F, !0), $ = At.getRSSvalue(u, P, !1), it = B.EVEN_TOTAL_SUBSET[L], xt = B.GSUM[L], st = re * it + $ + xt;
-          return new Jt(st, N);
+          return new tn(st, N);
         }
         static isNotA1left(e, t, n) {
           return !(e.getValue() == 0 && t && n);
@@ -7399,7 +7399,7 @@ function Ys() {
         [B.FINDER_PAT_A, B.FINDER_PAT_A, B.FINDER_PAT_B, B.FINDER_PAT_B, B.FINDER_PAT_C, B.FINDER_PAT_C, B.FINDER_PAT_D, B.FINDER_PAT_E, B.FINDER_PAT_F, B.FINDER_PAT_F],
         [B.FINDER_PAT_A, B.FINDER_PAT_A, B.FINDER_PAT_B, B.FINDER_PAT_B, B.FINDER_PAT_C, B.FINDER_PAT_D, B.FINDER_PAT_D, B.FINDER_PAT_E, B.FINDER_PAT_E, B.FINDER_PAT_F, B.FINDER_PAT_F]
       ], B.MAX_PAIRS = 11;
-      class zi extends Jt {
+      class zi extends tn {
         constructor(e, t, n) {
           super(e, t), this.count = 0, this.finderPattern = n;
         }
@@ -7507,12 +7507,12 @@ function Ys() {
             if ((d & 1) !== 0 || d > 12 || d < 4)
               throw new D();
             let _ = (12 - d) / 2, N = Ne.OUTSIDE_ODD_WIDEST[_], L = 9 - N, F = At.getRSSvalue(o, N, !1), P = At.getRSSvalue(a, L, !0), re = Ne.OUTSIDE_EVEN_TOTAL_SUBSET[_], $ = Ne.OUTSIDE_GSUM[_];
-            return new Jt(F * re + P + $, y);
+            return new tn(F * re + P + $, y);
           } else {
             if ((I & 1) !== 0 || I > 10 || I < 4)
               throw new D();
             let _ = (10 - I) / 2, N = Ne.INSIDE_ODD_WIDEST[_], L = 9 - N, F = At.getRSSvalue(o, N, !0), P = At.getRSSvalue(a, L, !1), re = Ne.INSIDE_ODD_TOTAL_SUBSET[_], $ = Ne.INSIDE_GSUM[_];
-            return new Jt(P * re + F + $, y);
+            return new tn(P * re + F + $, y);
           }
         }
         findFinderPattern(e, t) {
@@ -7604,7 +7604,7 @@ function Ys() {
         Int32Array.from([1, 5, 7, 1]),
         Int32Array.from([1, 3, 9, 1])
       ];
-      class nn extends ve {
+      class sn extends ve {
         constructor(e, t) {
           super(), this.readers = [], this.verbose = t === !0;
           const n = e ? e.get(xe.POSSIBLE_FORMATS) : null, r = e && e.get(xe.ASSUME_CODE_39_CHECK_DIGIT) !== void 0;
@@ -7631,7 +7631,7 @@ function Ys() {
          * @param {Map<DecodeHintType, any>} hints
          */
         constructor(e = 500, t) {
-          super(new nn(t), e, t);
+          super(new sn(t), e, t);
         }
       }
       class fe {
@@ -8510,7 +8510,7 @@ function Ys() {
       }
       class De {
         constructor(e) {
-          this.image = e, this.rectangleDetector = new bt(this.image);
+          this.image = e, this.rectangleDetector = new yt(this.image);
         }
         /**
          * <p>Detects a Data Matrix Code in an image.</p>
@@ -8691,10 +8691,10 @@ function Ys() {
           super(new vt(), e);
         }
       }
-      var rn;
+      var on;
       (function(f) {
         f[f.L = 0] = "L", f[f.M = 1] = "M", f[f.Q = 2] = "Q", f[f.H = 3] = "H";
-      })(rn || (rn = {}));
+      })(on || (on = {}));
       class Ie {
         constructor(e, t, n) {
           this.value = e, this.stringValue = t, this.bits = n, Ie.FOR_BITS.set(n, this), Ie.FOR_VALUE.set(e, this);
@@ -8738,7 +8738,7 @@ function Ys() {
           return Ie.FOR_BITS.get(e);
         }
       }
-      Ie.FOR_BITS = /* @__PURE__ */ new Map(), Ie.FOR_VALUE = /* @__PURE__ */ new Map(), Ie.L = new Ie(rn.L, "L", 1), Ie.M = new Ie(rn.M, "M", 0), Ie.Q = new Ie(rn.Q, "Q", 3), Ie.H = new Ie(rn.H, "H", 2);
+      Ie.FOR_BITS = /* @__PURE__ */ new Map(), Ie.FOR_VALUE = /* @__PURE__ */ new Map(), Ie.L = new Ie(on.L, "L", 1), Ie.M = new Ie(on.M, "M", 0), Ie.Q = new Ie(on.Q, "Q", 3), Ie.H = new Ie(on.H, "H", 2);
       class je {
         constructor(e) {
           this.errorCorrectionLevel = Ie.forBits(e >> 3 & 3), this.dataMask = /*(byte) */
@@ -18671,12 +18671,12 @@ function Ys() {
          */
         setHints(e) {
           this.hints = e;
-          const t = !w(e) && e.get(xe.TRY_HARDER) === !0, n = w(e) ? null : e.get(xe.POSSIBLE_FORMATS), r = new Array();
-          if (!w(n)) {
+          const t = !g(e) && e.get(xe.TRY_HARDER) === !0, n = g(e) ? null : e.get(xe.POSSIBLE_FORMATS), r = new Array();
+          if (!g(n)) {
             const i = n.some((s) => s === Y.UPC_A || s === Y.UPC_E || s === Y.EAN_13 || s === Y.EAN_8 || s === Y.CODABAR || s === Y.CODE_39 || s === Y.CODE_93 || s === Y.CODE_128 || s === Y.ITF || s === Y.RSS_14 || s === Y.RSS_EXPANDED);
-            i && !t && r.push(new nn(e, this.verbose)), n.includes(Y.QR_CODE) && r.push(new Bt()), n.includes(Y.DATA_MATRIX) && r.push(new vt()), n.includes(Y.AZTEC) && r.push(new Vn()), n.includes(Y.PDF_417) && r.push(new ze()), i && t && r.push(new nn(e, this.verbose));
+            i && !t && r.push(new sn(e, this.verbose)), n.includes(Y.QR_CODE) && r.push(new Bt()), n.includes(Y.DATA_MATRIX) && r.push(new vt()), n.includes(Y.AZTEC) && r.push(new Vn()), n.includes(Y.PDF_417) && r.push(new ze()), i && t && r.push(new sn(e, this.verbose));
           }
-          r.length === 0 && (t || r.push(new nn(e, this.verbose)), r.push(new Bt()), r.push(new vt()), r.push(new Vn()), r.push(new ze()), t && r.push(new nn(e, this.verbose))), this.readers = r;
+          r.length === 0 && (t || r.push(new sn(e, this.verbose)), r.push(new Bt()), r.push(new vt()), r.push(new Vn()), r.push(new ze()), t && r.push(new sn(e, this.verbose))), this.readers = r;
         }
         /*@Override*/
         reset() {
@@ -19836,7 +19836,7 @@ function Ys() {
         }
       }
       zt.QUIET_ZONE_SIZE = 4, zt.SVG_NS = "http://www.w3.org/2000/svg";
-      class sn {
+      class an {
         /*@Override*/
         // public encode(contents: string, format: BarcodeFormat, width: number /*int*/, height: number /*int*/): BitMatrix
         //     /*throws WriterException */ {
@@ -19850,10 +19850,10 @@ function Ys() {
             throw new R("Can only encode QR_CODE, but got " + t);
           if (n < 0 || r < 0)
             throw new R(`Requested dimensions are too small: ${n}x${r}`);
-          let s = Ie.L, o = sn.QUIET_ZONE_SIZE;
+          let s = Ie.L, o = an.QUIET_ZONE_SIZE;
           i !== null && (i.get(Le.ERROR_CORRECTION) !== void 0 && (s = Ie.fromString(i.get(Le.ERROR_CORRECTION).toString())), i.get(Le.MARGIN) !== void 0 && (o = Number.parseInt(i.get(Le.MARGIN).toString(), 10)));
           const a = be.encode(e, s, i);
-          return sn.renderResult(a, n, r, o);
+          return an.renderResult(a, n, r, o);
         }
         // Note that the input matrix uses 0 == white, 1 == black, while the output matrix uses
         // 0 == black, 255 == white (i.e. an 8 bit greyscale bitmap).
@@ -19868,7 +19868,7 @@ function Ys() {
           return y;
         }
       }
-      sn.QUIET_ZONE_SIZE = 4;
+      an.QUIET_ZONE_SIZE = 4;
       class cs {
         /*@Override*/
         // public encode(contents: string,
@@ -19894,7 +19894,7 @@ function Ys() {
             //   writer = new UPCAWriter()
             //   break
             case Y.QR_CODE:
-              s = new sn();
+              s = new an();
               break;
             // case BarcodeFormat.CODE_39:
             //   writer = new Code39Writer()
@@ -20132,7 +20132,7 @@ function Ys() {
           return this.previous;
         }
       }
-      class on extends hs {
+      class ln extends hs {
         constructor(e, t, n) {
           super(e), this.value = t, this.bitCount = n;
         }
@@ -20143,10 +20143,10 @@ function Ys() {
           e.appendBits(this.value, this.bitCount);
         }
         add(e, t) {
-          return new on(this, e, t);
+          return new ln(this, e, t);
         }
         addBinaryShift(e, t) {
-          return console.warn("addBinaryShift on SimpleToken, this simply returns a copy of this token"), new on(this, e, t);
+          return console.warn("addBinaryShift on SimpleToken, this simply returns a copy of this token"), new ln(this, e, t);
         }
         /**
          * @Override
@@ -20156,7 +20156,7 @@ function Ys() {
           return e |= 1 << this.bitCount, "<" + K.toBinaryString(e | 1 << this.bitCount).substring(1) + ">";
         }
       }
-      class Sr extends on {
+      class Sr extends ln {
         constructor(e, t, n) {
           super(e, 0, 0), this.binaryShiftStart = t, this.binaryShiftByteCount = n;
         }
@@ -20181,7 +20181,7 @@ function Ys() {
         return new Sr(f, e, t);
       }
       function Sn(f, e, t) {
-        return new on(f, e, t);
+        return new ln(f, e, t);
       }
       const fs = [
         "UPPER",
@@ -20189,7 +20189,7 @@ function Ys() {
         "DIGIT",
         "MIXED",
         "PUNCT"
-      ], Lt = 0, jn = 1, ut = 2, li = 3, mt = 4, ds = new on(null, 0, 0), Tr = [
+      ], Lt = 0, jn = 1, ut = 2, li = 3, mt = 4, ds = new ln(null, 0, 0), Tr = [
         Int32Array.from([
           0,
           (5 << 16) + 28,
@@ -20711,7 +20711,7 @@ function Ys() {
           return A;
         }
       }
-      h.AbstractExpandedDecoder = dr, h.ArgumentException = v, h.ArithmeticException = Fn, h.AztecCode = oi, h.AztecCodeReader = Vn, h.AztecCodeWriter = Kn, h.AztecDecoder = me, h.AztecDetector = Yr, h.AztecDetectorResult = Xr, h.AztecEncoder = ae, h.AztecHighLevelEncoder = Tn, h.AztecPoint = Qe, h.BarcodeFormat = Y, h.Binarizer = Me, h.BinaryBitmap = ne, h.BitArray = le, h.BitMatrix = Fe, h.BitSource = Ar, h.BrowserAztecCodeReader = Hi, h.BrowserBarcodeReader = Yi, h.BrowserCodeReader = Ut, h.BrowserDatamatrixCodeReader = ji, h.BrowserMultiFormatReader = ss, h.BrowserPDF417Reader = os, h.BrowserQRCodeReader = as, h.BrowserQRCodeSvgWriter = zt, h.CharacterSetECI = k, h.ChecksumException = q, h.Code128Reader = V, h.Code39Reader = Be, h.DataMatrixDecodedBitStreamParser = Mt, h.DataMatrixReader = vt, h.DecodeHintType = xe, h.DecoderResult = wn, h.DefaultGridSampler = zr, h.DetectorResult = Un, h.EAN13Reader = Vt, h.EncodeHintType = Le, h.Exception = m, h.FormatException = U, h.GenericGF = ce, h.GenericGFPoly = et, h.GlobalHistogramBinarizer = ke, h.GridSampler = cr, h.GridSamplerInstance = Rt, h.HTMLCanvasElementLuminanceSource = Ot, h.HybridBinarizer = J, h.ITFReader = Ae, h.IllegalArgumentException = R, h.IllegalStateException = wt, h.InvertedLuminanceSource = Nt, h.LuminanceSource = gn, h.MathUtils = oe, h.MultiFormatOneDReader = nn, h.MultiFormatReader = ii, h.MultiFormatWriter = cs, h.NotFoundException = D, h.OneDReader = ve, h.PDF417DecodedBitStreamParser = T, h.PDF417DecoderErrorCorrection = $r, h.PDF417Reader = ze, h.PDF417ResultMetadata = ei, h.PerspectiveTransform = ft, h.PlanarYUVLuminanceSource = pt, h.QRCodeByteMatrix = Zn, h.QRCodeDataMask = ct, h.QRCodeDecodedBitStreamParser = Se, h.QRCodeDecoderErrorCorrectionLevel = Ie, h.QRCodeDecoderFormatInformation = je, h.QRCodeEncoder = be, h.QRCodeEncoderQRCode = Xt, h.QRCodeMaskUtil = Oe, h.QRCodeMatrixUtil = Z, h.QRCodeMode = z, h.QRCodeReader = Bt, h.QRCodeVersion = X, h.QRCodeWriter = sn, h.RGBLuminanceSource = yr, h.RSS14Reader = Ne, h.RSSExpandedReader = B, h.ReaderException = Yn, h.ReedSolomonDecoder = En, h.ReedSolomonEncoder = br, h.ReedSolomonException = $t, h.Result = qe, h.ResultMetadataType = Ue, h.ResultPoint = W, h.StringUtils = Q, h.UnsupportedOperationException = Qt, h.VideoInputDevice = Wr, h.WhiteRectangleDetector = bt, h.WriterException = Ee, h.ZXingArrays = pe, h.ZXingCharset = si, h.ZXingInteger = K, h.ZXingStandardCharsets = _r, h.ZXingStringBuilder = ge, h.ZXingStringEncoding = Je, h.ZXingSystem = ie, h.createAbstractExpandedDecoder = qr, Object.defineProperty(h, "__esModule", { value: !0 });
+      h.AbstractExpandedDecoder = dr, h.ArgumentException = v, h.ArithmeticException = Fn, h.AztecCode = oi, h.AztecCodeReader = Vn, h.AztecCodeWriter = Kn, h.AztecDecoder = me, h.AztecDetector = Yr, h.AztecDetectorResult = Xr, h.AztecEncoder = ae, h.AztecHighLevelEncoder = Tn, h.AztecPoint = Qe, h.BarcodeFormat = Y, h.Binarizer = Me, h.BinaryBitmap = ne, h.BitArray = le, h.BitMatrix = Fe, h.BitSource = Ar, h.BrowserAztecCodeReader = Hi, h.BrowserBarcodeReader = Yi, h.BrowserCodeReader = Ut, h.BrowserDatamatrixCodeReader = ji, h.BrowserMultiFormatReader = ss, h.BrowserPDF417Reader = os, h.BrowserQRCodeReader = as, h.BrowserQRCodeSvgWriter = zt, h.CharacterSetECI = k, h.ChecksumException = q, h.Code128Reader = V, h.Code39Reader = Be, h.DataMatrixDecodedBitStreamParser = Mt, h.DataMatrixReader = vt, h.DecodeHintType = xe, h.DecoderResult = wn, h.DefaultGridSampler = zr, h.DetectorResult = Un, h.EAN13Reader = Vt, h.EncodeHintType = Le, h.Exception = m, h.FormatException = U, h.GenericGF = ce, h.GenericGFPoly = et, h.GlobalHistogramBinarizer = ke, h.GridSampler = cr, h.GridSamplerInstance = Rt, h.HTMLCanvasElementLuminanceSource = Ot, h.HybridBinarizer = J, h.ITFReader = Ae, h.IllegalArgumentException = R, h.IllegalStateException = wt, h.InvertedLuminanceSource = Nt, h.LuminanceSource = gn, h.MathUtils = oe, h.MultiFormatOneDReader = sn, h.MultiFormatReader = ii, h.MultiFormatWriter = cs, h.NotFoundException = D, h.OneDReader = ve, h.PDF417DecodedBitStreamParser = T, h.PDF417DecoderErrorCorrection = $r, h.PDF417Reader = ze, h.PDF417ResultMetadata = ei, h.PerspectiveTransform = ft, h.PlanarYUVLuminanceSource = pt, h.QRCodeByteMatrix = Zn, h.QRCodeDataMask = ct, h.QRCodeDecodedBitStreamParser = Se, h.QRCodeDecoderErrorCorrectionLevel = Ie, h.QRCodeDecoderFormatInformation = je, h.QRCodeEncoder = be, h.QRCodeEncoderQRCode = Xt, h.QRCodeMaskUtil = Oe, h.QRCodeMatrixUtil = Z, h.QRCodeMode = z, h.QRCodeReader = Bt, h.QRCodeVersion = X, h.QRCodeWriter = an, h.RGBLuminanceSource = yr, h.RSS14Reader = Ne, h.RSSExpandedReader = B, h.ReaderException = Yn, h.ReedSolomonDecoder = En, h.ReedSolomonEncoder = br, h.ReedSolomonException = en, h.Result = qe, h.ResultMetadataType = Ue, h.ResultPoint = W, h.StringUtils = Q, h.UnsupportedOperationException = Jt, h.VideoInputDevice = Wr, h.WhiteRectangleDetector = yt, h.WriterException = Ee, h.ZXingArrays = pe, h.ZXingCharset = si, h.ZXingInteger = K, h.ZXingStandardCharsets = _r, h.ZXingStringBuilder = ge, h.ZXingStringEncoding = Je, h.ZXingSystem = ie, h.createAbstractExpandedDecoder = qr, Object.defineProperty(h, "__esModule", { value: !0 });
     });
   }(On, On.exports)), On.exports;
 }
@@ -20721,7 +20721,7 @@ const Zs = /* @__PURE__ */ Xs(ye), js = /* @__PURE__ */ Es({
   default: Zs
 }, [ye]);
 var yi = function() {
-  function x(c, h, w) {
+  function x(c, h, g) {
     if (this.formatMap = /* @__PURE__ */ new Map([
       [G.QR_CODE, ye.BarcodeFormat.QR_CODE],
       [G.AZTEC, ye.BarcodeFormat.AZTEC],
@@ -20757,75 +20757,75 @@ var yi = function() {
       ]
     ]), this.reverseFormatMap = this.createReverseFormatMap(), !js)
       throw "Use html5qrcode.min.js without edit, ZXing not found.";
-    this.verbose = h, this.logger = w;
-    var E = this.createZXingFormats(c), g = /* @__PURE__ */ new Map();
-    g.set(ye.DecodeHintType.POSSIBLE_FORMATS, E), g.set(ye.DecodeHintType.TRY_HARDER, !1), this.hints = g;
+    this.verbose = h, this.logger = g;
+    var E = this.createZXingFormats(c), w = /* @__PURE__ */ new Map();
+    w.set(ye.DecodeHintType.POSSIBLE_FORMATS, E), w.set(ye.DecodeHintType.TRY_HARDER, !1), this.hints = w;
   }
   return x.prototype.decodeAsync = function(c) {
     var h = this;
-    return new Promise(function(w, E) {
+    return new Promise(function(g, E) {
       try {
-        w(h.decode(c));
-      } catch (g) {
-        E(g);
+        g(h.decode(c));
+      } catch (w) {
+        E(w);
       }
     });
   }, x.prototype.decode = function(c) {
-    var h = new ye.MultiFormatReader(this.verbose, this.hints), w = new ye.HTMLCanvasElementLuminanceSource(c), E = new ye.BinaryBitmap(new ye.HybridBinarizer(w)), g = h.decode(E);
+    var h = new ye.MultiFormatReader(this.verbose, this.hints), g = new ye.HTMLCanvasElementLuminanceSource(c), E = new ye.BinaryBitmap(new ye.HybridBinarizer(g)), w = h.decode(E);
     return {
-      text: g.text,
-      format: ki.create(this.toHtml5QrcodeSupportedFormats(g.format)),
+      text: w.text,
+      format: ki.create(this.toHtml5QrcodeSupportedFormats(w.format)),
       debugData: this.createDebugData()
     };
   }, x.prototype.createReverseFormatMap = function() {
     var c = /* @__PURE__ */ new Map();
-    return this.formatMap.forEach(function(h, w, E) {
-      c.set(h, w);
+    return this.formatMap.forEach(function(h, g, E) {
+      c.set(h, g);
     }), c;
   }, x.prototype.toHtml5QrcodeSupportedFormats = function(c) {
     if (!this.reverseFormatMap.has(c))
       throw "reverseFormatMap doesn't have ".concat(c);
     return this.reverseFormatMap.get(c);
   }, x.prototype.createZXingFormats = function(c) {
-    for (var h = [], w = 0, E = c; w < E.length; w++) {
-      var g = E[w];
-      this.formatMap.has(g) ? h.push(this.formatMap.get(g)) : this.logger.logError("".concat(g, " is not supported by") + "ZXingHtml5QrcodeShim");
+    for (var h = [], g = 0, E = c; g < E.length; g++) {
+      var w = E[g];
+      this.formatMap.has(w) ? h.push(this.formatMap.get(w)) : this.logger.logError("".concat(w, " is not supported by") + "ZXingHtml5QrcodeShim");
     }
     return h;
   }, x.prototype.createDebugData = function() {
     return { decoderName: "zxing-js" };
   }, x;
-}(), Ks = function(x, c, h, w) {
-  function E(g) {
-    return g instanceof h ? g : new h(function(b) {
-      b(g);
+}(), Ks = function(x, c, h, g) {
+  function E(w) {
+    return w instanceof h ? w : new h(function(b) {
+      b(w);
     });
   }
-  return new (h || (h = Promise))(function(g, b) {
+  return new (h || (h = Promise))(function(w, b) {
     function M(v) {
       try {
-        m(w.next(v));
+        m(g.next(v));
       } catch (R) {
         b(R);
       }
     }
     function O(v) {
       try {
-        m(w.throw(v));
+        m(g.throw(v));
       } catch (R) {
         b(R);
       }
     }
     function m(v) {
-      v.done ? g(v.value) : E(v.value).then(M, O);
+      v.done ? w(v.value) : E(v.value).then(M, O);
     }
-    m((w = w.apply(x, c || [])).next());
+    m((g = g.apply(x, c || [])).next());
   });
 }, qs = function(x, c) {
   var h = { label: 0, sent: function() {
-    if (g[0] & 1) throw g[1];
-    return g[1];
-  }, trys: [], ops: [] }, w, E, g, b;
+    if (w[0] & 1) throw w[1];
+    return w[1];
+  }, trys: [], ops: [] }, g, E, w, b;
   return b = { next: M(0), throw: M(1), return: M(2) }, typeof Symbol == "function" && (b[Symbol.iterator] = function() {
     return this;
   }), b;
@@ -20835,13 +20835,13 @@ var yi = function() {
     };
   }
   function O(m) {
-    if (w) throw new TypeError("Generator is already executing.");
+    if (g) throw new TypeError("Generator is already executing.");
     for (; b && (b = 0, m[0] && (h = 0)), h; ) try {
-      if (w = 1, E && (g = m[0] & 2 ? E.return : m[0] ? E.throw || ((g = E.return) && g.call(E), 0) : E.next) && !(g = g.call(E, m[1])).done) return g;
-      switch (E = 0, g && (m = [m[0] & 2, g.value]), m[0]) {
+      if (g = 1, E && (w = m[0] & 2 ? E.return : m[0] ? E.throw || ((w = E.return) && w.call(E), 0) : E.next) && !(w = w.call(E, m[1])).done) return w;
+      switch (E = 0, w && (m = [m[0] & 2, w.value]), m[0]) {
         case 0:
         case 1:
-          g = m;
+          w = m;
           break;
         case 4:
           return h.label++, { value: m[1], done: !1 };
@@ -20852,36 +20852,36 @@ var yi = function() {
           m = h.ops.pop(), h.trys.pop();
           continue;
         default:
-          if (g = h.trys, !(g = g.length > 0 && g[g.length - 1]) && (m[0] === 6 || m[0] === 2)) {
+          if (w = h.trys, !(w = w.length > 0 && w[w.length - 1]) && (m[0] === 6 || m[0] === 2)) {
             h = 0;
             continue;
           }
-          if (m[0] === 3 && (!g || m[1] > g[0] && m[1] < g[3])) {
+          if (m[0] === 3 && (!w || m[1] > w[0] && m[1] < w[3])) {
             h.label = m[1];
             break;
           }
-          if (m[0] === 6 && h.label < g[1]) {
-            h.label = g[1], g = m;
+          if (m[0] === 6 && h.label < w[1]) {
+            h.label = w[1], w = m;
             break;
           }
-          if (g && h.label < g[2]) {
-            h.label = g[2], h.ops.push(m);
+          if (w && h.label < w[2]) {
+            h.label = w[2], h.ops.push(m);
             break;
           }
-          g[2] && h.ops.pop(), h.trys.pop();
+          w[2] && h.ops.pop(), h.trys.pop();
           continue;
       }
       m = c.call(x, h);
     } catch (v) {
       m = [6, v], E = 0;
     } finally {
-      w = g = 0;
+      g = w = 0;
     }
     if (m[0] & 5) throw m[1];
     return { value: m[0] ? m[1] : void 0, done: !0 };
   }
 }, _i = function() {
-  function x(c, h, w) {
+  function x(c, h, g) {
     if (this.formatMap = /* @__PURE__ */ new Map([
       [G.QR_CODE, "qr_code"],
       [G.AZTEC, "aztec"],
@@ -20898,7 +20898,7 @@ var yi = function() {
       [G.UPC_E, "upc_e"]
     ]), this.reverseFormatMap = this.createReverseFormatMap(), !x.isSupported())
       throw "Use html5qrcode.min.js without edit, Use BarcodeDetectorDelegate only if it isSupported();";
-    this.verbose = h, this.logger = w;
+    this.verbose = h, this.logger = g;
     var E = this.createBarcodeDetectorFormats(c);
     if (this.detector = new BarcodeDetector(E), !this.detector)
       throw "BarcodeDetector detector not supported";
@@ -20910,7 +20910,7 @@ var yi = function() {
     return typeof c < "u";
   }, x.prototype.decodeAsync = function(c) {
     return Ks(this, void 0, void 0, function() {
-      var h, w;
+      var h, g;
       return qs(this, function(E) {
         switch (E.label) {
           case 0:
@@ -20918,26 +20918,26 @@ var yi = function() {
           case 1:
             if (h = E.sent(), !h || h.length === 0)
               throw "No barcode or QR code detected.";
-            return w = this.selectLargestBarcode(h), [2, {
-              text: w.rawValue,
-              format: ki.create(this.toHtml5QrcodeSupportedFormats(w.format)),
+            return g = this.selectLargestBarcode(h), [2, {
+              text: g.rawValue,
+              format: ki.create(this.toHtml5QrcodeSupportedFormats(g.format)),
               debugData: this.createDebugData()
             }];
         }
       });
     });
   }, x.prototype.selectLargestBarcode = function(c) {
-    for (var h = null, w = 0, E = 0, g = c; E < g.length; E++) {
-      var b = g[E], M = b.boundingBox.width * b.boundingBox.height;
-      M > w && (w = M, h = b);
+    for (var h = null, g = 0, E = 0, w = c; E < w.length; E++) {
+      var b = w[E], M = b.boundingBox.width * b.boundingBox.height;
+      M > g && (g = M, h = b);
     }
     if (!h)
       throw "No largest barcode found";
     return h;
   }, x.prototype.createBarcodeDetectorFormats = function(c) {
-    for (var h = [], w = 0, E = c; w < E.length; w++) {
-      var g = E[w];
-      this.formatMap.has(g) ? h.push(this.formatMap.get(g)) : this.logger.warn("".concat(g, " is not supported by") + "BarcodeDetectorDelegate");
+    for (var h = [], g = 0, E = c; g < E.length; g++) {
+      var w = E[g];
+      this.formatMap.has(w) ? h.push(this.formatMap.get(w)) : this.logger.warn("".concat(w, " is not supported by") + "BarcodeDetectorDelegate");
     }
     return { formats: h };
   }, x.prototype.toHtml5QrcodeSupportedFormats = function(c) {
@@ -20946,43 +20946,43 @@ var yi = function() {
     return this.reverseFormatMap.get(c);
   }, x.prototype.createReverseFormatMap = function() {
     var c = /* @__PURE__ */ new Map();
-    return this.formatMap.forEach(function(h, w, E) {
-      c.set(h, w);
+    return this.formatMap.forEach(function(h, g, E) {
+      c.set(h, g);
     }), c;
   }, x.prototype.createDebugData = function() {
     return { decoderName: "BarcodeDetector" };
   }, x;
-}(), Si = function(x, c, h, w) {
-  function E(g) {
-    return g instanceof h ? g : new h(function(b) {
-      b(g);
+}(), Si = function(x, c, h, g) {
+  function E(w) {
+    return w instanceof h ? w : new h(function(b) {
+      b(w);
     });
   }
-  return new (h || (h = Promise))(function(g, b) {
+  return new (h || (h = Promise))(function(w, b) {
     function M(v) {
       try {
-        m(w.next(v));
+        m(g.next(v));
       } catch (R) {
         b(R);
       }
     }
     function O(v) {
       try {
-        m(w.throw(v));
+        m(g.throw(v));
       } catch (R) {
         b(R);
       }
     }
     function m(v) {
-      v.done ? g(v.value) : E(v.value).then(M, O);
+      v.done ? w(v.value) : E(v.value).then(M, O);
     }
-    m((w = w.apply(x, c || [])).next());
+    m((g = g.apply(x, c || [])).next());
   });
 }, Ti = function(x, c) {
   var h = { label: 0, sent: function() {
-    if (g[0] & 1) throw g[1];
-    return g[1];
-  }, trys: [], ops: [] }, w, E, g, b;
+    if (w[0] & 1) throw w[1];
+    return w[1];
+  }, trys: [], ops: [] }, g, E, w, b;
   return b = { next: M(0), throw: M(1), return: M(2) }, typeof Symbol == "function" && (b[Symbol.iterator] = function() {
     return this;
   }), b;
@@ -20992,13 +20992,13 @@ var yi = function() {
     };
   }
   function O(m) {
-    if (w) throw new TypeError("Generator is already executing.");
+    if (g) throw new TypeError("Generator is already executing.");
     for (; b && (b = 0, m[0] && (h = 0)), h; ) try {
-      if (w = 1, E && (g = m[0] & 2 ? E.return : m[0] ? E.throw || ((g = E.return) && g.call(E), 0) : E.next) && !(g = g.call(E, m[1])).done) return g;
-      switch (E = 0, g && (m = [m[0] & 2, g.value]), m[0]) {
+      if (g = 1, E && (w = m[0] & 2 ? E.return : m[0] ? E.throw || ((w = E.return) && w.call(E), 0) : E.next) && !(w = w.call(E, m[1])).done) return w;
+      switch (E = 0, w && (m = [m[0] & 2, w.value]), m[0]) {
         case 0:
         case 1:
-          g = m;
+          w = m;
           break;
         case 4:
           return h.label++, { value: m[1], done: !1 };
@@ -21009,49 +21009,49 @@ var yi = function() {
           m = h.ops.pop(), h.trys.pop();
           continue;
         default:
-          if (g = h.trys, !(g = g.length > 0 && g[g.length - 1]) && (m[0] === 6 || m[0] === 2)) {
+          if (w = h.trys, !(w = w.length > 0 && w[w.length - 1]) && (m[0] === 6 || m[0] === 2)) {
             h = 0;
             continue;
           }
-          if (m[0] === 3 && (!g || m[1] > g[0] && m[1] < g[3])) {
+          if (m[0] === 3 && (!w || m[1] > w[0] && m[1] < w[3])) {
             h.label = m[1];
             break;
           }
-          if (m[0] === 6 && h.label < g[1]) {
-            h.label = g[1], g = m;
+          if (m[0] === 6 && h.label < w[1]) {
+            h.label = w[1], w = m;
             break;
           }
-          if (g && h.label < g[2]) {
-            h.label = g[2], h.ops.push(m);
+          if (w && h.label < w[2]) {
+            h.label = w[2], h.ops.push(m);
             break;
           }
-          g[2] && h.ops.pop(), h.trys.pop();
+          w[2] && h.ops.pop(), h.trys.pop();
           continue;
       }
       m = c.call(x, h);
     } catch (v) {
       m = [6, v], E = 0;
     } finally {
-      w = g = 0;
+      g = w = 0;
     }
     if (m[0] & 5) throw m[1];
     return { value: m[0] ? m[1] : void 0, done: !0 };
   }
 }, Qs = function() {
-  function x(c, h, w, E) {
-    this.EXECUTIONS_TO_REPORT_PERFORMANCE = 100, this.executions = 0, this.executionResults = [], this.wasPrimaryDecoderUsedInLastDecode = !1, this.verbose = w, h && _i.isSupported() ? (this.primaryDecoder = new _i(c, w, E), this.secondaryDecoder = new yi(c, w, E)) : this.primaryDecoder = new yi(c, w, E);
+  function x(c, h, g, E) {
+    this.EXECUTIONS_TO_REPORT_PERFORMANCE = 100, this.executions = 0, this.executionResults = [], this.wasPrimaryDecoderUsedInLastDecode = !1, this.verbose = g, h && _i.isSupported() ? (this.primaryDecoder = new _i(c, g, E), this.secondaryDecoder = new yi(c, g, E)) : this.primaryDecoder = new yi(c, g, E);
   }
   return x.prototype.decodeAsync = function(c) {
     return Si(this, void 0, void 0, function() {
       var h;
-      return Ti(this, function(w) {
-        switch (w.label) {
+      return Ti(this, function(g) {
+        switch (g.label) {
           case 0:
-            h = performance.now(), w.label = 1;
+            h = performance.now(), g.label = 1;
           case 1:
-            return w.trys.push([1, , 3, 4]), [4, this.getDecoder().decodeAsync(c)];
+            return g.trys.push([1, , 3, 4]), [4, this.getDecoder().decodeAsync(c)];
           case 2:
-            return [2, w.sent()];
+            return [2, g.sent()];
           case 3:
             return this.possiblyLogPerformance(h), [7];
           case 4:
@@ -21061,7 +21061,7 @@ var yi = function() {
     });
   }, x.prototype.decodeRobustlyAsync = function(c) {
     return Si(this, void 0, void 0, function() {
-      var h, w;
+      var h, g;
       return Ti(this, function(E) {
         switch (E.label) {
           case 0:
@@ -21071,9 +21071,9 @@ var yi = function() {
           case 2:
             return [2, E.sent()];
           case 3:
-            if (w = E.sent(), this.secondaryDecoder)
+            if (g = E.sent(), this.secondaryDecoder)
               return [2, this.secondaryDecoder.decodeAsync(c)];
-            throw w;
+            throw g;
           case 4:
             return this.possiblyLogPerformance(h), [7];
           case 5:
@@ -21090,62 +21090,62 @@ var yi = function() {
     }
   }, x.prototype.possiblyFlushPerformanceReport = function() {
     if (!(this.executions < this.EXECUTIONS_TO_REPORT_PERFORMANCE)) {
-      for (var c = 0, h = 0, w = this.executionResults; h < w.length; h++) {
-        var E = w[h];
+      for (var c = 0, h = 0, g = this.executionResults; h < g.length; h++) {
+        var E = g[h];
         c += E;
       }
-      var g = c / this.executionResults.length;
-      console.log("".concat(g, " ms for ").concat(this.executionResults.length, " last runs.")), this.executions = 0, this.executionResults = [];
+      var w = c / this.executionResults.length;
+      console.log("".concat(w, " ms for ").concat(this.executionResults.length, " last runs.")), this.executions = 0, this.executionResults = [];
     }
   }, x;
 }(), Vr = /* @__PURE__ */ function() {
   var x = function(c, h) {
-    return x = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(w, E) {
-      w.__proto__ = E;
-    } || function(w, E) {
-      for (var g in E) Object.prototype.hasOwnProperty.call(E, g) && (w[g] = E[g]);
+    return x = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(g, E) {
+      g.__proto__ = E;
+    } || function(g, E) {
+      for (var w in E) Object.prototype.hasOwnProperty.call(E, w) && (g[w] = E[w]);
     }, x(c, h);
   };
   return function(c, h) {
     if (typeof h != "function" && h !== null)
       throw new TypeError("Class extends value " + String(h) + " is not a constructor or null");
     x(c, h);
-    function w() {
+    function g() {
       this.constructor = c;
     }
-    c.prototype = h === null ? Object.create(h) : (w.prototype = h.prototype, new w());
+    c.prototype = h === null ? Object.create(h) : (g.prototype = h.prototype, new g());
   };
-}(), tr = function(x, c, h, w) {
-  function E(g) {
-    return g instanceof h ? g : new h(function(b) {
-      b(g);
+}(), tr = function(x, c, h, g) {
+  function E(w) {
+    return w instanceof h ? w : new h(function(b) {
+      b(w);
     });
   }
-  return new (h || (h = Promise))(function(g, b) {
+  return new (h || (h = Promise))(function(w, b) {
     function M(v) {
       try {
-        m(w.next(v));
+        m(g.next(v));
       } catch (R) {
         b(R);
       }
     }
     function O(v) {
       try {
-        m(w.throw(v));
+        m(g.throw(v));
       } catch (R) {
         b(R);
       }
     }
     function m(v) {
-      v.done ? g(v.value) : E(v.value).then(M, O);
+      v.done ? w(v.value) : E(v.value).then(M, O);
     }
-    m((w = w.apply(x, c || [])).next());
+    m((g = g.apply(x, c || [])).next());
   });
 }, nr = function(x, c) {
   var h = { label: 0, sent: function() {
-    if (g[0] & 1) throw g[1];
-    return g[1];
-  }, trys: [], ops: [] }, w, E, g, b;
+    if (w[0] & 1) throw w[1];
+    return w[1];
+  }, trys: [], ops: [] }, g, E, w, b;
   return b = { next: M(0), throw: M(1), return: M(2) }, typeof Symbol == "function" && (b[Symbol.iterator] = function() {
     return this;
   }), b;
@@ -21155,13 +21155,13 @@ var yi = function() {
     };
   }
   function O(m) {
-    if (w) throw new TypeError("Generator is already executing.");
+    if (g) throw new TypeError("Generator is already executing.");
     for (; b && (b = 0, m[0] && (h = 0)), h; ) try {
-      if (w = 1, E && (g = m[0] & 2 ? E.return : m[0] ? E.throw || ((g = E.return) && g.call(E), 0) : E.next) && !(g = g.call(E, m[1])).done) return g;
-      switch (E = 0, g && (m = [m[0] & 2, g.value]), m[0]) {
+      if (g = 1, E && (w = m[0] & 2 ? E.return : m[0] ? E.throw || ((w = E.return) && w.call(E), 0) : E.next) && !(w = w.call(E, m[1])).done) return w;
+      switch (E = 0, w && (m = [m[0] & 2, w.value]), m[0]) {
         case 0:
         case 1:
-          g = m;
+          w = m;
           break;
         case 4:
           return h.label++, { value: m[1], done: !1 };
@@ -21172,30 +21172,30 @@ var yi = function() {
           m = h.ops.pop(), h.trys.pop();
           continue;
         default:
-          if (g = h.trys, !(g = g.length > 0 && g[g.length - 1]) && (m[0] === 6 || m[0] === 2)) {
+          if (w = h.trys, !(w = w.length > 0 && w[w.length - 1]) && (m[0] === 6 || m[0] === 2)) {
             h = 0;
             continue;
           }
-          if (m[0] === 3 && (!g || m[1] > g[0] && m[1] < g[3])) {
+          if (m[0] === 3 && (!w || m[1] > w[0] && m[1] < w[3])) {
             h.label = m[1];
             break;
           }
-          if (m[0] === 6 && h.label < g[1]) {
-            h.label = g[1], g = m;
+          if (m[0] === 6 && h.label < w[1]) {
+            h.label = w[1], w = m;
             break;
           }
-          if (g && h.label < g[2]) {
-            h.label = g[2], h.ops.push(m);
+          if (w && h.label < w[2]) {
+            h.label = w[2], h.ops.push(m);
             break;
           }
-          g[2] && h.ops.pop(), h.trys.pop();
+          w[2] && h.ops.pop(), h.trys.pop();
           continue;
       }
       m = c.call(x, h);
     } catch (v) {
       m = [6, v], E = 0;
     } finally {
-      w = g = 0;
+      g = w = 0;
     }
     if (m[0] & 5) throw m[1];
     return { value: m[0] ? m[1] : void 0, done: !0 };
@@ -21209,8 +21209,8 @@ var yi = function() {
   }, x.prototype.apply = function(c) {
     var h = {};
     h[this.name] = c;
-    var w = { advanced: [h] };
-    return this.track.applyConstraints(w);
+    var g = { advanced: [h] };
+    return this.track.applyConstraints(g);
   }, x.prototype.value = function() {
     var c = this.track.getSettings();
     if (this.name in c) {
@@ -21221,8 +21221,8 @@ var yi = function() {
   }, x;
 }(), $s = function(x) {
   Vr(c, x);
-  function c(h, w) {
-    return x.call(this, h, w) || this;
+  function c(h, g) {
+    return x.call(this, h, g) || this;
   }
   return c.prototype.min = function() {
     return this.getCapabilities().min;
@@ -21231,17 +21231,17 @@ var yi = function() {
   }, c.prototype.step = function() {
     return this.getCapabilities().step;
   }, c.prototype.apply = function(h) {
-    var w = {};
-    w[this.name] = h;
-    var E = { advanced: [w] };
+    var g = {};
+    g[this.name] = h;
+    var E = { advanced: [g] };
     return this.track.applyConstraints(E);
   }, c.prototype.getCapabilities = function() {
     this.failIfNotSupported();
-    var h = this.track.getCapabilities(), w = h[this.name];
+    var h = this.track.getCapabilities(), g = h[this.name];
     return {
-      min: w.min,
-      max: w.max,
-      step: w.step
+      min: g.min,
+      max: g.max,
+      step: g.step
     };
   }, c.prototype.failIfNotSupported = function() {
     if (!this.isSupported())
@@ -21269,8 +21269,8 @@ var yi = function() {
     return new eo(this.track);
   }, x;
 }(), no = function() {
-  function x(c, h, w) {
-    this.isClosed = !1, this.parentElement = c, this.mediaStream = h, this.callbacks = w, this.surface = this.createVideoElement(this.parentElement.clientWidth), c.append(this.surface);
+  function x(c, h, g) {
+    this.isClosed = !1, this.parentElement = c, this.mediaStream = h, this.callbacks = g, this.surface = this.createVideoElement(this.parentElement.clientWidth), c.append(this.surface);
   }
   return x.prototype.createVideoElement = function(c) {
     var h = document.createElement("video");
@@ -21283,23 +21283,23 @@ var yi = function() {
       throw "RenderedCameraImpl video surface onerror() called";
     };
     var h = function() {
-      var w = c.surface.clientWidth, E = c.surface.clientHeight;
-      c.callbacks.onRenderSurfaceReady(w, E), c.surface.removeEventListener("playing", h);
+      var g = c.surface.clientWidth, E = c.surface.clientHeight;
+      c.callbacks.onRenderSurfaceReady(g, E), c.surface.removeEventListener("playing", h);
     };
     this.surface.addEventListener("playing", h), this.surface.srcObject = this.mediaStream, this.surface.play();
-  }, x.create = function(c, h, w, E) {
+  }, x.create = function(c, h, g, E) {
     return tr(this, void 0, void 0, function() {
-      var g, b;
+      var w, b;
       return nr(this, function(M) {
         switch (M.label) {
           case 0:
-            return g = new x(c, h, E), w.aspectRatio ? (b = {
-              aspectRatio: w.aspectRatio
-            }, [4, g.getFirstTrackOrFail().applyConstraints(b)]) : [3, 2];
+            return w = new x(c, h, E), g.aspectRatio ? (b = {
+              aspectRatio: g.aspectRatio
+            }, [4, w.getFirstTrackOrFail().applyConstraints(b)]) : [3, 2];
           case 1:
             M.sent(), M.label = 2;
           case 2:
-            return g.setupSurface(), [2, g];
+            return w.setupSurface(), [2, w];
         }
       });
     });
@@ -21314,10 +21314,10 @@ var yi = function() {
     this.failIfClosed(), this.surface.pause();
   }, x.prototype.resume = function(c) {
     this.failIfClosed();
-    var h = this, w = function() {
-      setTimeout(c, 200), h.surface.removeEventListener("playing", w);
+    var h = this, g = function() {
+      setTimeout(c, 200), h.surface.removeEventListener("playing", g);
     };
-    this.surface.addEventListener("playing", w), this.surface.play();
+    this.surface.addEventListener("playing", g), this.surface.play();
   }, x.prototype.isPaused = function() {
     return this.failIfClosed(), this.surface.paused;
   }, x.prototype.getSurface = function() {
@@ -21338,10 +21338,10 @@ var yi = function() {
     if (this.isClosed)
       return Promise.resolve();
     var c = this;
-    return new Promise(function(h, w) {
-      var E = c.mediaStream.getVideoTracks(), g = E.length, b = 0;
+    return new Promise(function(h, g) {
+      var E = c.mediaStream.getVideoTracks(), w = E.length, b = 0;
       c.mediaStream.getVideoTracks().forEach(function(M) {
-        c.mediaStream.removeTrack(M), M.stop(), ++b, b >= g && (c.isClosed = !0, c.parentElement.removeChild(c.surface), h());
+        c.mediaStream.removeTrack(M), M.stop(), ++b, b >= w && (c.isClosed = !0, c.parentElement.removeChild(c.surface), h());
       });
     });
   }, x.prototype.getCapabilities = function() {
@@ -21351,15 +21351,15 @@ var yi = function() {
   function x(c) {
     this.mediaStream = c;
   }
-  return x.prototype.render = function(c, h, w) {
+  return x.prototype.render = function(c, h, g) {
     return tr(this, void 0, void 0, function() {
       return nr(this, function(E) {
-        return [2, no.create(c, this.mediaStream, h, w)];
+        return [2, no.create(c, this.mediaStream, h, g)];
       });
     });
   }, x.create = function(c) {
     return tr(this, void 0, void 0, function() {
-      var h, w;
+      var h, g;
       return nr(this, function(E) {
         switch (E.label) {
           case 0:
@@ -21370,42 +21370,42 @@ var yi = function() {
               video: c
             }, [4, navigator.mediaDevices.getUserMedia(h)];
           case 1:
-            return w = E.sent(), [2, new x(w)];
+            return g = E.sent(), [2, new x(g)];
         }
       });
     });
   }, x;
-}(), Ni = function(x, c, h, w) {
-  function E(g) {
-    return g instanceof h ? g : new h(function(b) {
-      b(g);
+}(), Ni = function(x, c, h, g) {
+  function E(w) {
+    return w instanceof h ? w : new h(function(b) {
+      b(w);
     });
   }
-  return new (h || (h = Promise))(function(g, b) {
+  return new (h || (h = Promise))(function(w, b) {
     function M(v) {
       try {
-        m(w.next(v));
+        m(g.next(v));
       } catch (R) {
         b(R);
       }
     }
     function O(v) {
       try {
-        m(w.throw(v));
+        m(g.throw(v));
       } catch (R) {
         b(R);
       }
     }
     function m(v) {
-      v.done ? g(v.value) : E(v.value).then(M, O);
+      v.done ? w(v.value) : E(v.value).then(M, O);
     }
-    m((w = w.apply(x, c || [])).next());
+    m((g = g.apply(x, c || [])).next());
   });
 }, Oi = function(x, c) {
   var h = { label: 0, sent: function() {
-    if (g[0] & 1) throw g[1];
-    return g[1];
-  }, trys: [], ops: [] }, w, E, g, b;
+    if (w[0] & 1) throw w[1];
+    return w[1];
+  }, trys: [], ops: [] }, g, E, w, b;
   return b = { next: M(0), throw: M(1), return: M(2) }, typeof Symbol == "function" && (b[Symbol.iterator] = function() {
     return this;
   }), b;
@@ -21415,13 +21415,13 @@ var yi = function() {
     };
   }
   function O(m) {
-    if (w) throw new TypeError("Generator is already executing.");
+    if (g) throw new TypeError("Generator is already executing.");
     for (; b && (b = 0, m[0] && (h = 0)), h; ) try {
-      if (w = 1, E && (g = m[0] & 2 ? E.return : m[0] ? E.throw || ((g = E.return) && g.call(E), 0) : E.next) && !(g = g.call(E, m[1])).done) return g;
-      switch (E = 0, g && (m = [m[0] & 2, g.value]), m[0]) {
+      if (g = 1, E && (w = m[0] & 2 ? E.return : m[0] ? E.throw || ((w = E.return) && w.call(E), 0) : E.next) && !(w = w.call(E, m[1])).done) return w;
+      switch (E = 0, w && (m = [m[0] & 2, w.value]), m[0]) {
         case 0:
         case 1:
-          g = m;
+          w = m;
           break;
         case 4:
           return h.label++, { value: m[1], done: !1 };
@@ -21432,30 +21432,30 @@ var yi = function() {
           m = h.ops.pop(), h.trys.pop();
           continue;
         default:
-          if (g = h.trys, !(g = g.length > 0 && g[g.length - 1]) && (m[0] === 6 || m[0] === 2)) {
+          if (w = h.trys, !(w = w.length > 0 && w[w.length - 1]) && (m[0] === 6 || m[0] === 2)) {
             h = 0;
             continue;
           }
-          if (m[0] === 3 && (!g || m[1] > g[0] && m[1] < g[3])) {
+          if (m[0] === 3 && (!w || m[1] > w[0] && m[1] < w[3])) {
             h.label = m[1];
             break;
           }
-          if (m[0] === 6 && h.label < g[1]) {
-            h.label = g[1], g = m;
+          if (m[0] === 6 && h.label < w[1]) {
+            h.label = w[1], w = m;
             break;
           }
-          if (g && h.label < g[2]) {
-            h.label = g[2], h.ops.push(m);
+          if (w && h.label < w[2]) {
+            h.label = w[2], h.ops.push(m);
             break;
           }
-          g[2] && h.ops.pop(), h.trys.pop();
+          w[2] && h.ops.pop(), h.trys.pop();
           continue;
       }
       m = c.call(x, h);
     } catch (v) {
       m = [6, v], E = 0;
     } finally {
-      w = g = 0;
+      g = w = 0;
     }
     if (m[0] & 5) throw m[1];
     return { value: m[0] ? m[1] : void 0, done: !0 };
@@ -21478,37 +21478,37 @@ var yi = function() {
       });
     });
   }, x;
-}(), so = function(x, c, h, w) {
-  function E(g) {
-    return g instanceof h ? g : new h(function(b) {
-      b(g);
+}(), so = function(x, c, h, g) {
+  function E(w) {
+    return w instanceof h ? w : new h(function(b) {
+      b(w);
     });
   }
-  return new (h || (h = Promise))(function(g, b) {
+  return new (h || (h = Promise))(function(w, b) {
     function M(v) {
       try {
-        m(w.next(v));
+        m(g.next(v));
       } catch (R) {
         b(R);
       }
     }
     function O(v) {
       try {
-        m(w.throw(v));
+        m(g.throw(v));
       } catch (R) {
         b(R);
       }
     }
     function m(v) {
-      v.done ? g(v.value) : E(v.value).then(M, O);
+      v.done ? w(v.value) : E(v.value).then(M, O);
     }
-    m((w = w.apply(x, c || [])).next());
+    m((g = g.apply(x, c || [])).next());
   });
 }, oo = function(x, c) {
   var h = { label: 0, sent: function() {
-    if (g[0] & 1) throw g[1];
-    return g[1];
-  }, trys: [], ops: [] }, w, E, g, b;
+    if (w[0] & 1) throw w[1];
+    return w[1];
+  }, trys: [], ops: [] }, g, E, w, b;
   return b = { next: M(0), throw: M(1), return: M(2) }, typeof Symbol == "function" && (b[Symbol.iterator] = function() {
     return this;
   }), b;
@@ -21518,13 +21518,13 @@ var yi = function() {
     };
   }
   function O(m) {
-    if (w) throw new TypeError("Generator is already executing.");
+    if (g) throw new TypeError("Generator is already executing.");
     for (; b && (b = 0, m[0] && (h = 0)), h; ) try {
-      if (w = 1, E && (g = m[0] & 2 ? E.return : m[0] ? E.throw || ((g = E.return) && g.call(E), 0) : E.next) && !(g = g.call(E, m[1])).done) return g;
-      switch (E = 0, g && (m = [m[0] & 2, g.value]), m[0]) {
+      if (g = 1, E && (w = m[0] & 2 ? E.return : m[0] ? E.throw || ((w = E.return) && w.call(E), 0) : E.next) && !(w = w.call(E, m[1])).done) return w;
+      switch (E = 0, w && (m = [m[0] & 2, w.value]), m[0]) {
         case 0:
         case 1:
-          g = m;
+          w = m;
           break;
         case 4:
           return h.label++, { value: m[1], done: !1 };
@@ -21535,30 +21535,30 @@ var yi = function() {
           m = h.ops.pop(), h.trys.pop();
           continue;
         default:
-          if (g = h.trys, !(g = g.length > 0 && g[g.length - 1]) && (m[0] === 6 || m[0] === 2)) {
+          if (w = h.trys, !(w = w.length > 0 && w[w.length - 1]) && (m[0] === 6 || m[0] === 2)) {
             h = 0;
             continue;
           }
-          if (m[0] === 3 && (!g || m[1] > g[0] && m[1] < g[3])) {
+          if (m[0] === 3 && (!w || m[1] > w[0] && m[1] < w[3])) {
             h.label = m[1];
             break;
           }
-          if (m[0] === 6 && h.label < g[1]) {
-            h.label = g[1], g = m;
+          if (m[0] === 6 && h.label < w[1]) {
+            h.label = w[1], w = m;
             break;
           }
-          if (g && h.label < g[2]) {
-            h.label = g[2], h.ops.push(m);
+          if (w && h.label < w[2]) {
+            h.label = w[2], h.ops.push(m);
             break;
           }
-          g[2] && h.ops.pop(), h.trys.pop();
+          w[2] && h.ops.pop(), h.trys.pop();
           continue;
       }
       m = c.call(x, h);
     } catch (v) {
       m = [6, v], E = 0;
     } finally {
-      w = g = 0;
+      g = w = 0;
     }
     if (m[0] & 5) throw m[1];
     return { value: m[0] ? m[1] : void 0, done: !0 };
@@ -21572,8 +21572,8 @@ var yi = function() {
     var c = MediaStreamTrack;
     return MediaStreamTrack && c.getSources ? x.getCamerasFromMediaStreamTrack() : x.rejectWithError();
   }, x.rejectWithError = function() {
-    var c = hn.unableToQuerySupportedDevices();
-    return x.isHttpsOrLocalhost() || (c = hn.insecureContextCameraQueryError()), Promise.reject(c);
+    var c = fn.unableToQuerySupportedDevices();
+    return x.isHttpsOrLocalhost() || (c = fn.insecureContextCameraQueryError()), Promise.reject(c);
   }, x.isHttpsOrLocalhost = function() {
     if (location.protocol === "https:")
       return !0;
@@ -21581,7 +21581,7 @@ var yi = function() {
     return c === "127.0.0.1" || c === "localhost";
   }, x.getCamerasFromMediaDevices = function() {
     return so(this, void 0, void 0, function() {
-      var c, h, w, E, g, b, M;
+      var c, h, g, E, w, b, M;
       return oo(this, function(O) {
         switch (O.label) {
           case 0:
@@ -21594,8 +21594,8 @@ var yi = function() {
           case 1:
             return h = O.sent(), [4, navigator.mediaDevices.enumerateDevices()];
           case 2:
-            for (w = O.sent(), E = [], g = 0, b = w; g < b.length; g++)
-              M = b[g], M.kind === "videoinput" && E.push({
+            for (g = O.sent(), E = [], w = 0, b = g; w < b.length; w++)
+              M = b[w], M.kind === "videoinput" && E.push({
                 id: M.deviceId,
                 label: M.label
               });
@@ -21605,8 +21605,8 @@ var yi = function() {
     });
   }, x.getCamerasFromMediaStreamTrack = function() {
     return new Promise(function(c, h) {
-      var w = function(g) {
-        for (var b = [], M = 0, O = g; M < O.length; M++) {
+      var g = function(w) {
+        for (var b = [], M = 0, O = w; M < O.length; M++) {
           var m = O[M];
           m.kind === "video" && b.push({
             id: m.id,
@@ -21615,7 +21615,7 @@ var yi = function() {
         }
         c(b);
       }, E = MediaStreamTrack;
-      E.getSources(w);
+      E.getSources(g);
     });
   }, x;
 }(), Re;
@@ -21657,9 +21657,9 @@ var lo = function() {
         break;
     }
   }, x.prototype.failIfNewStateIs = function(c, h) {
-    for (var w = 0, E = h; w < E.length; w++) {
-      var g = E[w];
-      if (c === g)
+    for (var g = 0, E = h; g < E.length; g++) {
+      var w = E[g];
+      if (c === w)
         throw "Cannot transition from ".concat(this.state, " to ").concat(c);
     }
   }, x;
@@ -21690,20 +21690,20 @@ var lo = function() {
   }, x;
 }(), uo = /* @__PURE__ */ function() {
   var x = function(c, h) {
-    return x = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(w, E) {
-      w.__proto__ = E;
-    } || function(w, E) {
-      for (var g in E) Object.prototype.hasOwnProperty.call(E, g) && (w[g] = E[g]);
+    return x = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(g, E) {
+      g.__proto__ = E;
+    } || function(g, E) {
+      for (var w in E) Object.prototype.hasOwnProperty.call(E, w) && (g[w] = E[w]);
     }, x(c, h);
   };
   return function(c, h) {
     if (typeof h != "function" && h !== null)
       throw new TypeError("Class extends value " + String(h) + " is not a constructor or null");
     x(c, h);
-    function w() {
+    function g() {
       this.constructor = c;
     }
-    c.prototype = h === null ? Object.create(h) : (w.prototype = h.prototype, new w());
+    c.prototype = h === null ? Object.create(h) : (g.prototype = h.prototype, new g());
   };
 }(), at = function(x) {
   uo(c, x);
@@ -21718,7 +21718,7 @@ var lo = function() {
   return x.prototype.isMediaStreamConstraintsValid = function() {
     return this.videoConstraints ? Ui.isMediaStreamConstraintsValid(this.videoConstraints, this.logger) : (this.logger.logError("Empty videoConstraints", !0), !1);
   }, x.prototype.isShadedBoxEnabled = function() {
-    return !yt(this.qrbox);
+    return !_t(this.qrbox);
   }, x.create = function(c, h) {
     return new x(c, h);
   }, x;
@@ -21727,14 +21727,14 @@ var lo = function() {
     if (this.element = null, this.canvasElement = null, this.scannerPausedUiElement = null, this.hasBorderShaders = null, this.borderShaders = null, this.qrMatch = null, this.renderedCamera = null, this.qrRegion = null, this.context = null, this.lastScanImageFile = null, this.isScanning = !1, !document.getElementById(c))
       throw "HTML Element with id=".concat(c, " not found");
     this.elementId = c, this.verbose = !1;
-    var w;
-    typeof h == "boolean" ? this.verbose = h === !0 : h && (w = h, this.verbose = w.verbose === !0, w.experimentalFeatures), this.logger = new Ws(this.verbose), this.qrcode = new Qs(this.getSupportedFormats(h), this.getUseBarCodeDetectorIfSupported(w), this.verbose, this.logger), this.foreverScanTimeout, this.shouldScan = !0, this.stateManagerProxy = ho.create();
+    var g;
+    typeof h == "boolean" ? this.verbose = h === !0 : h && (g = h, this.verbose = g.verbose === !0, g.experimentalFeatures), this.logger = new Ws(this.verbose), this.qrcode = new Qs(this.getSupportedFormats(h), this.getUseBarCodeDetectorIfSupported(g), this.verbose, this.logger), this.foreverScanTimeout, this.shouldScan = !0, this.stateManagerProxy = ho.create();
   }
-  return x.prototype.start = function(c, h, w, E) {
-    var g = this;
+  return x.prototype.start = function(c, h, g, E) {
+    var w = this;
     if (!c)
       throw "cameraIdOrConfig is required";
-    if (!w || typeof w != "function")
+    if (!g || typeof g != "function")
       throw "qrCodeSuccessCallback is required and should be a function.";
     var b;
     E ? b = E : b = this.verbose ? this.logger.log : function() {
@@ -21756,27 +21756,27 @@ var lo = function() {
       (!m || M.aspectRatio) && (gt.aspectRatio = M.aspectRatio);
       var St = {
         onRenderSurfaceReady: function(pe, K) {
-          R.setupUi(pe, K, M), R.isScanning = !0, R.foreverScan(M, w, b);
+          R.setupUi(pe, K, M), R.isScanning = !0, R.foreverScan(M, g, b);
         }
       };
       io.failIfNotSupported().then(function(pe) {
         pe.create(ie).then(function(K) {
-          return K.render(g.element, gt, St).then(function(le) {
+          return K.render(w.element, gt, St).then(function(le) {
             R.renderedCamera = le, ne.execute(), q(null);
           }).catch(function(le) {
             ne.cancel(), Me(le);
           });
         }).catch(function(K) {
-          ne.cancel(), Me(hn.errorGettingUserMedia(K));
+          ne.cancel(), Me(fn.errorGettingUserMedia(K));
         });
       }).catch(function(pe) {
-        ne.cancel(), Me(hn.cameraStreamingNotSupported());
+        ne.cancel(), Me(fn.cameraStreamingNotSupported());
       });
     });
   }, x.prototype.pause = function(c) {
     if (!this.stateManagerProxy.isStrictlyScanning())
       throw "Cannot pause, scanner is not scanning.";
-    this.stateManagerProxy.directTransition(Re.PAUSED), this.showPausedState(), (yt(c) || c !== !0) && (c = !1), c && this.renderedCamera && this.renderedCamera.pause();
+    this.stateManagerProxy.directTransition(Re.PAUSED), this.showPausedState(), (_t(c) || c !== !0) && (c = !1), c && this.renderedCamera && this.renderedCamera.pause();
   }, x.prototype.resume = function() {
     if (!this.stateManagerProxy.isPaused())
       throw "Cannot result, scanner is not paused.";
@@ -21800,52 +21800,52 @@ var lo = function() {
       throw "Cannot stop, scanner is not running or paused.";
     var h = this.stateManagerProxy.startTransition(Re.NOT_STARTED);
     this.shouldScan = !1, this.foreverScanTimeout && clearTimeout(this.foreverScanTimeout);
-    var w = function() {
+    var g = function() {
       if (c.element) {
-        var g = document.getElementById(at.SHADED_REGION_ELEMENT_ID);
-        g && c.element.removeChild(g);
+        var w = document.getElementById(at.SHADED_REGION_ELEMENT_ID);
+        w && c.element.removeChild(w);
       }
     }, E = this;
     return this.renderedCamera.close().then(function() {
-      return E.renderedCamera = null, E.element && (E.element.removeChild(E.canvasElement), E.canvasElement = null), w(), E.qrRegion && (E.qrRegion = null), E.context && (E.context = null), h.execute(), E.hidePausedState(), E.isScanning = !1, Promise.resolve();
+      return E.renderedCamera = null, E.element && (E.element.removeChild(E.canvasElement), E.canvasElement = null), g(), E.qrRegion && (E.qrRegion = null), E.context && (E.context = null), h.execute(), E.hidePausedState(), E.isScanning = !1, Promise.resolve();
     });
   }, x.prototype.scanFile = function(c, h) {
-    return this.scanFileV2(c, h).then(function(w) {
-      return w.decodedText;
+    return this.scanFileV2(c, h).then(function(g) {
+      return g.decodedText;
     });
   }, x.prototype.scanFileV2 = function(c, h) {
-    var w = this;
+    var g = this;
     if (!c || !(c instanceof File))
       throw "imageFile argument is mandatory and should be instance of File. Use 'event.target.files[0]'.";
-    if (yt(h) && (h = !0), !this.stateManagerProxy.canScanFile())
+    if (_t(h) && (h = !0), !this.stateManagerProxy.canScanFile())
       throw "Cannot start file scan - ongoing camera scan";
-    return new Promise(function(E, g) {
-      w.possiblyCloseLastScanImageFile(), w.clearElement(), w.lastScanImageFile = URL.createObjectURL(c);
+    return new Promise(function(E, w) {
+      g.possiblyCloseLastScanImageFile(), g.clearElement(), g.lastScanImageFile = URL.createObjectURL(c);
       var b = new Image();
       b.onload = function() {
-        var M = b.width, O = b.height, m = document.getElementById(w.elementId), v = m.clientWidth ? m.clientWidth : at.DEFAULT_WIDTH, R = Math.max(m.clientHeight ? m.clientHeight : O, at.FILE_SCAN_MIN_HEIGHT), ne = w.computeCanvasDrawConfig(M, O, v, R);
+        var M = b.width, O = b.height, m = document.getElementById(g.elementId), v = m.clientWidth ? m.clientWidth : at.DEFAULT_WIDTH, R = Math.max(m.clientHeight ? m.clientHeight : O, at.FILE_SCAN_MIN_HEIGHT), ne = g.computeCanvasDrawConfig(M, O, v, R);
         if (h) {
-          var q = w.createCanvasElement(v, R, "qr-canvas-visible");
+          var q = g.createCanvasElement(v, R, "qr-canvas-visible");
           q.style.display = "inline-block", m.appendChild(q);
           var Me = q.getContext("2d");
           if (!Me)
             throw "Unable to get 2d context from canvas";
           Me.canvas.width = v, Me.canvas.height = R, Me.drawImage(b, 0, 0, M, O, ne.x, ne.y, ne.width, ne.height);
         }
-        var ie = at.FILE_SCAN_HIDDEN_CANVAS_PADDING, gt = Math.max(b.width, ne.width), St = Math.max(b.height, ne.height), pe = gt + 2 * ie, K = St + 2 * ie, le = w.createCanvasElement(pe, K);
+        var ie = at.FILE_SCAN_HIDDEN_CANVAS_PADDING, gt = Math.max(b.width, ne.width), St = Math.max(b.height, ne.height), pe = gt + 2 * ie, K = St + 2 * ie, le = g.createCanvasElement(pe, K);
         m.appendChild(le);
         var Tt = le.getContext("2d");
         if (!Tt)
           throw "Unable to get 2d context from canvas";
         Tt.canvas.width = pe, Tt.canvas.height = K, Tt.drawImage(b, 0, 0, M, O, ie, ie, gt, St);
         try {
-          w.qrcode.decodeRobustlyAsync(le).then(function(xe) {
+          g.qrcode.decodeRobustlyAsync(le).then(function(xe) {
             E(Ii.createFromQrcodeResult(xe));
-          }).catch(g);
+          }).catch(w);
         } catch (xe) {
-          g("QR code parse error, error = ".concat(xe));
+          w("QR code parse error, error = ".concat(xe));
         }
-      }, b.onerror = g, b.onabort = g, b.onstalled = g, b.onsuspend = g, b.src = URL.createObjectURL(c);
+      }, b.onerror = w, b.onabort = w, b.onstalled = w, b.onsuspend = w, b.src = URL.createObjectURL(c);
     });
   }, x.prototype.clear = function() {
     this.clearElement();
@@ -21893,26 +21893,26 @@ var lo = function() {
       throw "configOrVerbosityFlag.formatsToSupport should be undefined or an array.";
     if (c.formatsToSupport.length === 0)
       throw "Atleast 1 formatsToSupport is needed.";
-    for (var w = [], E = 0, g = c.formatsToSupport; E < g.length; E++) {
-      var b = g[E];
-      Vs(b) ? w.push(b) : this.logger.warn("Invalid format: ".concat(b, " passed in config, ignoring."));
+    for (var g = [], E = 0, w = c.formatsToSupport; E < w.length; E++) {
+      var b = w[E];
+      Vs(b) ? g.push(b) : this.logger.warn("Invalid format: ".concat(b, " passed in config, ignoring."));
     }
-    if (w.length === 0)
+    if (g.length === 0)
       throw "None of formatsToSupport match supported values.";
-    return w;
+    return g;
   }, x.prototype.getUseBarCodeDetectorIfSupported = function(c) {
-    if (yt(c))
+    if (_t(c))
       return !0;
-    if (!yt(c.useBarCodeDetectorIfSupported))
+    if (!_t(c.useBarCodeDetectorIfSupported))
       return c.useBarCodeDetectorIfSupported !== !1;
-    if (yt(c.experimentalFeatures))
+    if (_t(c.experimentalFeatures))
       return !0;
     var h = c.experimentalFeatures;
-    return yt(h.useBarCodeDetectorIfSupported) ? !0 : h.useBarCodeDetectorIfSupported !== !1;
-  }, x.prototype.validateQrboxSize = function(c, h, w) {
-    var E = this, g = w.qrbox;
-    this.validateQrboxConfig(g);
-    var b = this.toQrdimensions(c, h, g), M = function(m) {
+    return _t(h.useBarCodeDetectorIfSupported) ? !0 : h.useBarCodeDetectorIfSupported !== !1;
+  }, x.prototype.validateQrboxSize = function(c, h, g) {
+    var E = this, w = g.qrbox;
+    this.validateQrboxConfig(w);
+    var b = this.toQrdimensions(c, h, w), M = function(m) {
       if (m < at.MIN_QR_BOX_SIZE)
         throw "minimum size of 'config.qrbox' dimension value is" + " ".concat(at.MIN_QR_BOX_SIZE, "px.");
     }, O = function(m) {
@@ -21922,56 +21922,56 @@ var lo = function() {
   }, x.prototype.validateQrboxConfig = function(c) {
     if (typeof c != "number" && typeof c != "function" && (c.width === void 0 || c.height === void 0))
       throw "Invalid instance of QrDimensions passed for 'config.qrbox'. Both 'width' and 'height' should be set.";
-  }, x.prototype.toQrdimensions = function(c, h, w) {
-    if (typeof w == "number")
-      return { width: w, height: w };
-    if (typeof w == "function")
+  }, x.prototype.toQrdimensions = function(c, h, g) {
+    if (typeof g == "number")
+      return { width: g, height: g };
+    if (typeof g == "function")
       try {
-        return w(c, h);
+        return g(c, h);
       } catch (E) {
         throw new Error("qrbox config was passed as a function but it failed with unknown error" + E);
       }
-    return w;
-  }, x.prototype.setupUi = function(c, h, w) {
-    w.isShadedBoxEnabled() && this.validateQrboxSize(c, h, w);
-    var E = yt(w.qrbox) ? { width: c, height: h } : w.qrbox;
+    return g;
+  }, x.prototype.setupUi = function(c, h, g) {
+    g.isShadedBoxEnabled() && this.validateQrboxSize(c, h, g);
+    var E = _t(g.qrbox) ? { width: c, height: h } : g.qrbox;
     this.validateQrboxConfig(E);
-    var g = this.toQrdimensions(c, h, E);
-    g.height > h && this.logger.warn("[Html5Qrcode] config.qrbox has height that isgreater than the height of the video stream. Shading will be ignored");
-    var b = w.isShadedBoxEnabled() && g.height <= h, M = {
+    var w = this.toQrdimensions(c, h, E);
+    w.height > h && this.logger.warn("[Html5Qrcode] config.qrbox has height that isgreater than the height of the video stream. Shading will be ignored");
+    var b = g.isShadedBoxEnabled() && w.height <= h, M = {
       x: 0,
       y: 0,
       width: c,
       height: h
-    }, O = b ? this.getShadedRegionBounds(c, h, g) : M, m = this.createCanvasElement(O.width, O.height), v = { willReadFrequently: !0 }, R = m.getContext("2d", v);
-    R.canvas.width = O.width, R.canvas.height = O.height, this.element.append(m), b && this.possiblyInsertShadingElement(this.element, c, h, g), this.createScannerPausedUiElement(this.element), this.qrRegion = O, this.context = R, this.canvasElement = m;
+    }, O = b ? this.getShadedRegionBounds(c, h, w) : M, m = this.createCanvasElement(O.width, O.height), v = { willReadFrequently: !0 }, R = m.getContext("2d", v);
+    R.canvas.width = O.width, R.canvas.height = O.height, this.element.append(m), b && this.possiblyInsertShadingElement(this.element, c, h, w), this.createScannerPausedUiElement(this.element), this.qrRegion = O, this.context = R, this.canvasElement = m;
   }, x.prototype.createScannerPausedUiElement = function(c) {
     var h = document.createElement("div");
-    h.innerText = hn.scannerPaused(), h.style.display = "none", h.style.position = "absolute", h.style.top = "0px", h.style.zIndex = "1", h.style.background = "rgba(9, 9, 9, 0.46)", h.style.color = "#FFECEC", h.style.textAlign = "center", h.style.width = "100%", c.appendChild(h), this.scannerPausedUiElement = h;
+    h.innerText = fn.scannerPaused(), h.style.display = "none", h.style.position = "absolute", h.style.top = "0px", h.style.zIndex = "1", h.style.background = "rgba(9, 9, 9, 0.46)", h.style.color = "#FFECEC", h.style.textAlign = "center", h.style.width = "100%", c.appendChild(h), this.scannerPausedUiElement = h;
   }, x.prototype.scanContext = function(c, h) {
-    var w = this;
+    var g = this;
     return this.stateManagerProxy.isPaused() ? Promise.resolve(!1) : this.qrcode.decodeAsync(this.canvasElement).then(function(E) {
-      return c(E.text, Ii.createFromQrcodeResult(E)), w.possiblyUpdateShaders(!0), !0;
+      return c(E.text, Ii.createFromQrcodeResult(E)), g.possiblyUpdateShaders(!0), !0;
     }).catch(function(E) {
-      w.possiblyUpdateShaders(!1);
-      var g = hn.codeParseError(E);
-      return h(g, Gs.createFrom(g)), !1;
+      g.possiblyUpdateShaders(!1);
+      var w = fn.codeParseError(E);
+      return h(w, Gs.createFrom(w)), !1;
     });
-  }, x.prototype.foreverScan = function(c, h, w) {
+  }, x.prototype.foreverScan = function(c, h, g) {
     var E = this;
     if (this.shouldScan && this.renderedCamera) {
-      var g = this.renderedCamera.getSurface(), b = g.videoWidth / g.clientWidth, M = g.videoHeight / g.clientHeight;
+      var w = this.renderedCamera.getSurface(), b = w.videoWidth / w.clientWidth, M = w.videoHeight / w.clientHeight;
       if (!this.qrRegion)
         throw "qrRegion undefined when localMediaStream is ready.";
       var O = this.qrRegion.width * b, m = this.qrRegion.height * M, v = this.qrRegion.x * b, R = this.qrRegion.y * M;
-      this.context.drawImage(g, v, R, O, m, 0, 0, this.qrRegion.width, this.qrRegion.height);
+      this.context.drawImage(w, v, R, O, m, 0, 0, this.qrRegion.width, this.qrRegion.height);
       var ne = function() {
         E.foreverScanTimeout = setTimeout(function() {
-          E.foreverScan(c, h, w);
+          E.foreverScan(c, h, g);
         }, E.getTimeoutFps(c.fps));
       };
-      this.scanContext(h, w).then(function(q) {
-        !q && c.disableFlip !== !0 ? (E.context.translate(E.context.canvas.width, 0), E.context.scale(-1, 1), E.scanContext(h, w).finally(function() {
+      this.scanContext(h, g).then(function(q) {
+        !q && c.disableFlip !== !0 ? (E.context.translate(E.context.canvas.width, 0), E.context.scale(-1, 1), E.scanContext(h, g).finally(function() {
           ne();
         })) : ne();
       }).catch(function(q) {
@@ -21982,7 +21982,7 @@ var lo = function() {
     if (typeof c == "string")
       return { deviceId: { exact: c } };
     if (typeof c == "object") {
-      var h = "facingMode", w = "deviceId", E = { user: !0, environment: !0 }, g = "exact", b = function(Me) {
+      var h = "facingMode", g = "deviceId", E = { user: !0, environment: !0 }, w = "exact", b = function(Me) {
         if (Me in E)
           return !0;
         throw "config has invalid 'facingMode' value = " + "'".concat(Me, "'");
@@ -21990,23 +21990,23 @@ var lo = function() {
       if (M.length !== 1)
         throw "'cameraIdOrConfig' object should have exactly 1 key," + " if passed as an object, found ".concat(M.length, " keys");
       var O = Object.keys(c)[0];
-      if (O !== h && O !== w)
-        throw "Only '".concat(h, "' and '").concat(w, "' ") + " are supported for 'cameraIdOrConfig'";
+      if (O !== h && O !== g)
+        throw "Only '".concat(h, "' and '").concat(g, "' ") + " are supported for 'cameraIdOrConfig'";
       if (O === h) {
         var m = c.facingMode;
         if (typeof m == "string") {
           if (b(m))
             return { facingMode: m };
         } else if (typeof m == "object")
-          if (g in m) {
-            if (b(m["".concat(g)]))
+          if (w in m) {
+            if (b(m["".concat(w)]))
               return {
                 facingMode: {
-                  exact: m["".concat(g)]
+                  exact: m["".concat(w)]
                 }
               };
           } else
-            throw "'facingMode' should be string or object with" + " ".concat(g, " as key.");
+            throw "'facingMode' should be string or object with" + " ".concat(w, " as key.");
         else {
           var v = typeof m;
           throw "Invalid type of 'facingMode' = ".concat(v);
@@ -22016,11 +22016,11 @@ var lo = function() {
         if (typeof R == "string")
           return { deviceId: R };
         if (typeof R == "object") {
-          if (g in R)
+          if (w in R)
             return {
-              deviceId: { exact: R["".concat(g)] }
+              deviceId: { exact: R["".concat(w)] }
             };
-          throw "'deviceId' should be string or object with" + " ".concat(g, " as key.");
+          throw "'deviceId' should be string or object with" + " ".concat(w, " as key.");
         } else {
           var ne = typeof R;
           throw "Invalid type of 'deviceId' = ".concat(ne);
@@ -22029,18 +22029,18 @@ var lo = function() {
     }
     var q = typeof c;
     throw "Invalid type of 'cameraIdOrConfig' = ".concat(q);
-  }, x.prototype.computeCanvasDrawConfig = function(c, h, w, E) {
-    if (c <= w && h <= E) {
-      var g = (w - c) / 2, b = (E - h) / 2;
+  }, x.prototype.computeCanvasDrawConfig = function(c, h, g, E) {
+    if (c <= g && h <= E) {
+      var w = (g - c) / 2, b = (E - h) / 2;
       return {
-        x: g,
+        x: w,
         y: b,
         width: c,
         height: h
       };
     } else {
       var M = c, O = h;
-      return c > w && (h = w / c * h, c = w), h > E && (c = E / h * c, h = E), this.logger.log("Image downsampled from " + "".concat(M, "X").concat(O) + " to ".concat(c, "X").concat(h, ".")), this.computeCanvasDrawConfig(c, h, w, E);
+      return c > g && (h = g / c * h, c = g), h > E && (c = E / h * c, h = E), this.logger.log("Image downsampled from " + "".concat(M, "X").concat(O) + " to ".concat(c, "X").concat(h, ".")), this.computeCanvasDrawConfig(c, h, g, E);
     }
   }, x.prototype.clearElement = function() {
     if (this.stateManagerProxy.isScanning())
@@ -22053,34 +22053,34 @@ var lo = function() {
     }), this.qrMatch = c);
   }, x.prototype.possiblyCloseLastScanImageFile = function() {
     this.lastScanImageFile && (URL.revokeObjectURL(this.lastScanImageFile), this.lastScanImageFile = null);
-  }, x.prototype.createCanvasElement = function(c, h, w) {
-    var E = c, g = h, b = document.createElement("canvas");
-    return b.style.width = "".concat(E, "px"), b.style.height = "".concat(g, "px"), b.style.display = "none", b.id = yt(w) ? "qr-canvas" : w, b;
-  }, x.prototype.getShadedRegionBounds = function(c, h, w) {
-    if (w.width > c || w.height > h)
+  }, x.prototype.createCanvasElement = function(c, h, g) {
+    var E = c, w = h, b = document.createElement("canvas");
+    return b.style.width = "".concat(E, "px"), b.style.height = "".concat(w, "px"), b.style.display = "none", b.id = _t(g) ? "qr-canvas" : g, b;
+  }, x.prototype.getShadedRegionBounds = function(c, h, g) {
+    if (g.width > c || g.height > h)
       throw "'config.qrbox' dimensions should not be greater than the dimensions of the root HTML element.";
     return {
-      x: (c - w.width) / 2,
-      y: (h - w.height) / 2,
-      width: w.width,
-      height: w.height
+      x: (c - g.width) / 2,
+      y: (h - g.height) / 2,
+      width: g.width,
+      height: g.height
     };
-  }, x.prototype.possiblyInsertShadingElement = function(c, h, w, E) {
-    if (!(h - E.width < 1 || w - E.height < 1)) {
-      var g = document.createElement("div");
-      g.style.position = "absolute";
-      var b = (h - E.width) / 2, M = (w - E.height) / 2;
-      if (g.style.borderLeft = "".concat(b, "px solid rgba(0, 0, 0, 0.48)"), g.style.borderRight = "".concat(b, "px solid rgba(0, 0, 0, 0.48)"), g.style.borderTop = "".concat(M, "px solid rgba(0, 0, 0, 0.48)"), g.style.borderBottom = "".concat(M, "px solid rgba(0, 0, 0, 0.48)"), g.style.boxSizing = "border-box", g.style.top = "0px", g.style.bottom = "0px", g.style.left = "0px", g.style.right = "0px", g.id = "".concat(at.SHADED_REGION_ELEMENT_ID), h - E.width < 11 || w - E.height < 11)
+  }, x.prototype.possiblyInsertShadingElement = function(c, h, g, E) {
+    if (!(h - E.width < 1 || g - E.height < 1)) {
+      var w = document.createElement("div");
+      w.style.position = "absolute";
+      var b = (h - E.width) / 2, M = (g - E.height) / 2;
+      if (w.style.borderLeft = "".concat(b, "px solid rgba(0, 0, 0, 0.48)"), w.style.borderRight = "".concat(b, "px solid rgba(0, 0, 0, 0.48)"), w.style.borderTop = "".concat(M, "px solid rgba(0, 0, 0, 0.48)"), w.style.borderBottom = "".concat(M, "px solid rgba(0, 0, 0, 0.48)"), w.style.boxSizing = "border-box", w.style.top = "0px", w.style.bottom = "0px", w.style.left = "0px", w.style.right = "0px", w.id = "".concat(at.SHADED_REGION_ELEMENT_ID), h - E.width < 11 || g - E.height < 11)
         this.hasBorderShaders = !1;
       else {
         var O = 5, m = 40;
-        this.insertShaderBorders(g, m, O, -O, null, 0, !0), this.insertShaderBorders(g, m, O, -O, null, 0, !1), this.insertShaderBorders(g, m, O, null, -O, 0, !0), this.insertShaderBorders(g, m, O, null, -O, 0, !1), this.insertShaderBorders(g, O, m + O, -O, null, -O, !0), this.insertShaderBorders(g, O, m + O, null, -O, -O, !0), this.insertShaderBorders(g, O, m + O, -O, null, -O, !1), this.insertShaderBorders(g, O, m + O, null, -O, -O, !1), this.hasBorderShaders = !0;
+        this.insertShaderBorders(w, m, O, -O, null, 0, !0), this.insertShaderBorders(w, m, O, -O, null, 0, !1), this.insertShaderBorders(w, m, O, null, -O, 0, !0), this.insertShaderBorders(w, m, O, null, -O, 0, !1), this.insertShaderBorders(w, O, m + O, -O, null, -O, !0), this.insertShaderBorders(w, O, m + O, null, -O, -O, !0), this.insertShaderBorders(w, O, m + O, -O, null, -O, !1), this.insertShaderBorders(w, O, m + O, null, -O, -O, !1), this.hasBorderShaders = !0;
       }
-      c.append(g);
+      c.append(w);
     }
-  }, x.prototype.insertShaderBorders = function(c, h, w, E, g, b, M) {
+  }, x.prototype.insertShaderBorders = function(c, h, g, E, w, b, M) {
     var O = document.createElement("div");
-    O.style.position = "absolute", O.style.backgroundColor = at.BORDER_SHADER_DEFAULT_COLOR, O.style.width = "".concat(h, "px"), O.style.height = "".concat(w, "px"), E !== null && (O.style.top = "".concat(E, "px")), g !== null && (O.style.bottom = "".concat(g, "px")), M ? O.style.left = "".concat(b, "px") : O.style.right = "".concat(b, "px"), this.borderShaders || (this.borderShaders = []), this.borderShaders.push(O), c.appendChild(O);
+    O.style.position = "absolute", O.style.backgroundColor = at.BORDER_SHADER_DEFAULT_COLOR, O.style.width = "".concat(h, "px"), O.style.height = "".concat(g, "px"), E !== null && (O.style.top = "".concat(E, "px")), w !== null && (O.style.bottom = "".concat(w, "px")), M ? O.style.left = "".concat(b, "px") : O.style.right = "".concat(b, "px"), this.borderShaders || (this.borderShaders = []), this.borderShaders.push(O), c.appendChild(O);
   }, x.prototype.showPausedState = function() {
     if (!this.scannerPausedUiElement)
       throw "[internal error] scanner paused UI element not found";
@@ -22134,9 +22134,9 @@ const xo = Lr`
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
   }
 `;
-var go = Object.defineProperty, wo = (x, c, h, w) => {
-  for (var E = void 0, g = x.length - 1, b; g >= 0; g--)
-    (b = x[g]) && (E = b(c, h, E) || E);
+var go = Object.defineProperty, wo = (x, c, h, g) => {
+  for (var E = void 0, w = x.length - 1, b; w >= 0; w--)
+    (b = x[w]) && (E = b(c, h, E) || E);
   return E && go(c, h, E), E;
 };
 const Hr = class Hr extends Kt {
@@ -22208,9 +22208,9 @@ const Ao = Lr`
     }
   }
 `;
-var Eo = Object.defineProperty, Co = (x, c, h, w) => {
-  for (var E = void 0, g = x.length - 1, b; g >= 0; g--)
-    (b = x[g]) && (E = b(c, h, E) || E);
+var Eo = Object.defineProperty, Co = (x, c, h, g) => {
+  for (var E = void 0, w = x.length - 1, b; w >= 0; w--)
+    (b = x[w]) && (E = b(c, h, E) || E);
   return E && Eo(c, h, E), E;
 };
 const Gr = class Gr extends Kt {
@@ -22422,14 +22422,14 @@ const po = Lr`
     }
   }
 `;
-var mo = Object.defineProperty, xn = (x, c, h, w) => {
-  for (var E = void 0, g = x.length - 1, b; g >= 0; g--)
-    (b = x[g]) && (E = b(c, h, E) || E);
+var mo = Object.defineProperty, $t = (x, c, h, g) => {
+  for (var E = void 0, w = x.length - 1, b; w >= 0; w--)
+    (b = x[w]) && (E = b(c, h, E) || E);
   return E && mo(c, h, E), E;
 };
 const sr = class sr extends Kt {
   constructor() {
-    super(...arguments), this.showScanner = !1, this.previewImg = null, this.cameras = [], this.camIndex = 0, this.lastResult = "", this.notify = {
+    super(...arguments), this.showScanner = !1, this.previewImg = null, this.cameras = [], this.camIndex = 0, this.lastResult = "", this.isMobile = !1, this.notify = {
       display: !1,
       type: "success",
       message: ""
@@ -22437,25 +22437,43 @@ const sr = class sr extends Kt {
   }
   update(c) {
     super.update(c), c.has("showScanner") && this.showScanner && (this.scanner = new Ri("scanner"), Ri.getCameras().then((h) => {
-      this.cameras = h;
-      const w = h.find((E) => /back|rear|environment/i.test(E.label));
-      this.camIndex = h.indexOf(w || h[0]), this._startCamera();
+      this.cameras = h, this._showNotification(JSON.stringify(h), "success");
+      const g = h.find((E) => /back|rear|environment/i.test(E.label));
+      this.camIndex = h.indexOf(g || h[0]), this._startCamera();
     }).catch((h) => this._showNotification("No cameras: " + h, "danger")));
+  }
+  _checkIfMobile() {
+    const c = navigator.userAgent.toLowerCase(), h = [
+      "iphone",
+      "ipod",
+      "android",
+      "blackberry",
+      "windows phone",
+      "opera mini"
+    ];
+    this.isMobile = h.some((g) => c.includes(g));
   }
   _startCamera() {
     var h;
     const c = this.cameras[this.camIndex].id;
     (h = this.scanner) == null || h.start(
       { deviceId: { exact: c } },
-      { aspectRatio: 10 / 16, fps: 2, qrbox: { height: 600, width: 400 } },
-      (w) => {
-        this.lastResult = w, this._showNotification("Decoded: " + w, "success");
+      {
+        aspectRatio: 10 / 16,
+        fps: 2,
+        qrbox: {
+          height: this.isMobile ? 400 : 600,
+          width: this.isMobile ? 300 : 400
+        }
       },
-      (w) => {
+      (g) => {
+        this.lastResult = g, this._showNotification(g, "success");
+      },
+      (g) => {
         this.lastResult = "";
       }
-    ).catch((w) => {
-      this._showNotification("Camera start failed: " + w, "danger");
+    ).catch((g) => {
+      this._showNotification("Camera start failed: " + g, "danger");
     });
   }
   _onSwitch() {
@@ -22471,13 +22489,13 @@ const sr = class sr extends Kt {
     }), this.showScanner = !1;
   }
   async _onUpload(c) {
-    var E, g, b;
+    var E, w, b;
     await ((E = this.scanner) == null ? void 0 : E.stop().then(() => {
       this._showNotification("Camera stopped", "warning");
     }));
-    const h = c.target, w = (g = h == null ? void 0 : h.files) == null ? void 0 : g[0];
-    w && (this.previewImg = URL.createObjectURL(w), (b = this.scanner) == null || b.scanFile(w, !0).then((M) => {
-      this._onHandleData(M), this._showNotification("Decoded: " + M, "success");
+    const h = c.target, g = (w = h == null ? void 0 : h.files) == null ? void 0 : w[0];
+    g && (this.previewImg = URL.createObjectURL(g), (b = this.scanner) == null || b.scanFile(g, !0).then((M) => {
+      this._onHandleData(M), this._showNotification(M, "success");
     }).catch((M) => {
       this._showNotification("No QR in image", "danger");
     }), setTimeout(() => {
@@ -22578,23 +22596,26 @@ const sr = class sr extends Kt {
 sr.styles = po, sr.properties = {
   showScanner: { type: Boolean }
 };
-let _t = sr;
-xn([
-  dn()
-], _t.prototype, "showScanner");
-xn([
-  dn()
-], _t.prototype, "previewImg");
-xn([
-  dn()
-], _t.prototype, "cameras");
-xn([
-  dn()
-], _t.prototype, "camIndex");
-xn([
-  dn()
-], _t.prototype, "lastResult");
-xn([
-  dn()
-], _t.prototype, "notify");
-customElements.define("qr-widget", _t);
+let bt = sr;
+$t([
+  Qt()
+], bt.prototype, "showScanner");
+$t([
+  Qt()
+], bt.prototype, "previewImg");
+$t([
+  Qt()
+], bt.prototype, "cameras");
+$t([
+  Qt()
+], bt.prototype, "camIndex");
+$t([
+  Qt()
+], bt.prototype, "lastResult");
+$t([
+  Qt()
+], bt.prototype, "isMobile");
+$t([
+  Qt()
+], bt.prototype, "notify");
+customElements.define("qr-widget", bt);
