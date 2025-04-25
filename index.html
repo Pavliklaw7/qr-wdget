@@ -9,16 +9,17 @@
     />
     <title>QR Widget</title>
     <script type="module" src="./qr-widget.js"></script>
+    <button id="openScanner">Open QR Scanner</button>
+    <qr-widget id="qr-widget">
+      <div id="scanner" slot="scanner" style="width: 100%; height: 100%;"></div>
+    </qr-widget>
+
     <script defer>
-      window.addEventListener('DOMContentLoaded', () => {
-        const qrWidget = document.querySelector('qr-widget');
-        setTimeout(() => {
-          qrWidget.toggleCamera();
-        }, 3000);
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('#openScanner').addEventListener('click', () => {
+        document.getElementById('qr-widget').showScanner = true;
       });
+      })
+  
     </script>
-  </head>
-  <body>
-    <qr-widget> </qr-widget>
-  </body>
 </html>
