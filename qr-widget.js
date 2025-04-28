@@ -22436,31 +22436,30 @@ const sr = class sr extends Kt {
     }, this.scanner = null;
   }
   update(c) {
-    super.update(c), c.has("showScanner") && this.showScanner && (this.scanner = new Ri("scanner"), this._checkIfMobile(), Ri.getCameras().then((h) => {
-      this.cameras = h;
-      const w = h.find((A) => /back|rear|environment/i.test(A.label));
-      this.camIndex = h.indexOf(w || h[0]), this._startCamera();
-    }).catch((h) => this._showNotification("No cameras: " + h, "danger")));
+    if (super.update(c), c.has("showScanner") && this.showScanner) {
+      const h = { formatsToSupport: [0] };
+      this.scanner = new Ri(
+        "qr-custom-scanner",
+        h
+      ), this._checkIfMobile(), Ri.getCameras().then((w) => {
+        this.cameras = w;
+        const A = w.find((g) => /back|rear|environment/i.test(g.label));
+        this.camIndex = w.indexOf(A || w[0]), this._startCamera();
+      }).catch((w) => this._showNotification("No cameras: " + w, "danger"));
+    }
   }
   _checkIfMobile() {
-    const c = navigator.userAgent.toLowerCase(), h = [
-      "iphone",
-      "ipod",
-      "android",
-      "blackberry",
-      "windows phone",
-      "opera mini"
-    ];
-    this.isMobile = h.some((w) => c.includes(w));
+    const c = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    this.isMobile = c <= 768;
   }
   _startCamera() {
     var A;
     const c = this.cameras[this.camIndex].id, h = {
-      aspectRatio: this.isMobile ? 9 / 16 : 10 / 16,
+      aspectRatio: this.isMobile ? 8 / 16 : 9 / 16,
       fps: 2,
       qrbox: {
-        height: this.isMobile ? 400 : 600,
-        width: this.isMobile ? 300 : 400
+        height: this.isMobile ? 420 : 620,
+        width: this.isMobile ? 320 : 420
       }
     }, w = (g) => {
       this.lastResult = g, this._showNotification(g, "success");
