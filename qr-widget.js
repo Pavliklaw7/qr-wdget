@@ -298,9 +298,9 @@ un.elementStyles = [], un.shadowRootOptions = { mode: "open" }, un[Rn("elementPr
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const Dn = globalThis, Jn = Dn.trustedTypes, xi = Jn ? Jn.createPolicy("lit-html", { createHTML: (x) => x }) : void 0, Bi = "$lit$", Ft = `lit$${Math.random().toFixed(9).slice(2)}$`, Pi = "?" + Ft, Ns = `<${Pi}>`, qt = document, vn = () => qt.createComment(""), Bn = (x) => x === null || typeof x != "object" && typeof x != "function", kr = Array.isArray, Os = (x) => kr(x) || typeof (x == null ? void 0 : x[Symbol.iterator]) == "function", Rr = `[ 	
-\f\r]`, Nn = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, gi = /-->/g, wi = />/g, Yt = RegExp(`>|${Rr}(?:([^\\s"'>=/]+)(${Rr}*=${Rr}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), Ai = /'/g, Ei = /"/g, Li = /^(?:script|style|textarea|title)$/i, Rs = (x) => (c, ...h) => ({ _$litType$: x, strings: c, values: h }), Mn = Rs(1), dn = Symbol.for("lit-noChange"), Ge = Symbol.for("lit-nothing"), Ci = /* @__PURE__ */ new WeakMap(), Zt = qt.createTreeWalker(qt, 129);
+const Dn = globalThis, Jn = Dn.trustedTypes, xi = Jn ? Jn.createPolicy("lit-html", { createHTML: (x) => x }) : void 0, Bi = "$lit$", Ft = `lit$${Math.random().toFixed(9).slice(2)}$`, Pi = "?" + Ft, Ns = `<${Pi}>`, $t = document, vn = () => $t.createComment(""), Bn = (x) => x === null || typeof x != "object" && typeof x != "function", kr = Array.isArray, Os = (x) => kr(x) || typeof (x == null ? void 0 : x[Symbol.iterator]) == "function", Rr = `[ 	
+\f\r]`, Nn = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, gi = /-->/g, wi = />/g, jt = RegExp(`>|${Rr}(?:([^\\s"'>=/]+)(${Rr}*=${Rr}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`, "g"), Ai = /'/g, Ei = /"/g, Li = /^(?:script|style|textarea|title)$/i, Rs = (x) => (c, ...h) => ({ _$litType$: x, strings: c, values: h }), Mn = Rs(1), dn = Symbol.for("lit-noChange"), Ge = Symbol.for("lit-nothing"), Ci = /* @__PURE__ */ new WeakMap(), Kt = $t.createTreeWalker($t, 129);
 function Fi(x, c) {
   if (!kr(x) || !x.hasOwnProperty("raw")) throw Error("invalid template strings array");
   return xi !== void 0 ? xi.createHTML(c) : c;
@@ -311,8 +311,8 @@ const Ds = (x, c) => {
   for (let M = 0; M < h; M++) {
     const O = x[M];
     let m, v, R = -1, ne = 0;
-    for (; ne < O.length && (b.lastIndex = ne, v = b.exec(O), v !== null); ) ne = b.lastIndex, b === Nn ? v[1] === "!--" ? b = gi : v[1] !== void 0 ? b = wi : v[2] !== void 0 ? (Li.test(v[2]) && (A = RegExp("</" + v[2], "g")), b = Yt) : v[3] !== void 0 && (b = Yt) : b === Yt ? v[0] === ">" ? (b = A ?? Nn, R = -1) : v[1] === void 0 ? R = -2 : (R = b.lastIndex - v[2].length, m = v[1], b = v[3] === void 0 ? Yt : v[3] === '"' ? Ei : Ai) : b === Ei || b === Ai ? b = Yt : b === gi || b === wi ? b = Nn : (b = Yt, A = void 0);
-    const q = b === Yt && x[M + 1].startsWith("/>") ? " " : "";
+    for (; ne < O.length && (b.lastIndex = ne, v = b.exec(O), v !== null); ) ne = b.lastIndex, b === Nn ? v[1] === "!--" ? b = gi : v[1] !== void 0 ? b = wi : v[2] !== void 0 ? (Li.test(v[2]) && (A = RegExp("</" + v[2], "g")), b = jt) : v[3] !== void 0 && (b = jt) : b === jt ? v[0] === ">" ? (b = A ?? Nn, R = -1) : v[1] === void 0 ? R = -2 : (R = b.lastIndex - v[2].length, m = v[1], b = v[3] === void 0 ? jt : v[3] === '"' ? Ei : Ai) : b === Ei || b === Ai ? b = jt : b === gi || b === wi ? b = Nn : (b = jt, A = void 0);
+    const q = b === jt && x[M + 1].startsWith("/>") ? " " : "";
     g += b === Nn ? O + Ns : R >= 0 ? (w.push(m), O.slice(0, R) + Bi + O.slice(R) + Ft + q) : O + Ft + (R === -2 ? M : q);
   }
   return [Fi(x, g + (x[h] || "<?>") + (c === 2 ? "</svg>" : c === 3 ? "</math>" : "")), w];
@@ -323,11 +323,11 @@ class Pn {
     this.parts = [];
     let g = 0, b = 0;
     const M = c.length - 1, O = this.parts, [m, v] = Ds(c, h);
-    if (this.el = Pn.createElement(m, w), Zt.currentNode = this.el.content, h === 2 || h === 3) {
+    if (this.el = Pn.createElement(m, w), Kt.currentNode = this.el.content, h === 2 || h === 3) {
       const R = this.el.content.firstChild;
       R.replaceWith(...R.childNodes);
     }
-    for (; (A = Zt.nextNode()) !== null && O.length < M; ) {
+    for (; (A = Kt.nextNode()) !== null && O.length < M; ) {
       if (A.nodeType === 1) {
         if (A.hasAttributes()) for (const R of A.getAttributeNames()) if (R.endsWith(Bi)) {
           const ne = v[b++], q = A.getAttribute(R).split(Ft), Me = /([.?@])?(.*)/.exec(ne);
@@ -337,7 +337,7 @@ class Pn {
           const R = A.textContent.split(Ft), ne = R.length - 1;
           if (ne > 0) {
             A.textContent = Jn ? Jn.emptyScript : "";
-            for (let q = 0; q < ne; q++) A.append(R[q], vn()), Zt.nextNode(), O.push({ type: 2, index: ++g });
+            for (let q = 0; q < ne; q++) A.append(R[q], vn()), Kt.nextNode(), O.push({ type: 2, index: ++g });
             A.append(R[ne], vn());
           }
         }
@@ -350,7 +350,7 @@ class Pn {
     }
   }
   static createElement(c, h) {
-    const w = qt.createElement("template");
+    const w = $t.createElement("template");
     return w.innerHTML = c, w;
   }
 }
@@ -372,17 +372,17 @@ class Ms {
     return this._$AM._$AU;
   }
   u(c) {
-    const { el: { content: h }, parts: w } = this._$AD, A = ((c == null ? void 0 : c.creationScope) ?? qt).importNode(h, !0);
-    Zt.currentNode = A;
-    let g = Zt.nextNode(), b = 0, M = 0, O = w[0];
+    const { el: { content: h }, parts: w } = this._$AD, A = ((c == null ? void 0 : c.creationScope) ?? $t).importNode(h, !0);
+    Kt.currentNode = A;
+    let g = Kt.nextNode(), b = 0, M = 0, O = w[0];
     for (; O !== void 0; ) {
       if (b === O.index) {
         let m;
         O.type === 2 ? m = new Ln(g, g.nextSibling, this, c) : O.type === 1 ? m = new O.ctor(g, O.name, O.strings, this, c) : O.type === 6 && (m = new Ls(g, this, c)), this._$AV.push(m), O = w[++M];
       }
-      b !== (O == null ? void 0 : O.index) && (g = Zt.nextNode(), b++);
+      b !== (O == null ? void 0 : O.index) && (g = Kt.nextNode(), b++);
     }
-    return Zt.currentNode = qt, A;
+    return Kt.currentNode = $t, A;
   }
   p(c) {
     let h = 0;
@@ -418,7 +418,7 @@ class Ln {
     this._$AH !== c && (this._$AR(), this._$AH = this.O(c));
   }
   _(c) {
-    this._$AH !== Ge && Bn(this._$AH) ? this._$AA.nextSibling.data = c : this.T(qt.createTextNode(c)), this._$AH = c;
+    this._$AH !== Ge && Bn(this._$AH) ? this._$AA.nextSibling.data = c : this.T($t.createTextNode(c)), this._$AH = c;
   }
   $(c) {
     var g;
@@ -534,8 +534,8 @@ const Fs = (x, c, h) => {
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const jt = globalThis;
-class Kt extends un {
+const qt = globalThis;
+class Qt extends un {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
   }
@@ -561,10 +561,10 @@ class Kt extends un {
   }
 }
 var Mi;
-Kt._$litElement$ = !0, Kt.finalized = !0, (Mi = jt.litElementHydrateSupport) == null || Mi.call(jt, { LitElement: Kt });
-const Mr = jt.litElementPolyfillSupport;
-Mr == null || Mr({ LitElement: Kt });
-(jt.litElementVersions ?? (jt.litElementVersions = [])).push("4.2.0");
+Qt._$litElement$ = !0, Qt.finalized = !0, (Mi = qt.litElementHydrateSupport) == null || Mi.call(qt, { LitElement: Qt });
+const Mr = qt.litElementPolyfillSupport;
+Mr == null || Mr({ LitElement: Qt });
+(qt.litElementVersions ?? (qt.litElementVersions = [])).push("4.2.0");
 /**
  * @license
  * Copyright 2017 Google LLC
@@ -602,7 +602,7 @@ function Ur(x) {
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-function Qt(x) {
+function Ut(x) {
   return Ur({ ...x, state: !0, attribute: !1 });
 }
 var G;
@@ -945,10 +945,10 @@ function Ys() {
           return Date.now();
         }
       }
-      class gt extends m {
+      class wt extends m {
       }
-      gt.kind = "IndexOutOfBoundsException";
-      class St extends gt {
+      wt.kind = "IndexOutOfBoundsException";
+      class St extends wt {
         constructor(e = void 0, t = void 0) {
           super(t), this.index = e, this.message = t;
         }
@@ -2414,7 +2414,7 @@ function Ys() {
           l((n = n.apply(f, e || [])).next());
         });
       };
-      class Ut {
+      class Ht {
         /**
          * Creates an instance of BrowserCodeReader.
          * @param {Reader} reader The reader instance to decode the barcode
@@ -3485,9 +3485,9 @@ function Ys() {
       class en extends m {
       }
       en.kind = "ReedSolomonException";
-      class wt extends m {
+      class At extends m {
       }
-      wt.kind = "IllegalStateException";
+      At.kind = "IllegalStateException";
       class En {
         constructor(e) {
           this.field = e;
@@ -3537,7 +3537,7 @@ function Ys() {
               y = y.addOrSubtract(r.buildMonomial(L, F)), s = s.addOrSubtract(i.multiplyByMonomial(L, F));
             }
             if (a = y.multiply(o).addOrSubtract(I), s.getDegree() >= i.getDegree())
-              throw new wt("Division algorithm failed to reduce polynomial?");
+              throw new At("Division algorithm failed to reduce polynomial?");
           }
           const l = a.getCoefficient(0);
           if (l === 0)
@@ -3664,7 +3664,7 @@ function Ys() {
             case We.DIGIT:
               return me.DIGIT_TABLE[t];
             default:
-              throw new wt("Bad table");
+              throw new At("Bad table");
           }
         }
         /**
@@ -4655,7 +4655,7 @@ function Ys() {
         reset() {
         }
       }
-      class Hi extends Ut {
+      class Hi extends Ht {
         /**
          * Creates an instance of BrowserAztecCodeReader.
          * @param {number} [timeBetweenScansMillis=500] the time delay between subsequent decode tries
@@ -5837,7 +5837,7 @@ function Ys() {
           return (1e3 - n) % 10;
         }
       }
-      class Vt extends he {
+      class Gt extends he {
         constructor() {
           super(), this.decodeMiddleCounters = Int32Array.from([0, 0, 0, 0]);
         }
@@ -5852,7 +5852,7 @@ function Ys() {
               s += d;
             u >= 10 && (o |= 1 << 5 - l);
           }
-          n = Vt.determineFirstDigit(n, o), s = he.findGuardPattern(
+          n = Gt.determineFirstDigit(n, o), s = he.findGuardPattern(
             e,
             s,
             !0,
@@ -5877,7 +5877,7 @@ function Ys() {
           throw new D();
         }
       }
-      Vt.FIRST_DIGIT_ENCODINGS = [0, 11, 13, 14, 19, 25, 28, 21, 22, 26];
+      Gt.FIRST_DIGIT_ENCODINGS = [0, 11, 13, 14, 19, 25, 28, 21, 22, 26];
       class jr extends he {
         constructor() {
           super(), this.decodeMiddleCounters = Int32Array.from([0, 0, 0, 0]);
@@ -5907,7 +5907,7 @@ function Ys() {
       }
       class Kr extends he {
         constructor() {
-          super(...arguments), this.ean13Reader = new Vt();
+          super(...arguments), this.ean13Reader = new Gt();
         }
         // @Override
         getBarcodeFormat() {
@@ -6043,7 +6043,7 @@ function Ys() {
         constructor(e) {
           super();
           let t = e == null ? null : e.get(xe.POSSIBLE_FORMATS), n = [];
-          w(t) ? (n.push(new Vt()), n.push(new Kr()), n.push(new jr()), n.push(new dt())) : (t.indexOf(Y.EAN_13) > -1 && n.push(new Vt()), t.indexOf(Y.UPC_A) > -1 && n.push(new Kr()), t.indexOf(Y.EAN_8) > -1 && n.push(new jr()), t.indexOf(Y.UPC_E) > -1 && n.push(new dt())), this.readers = n;
+          w(t) ? (n.push(new Gt()), n.push(new Kr()), n.push(new jr()), n.push(new dt())) : (t.indexOf(Y.EAN_13) > -1 && n.push(new Gt()), t.indexOf(Y.UPC_A) > -1 && n.push(new Kr()), t.indexOf(Y.EAN_8) > -1 && n.push(new jr()), t.indexOf(Y.UPC_E) > -1 && n.push(new dt())), this.readers = n;
         }
         decodeRow(e, t, n) {
           for (let r of this.readers)
@@ -6175,7 +6175,7 @@ function Ys() {
           return this.value;
         }
       }
-      class At {
+      class Et {
         constructor() {
         }
         static getRSSvalue(e, t, n) {
@@ -6186,11 +6186,11 @@ function Ys() {
           for (let a = 0; a < o - 1; a++) {
             let l;
             for (l = 1, s |= 1 << a; l < e[a]; l++, s &= ~(1 << a)) {
-              let u = At.combins(r - l - 1, o - a - 2);
-              if (n && s === 0 && r - l - (o - a - 1) >= o - a - 1 && (u -= At.combins(r - l - (o - a), o - a - 2)), o - a - 1 > 1) {
+              let u = Et.combins(r - l - 1, o - a - 2);
+              if (n && s === 0 && r - l - (o - a - 1) >= o - a - 1 && (u -= Et.combins(r - l - (o - a), o - a - 2)), o - a - 1 > 1) {
                 let d = 0;
                 for (let E = r - l - (o - a - 2); E > t; E--)
-                  d += At.combins(r - l - E - 1, o - a - 3);
+                  d += Et.combins(r - l - E - 1, o - a - 3);
                 u -= d * (o - 1 - a);
               } else r - l > t && u--;
               i += u;
@@ -6230,7 +6230,7 @@ function Ys() {
           return r;
         }
       }
-      class Ht {
+      class Wt {
         constructor(e, t) {
           t ? this.decodedInformation = null : (this.finished = e, this.decodedInformation = t);
         }
@@ -6261,7 +6261,7 @@ function Ys() {
         }
       }
       tt.FNC1 = "$";
-      class Gt extends fr {
+      class Xt extends fr {
         constructor(e, t, n) {
           super(e), n ? (this.remaining = !0, this.remainingValue = this.remainingValue) : (this.remaining = !1, this.remainingValue = 0), this.newString = t;
         }
@@ -6519,7 +6519,7 @@ function Ys() {
         decodeGeneralPurposeField(e, t) {
           this.buffer.setLengthToZero(), t != null && this.buffer.append(t), this.current.setPosition(e);
           let n = this.parseBlocks();
-          return n != null && n.isRemaining() ? new Gt(this.current.getPosition(), this.buffer.toString(), n.getRemainingValue()) : new Gt(this.current.getPosition(), this.buffer.toString());
+          return n != null && n.isRemaining() ? new Xt(this.current.getPosition(), this.buffer.toString(), n.getRemainingValue()) : new Xt(this.current.getPosition(), this.buffer.toString());
         }
         parseBlocks() {
           let e, t;
@@ -6535,37 +6535,37 @@ function Ys() {
             let e = this.decodeNumeric(this.current.getPosition());
             if (this.current.setPosition(e.getNewPosition()), e.isFirstDigitFNC1()) {
               let t;
-              return e.isSecondDigitFNC1() ? t = new Gt(this.current.getPosition(), this.buffer.toString()) : t = new Gt(this.current.getPosition(), this.buffer.toString(), e.getSecondDigit()), new Ht(!0, t);
+              return e.isSecondDigitFNC1() ? t = new Xt(this.current.getPosition(), this.buffer.toString()) : t = new Xt(this.current.getPosition(), this.buffer.toString(), e.getSecondDigit()), new Wt(!0, t);
             }
             if (this.buffer.append(e.getFirstDigit()), e.isSecondDigitFNC1()) {
-              let t = new Gt(this.current.getPosition(), this.buffer.toString());
-              return new Ht(!0, t);
+              let t = new Xt(this.current.getPosition(), this.buffer.toString());
+              return new Wt(!0, t);
             }
             this.buffer.append(e.getSecondDigit());
           }
-          return this.isNumericToAlphaNumericLatch(this.current.getPosition()) && (this.current.setAlpha(), this.current.incrementPosition(4)), new Ht(!1);
+          return this.isNumericToAlphaNumericLatch(this.current.getPosition()) && (this.current.setAlpha(), this.current.incrementPosition(4)), new Wt(!1);
         }
         parseIsoIec646Block() {
           for (; this.isStillIsoIec646(this.current.getPosition()); ) {
             let e = this.decodeIsoIec646(this.current.getPosition());
             if (this.current.setPosition(e.getNewPosition()), e.isFNC1()) {
-              let t = new Gt(this.current.getPosition(), this.buffer.toString());
-              return new Ht(!0, t);
+              let t = new Xt(this.current.getPosition(), this.buffer.toString());
+              return new Wt(!0, t);
             }
             this.buffer.append(e.getValue());
           }
-          return this.isAlphaOr646ToNumericLatch(this.current.getPosition()) ? (this.current.incrementPosition(3), this.current.setNumeric()) : this.isAlphaTo646ToAlphaLatch(this.current.getPosition()) && (this.current.getPosition() + 5 < this.information.getSize() ? this.current.incrementPosition(5) : this.current.setPosition(this.information.getSize()), this.current.setAlpha()), new Ht(!1);
+          return this.isAlphaOr646ToNumericLatch(this.current.getPosition()) ? (this.current.incrementPosition(3), this.current.setNumeric()) : this.isAlphaTo646ToAlphaLatch(this.current.getPosition()) && (this.current.getPosition() + 5 < this.information.getSize() ? this.current.incrementPosition(5) : this.current.setPosition(this.information.getSize()), this.current.setAlpha()), new Wt(!1);
         }
         parseAlphaBlock() {
           for (; this.isStillAlpha(this.current.getPosition()); ) {
             let e = this.decodeAlphanumeric(this.current.getPosition());
             if (this.current.setPosition(e.getNewPosition()), e.isFNC1()) {
-              let t = new Gt(this.current.getPosition(), this.buffer.toString());
-              return new Ht(!0, t);
+              let t = new Xt(this.current.getPosition(), this.buffer.toString());
+              return new Wt(!0, t);
             }
             this.buffer.append(e.getValue());
           }
-          return this.isAlphaOr646ToNumericLatch(this.current.getPosition()) ? (this.current.incrementPosition(3), this.current.setNumeric()) : this.isAlphaTo646ToAlphaLatch(this.current.getPosition()) && (this.current.getPosition() + 5 < this.information.getSize() ? this.current.incrementPosition(5) : this.current.setPosition(this.information.getSize()), this.current.setIsoIec646()), new Ht(!1);
+          return this.isAlphaOr646ToNumericLatch(this.current.getPosition()) ? (this.current.incrementPosition(3), this.current.setNumeric()) : this.isAlphaTo646ToAlphaLatch(this.current.getPosition()) && (this.current.getPosition() + 5 < this.information.getSize() ? this.current.incrementPosition(5) : this.current.setPosition(this.information.getSize()), this.current.setIsoIec646()), new Wt(!1);
         }
         isStillIsoIec646(e) {
           if (e + 5 > this.information.getSize())
@@ -6702,7 +6702,7 @@ function Ys() {
               r = "/";
               break;
             default:
-              throw new wt("Decoding invalid alphanumeric value: " + n);
+              throw new At("Decoding invalid alphanumeric value: " + n);
           }
           return new tt(e + 6, r);
         }
@@ -6807,19 +6807,19 @@ function Ys() {
           e.append(i);
         }
       }
-      class Et extends Wn {
+      class Ct extends Wn {
         constructor(e) {
           super(e);
         }
         parseInformation() {
-          if (this.getInformation().getSize() != Et.HEADER_SIZE + Wn.GTIN_SIZE + Et.WEIGHT_SIZE)
+          if (this.getInformation().getSize() != Ct.HEADER_SIZE + Wn.GTIN_SIZE + Ct.WEIGHT_SIZE)
             throw new D();
           let e = new ge();
-          return this.encodeCompressedGtin(e, Et.HEADER_SIZE), this.encodeCompressedWeight(e, Et.HEADER_SIZE + Wn.GTIN_SIZE, Et.WEIGHT_SIZE), e.toString();
+          return this.encodeCompressedGtin(e, Ct.HEADER_SIZE), this.encodeCompressedWeight(e, Ct.HEADER_SIZE + Wn.GTIN_SIZE, Ct.WEIGHT_SIZE), e.toString();
         }
       }
-      Et.HEADER_SIZE = 5, Et.WEIGHT_SIZE = 15;
-      class Wi extends Et {
+      Ct.HEADER_SIZE = 5, Ct.WEIGHT_SIZE = 15;
+      class Wi extends Ct {
         constructor(e) {
           super(e);
         }
@@ -6830,7 +6830,7 @@ function Ys() {
           return e;
         }
       }
-      class Xi extends Et {
+      class Xi extends Ct {
         constructor(e) {
           super(e);
         }
@@ -6841,22 +6841,22 @@ function Ys() {
           return e < 1e4 ? e : e - 1e4;
         }
       }
-      class Ct extends nt {
+      class pt extends nt {
         constructor(e) {
           super(e);
         }
         parseInformation() {
-          if (this.getInformation().getSize() < Ct.HEADER_SIZE + nt.GTIN_SIZE)
+          if (this.getInformation().getSize() < pt.HEADER_SIZE + nt.GTIN_SIZE)
             throw new D();
           let e = new ge();
-          this.encodeCompressedGtin(e, Ct.HEADER_SIZE);
-          let t = this.getGeneralDecoder().extractNumericValueFromBitArray(Ct.HEADER_SIZE + nt.GTIN_SIZE, Ct.LAST_DIGIT_SIZE);
+          this.encodeCompressedGtin(e, pt.HEADER_SIZE);
+          let t = this.getGeneralDecoder().extractNumericValueFromBitArray(pt.HEADER_SIZE + nt.GTIN_SIZE, pt.LAST_DIGIT_SIZE);
           e.append("(392"), e.append(t), e.append(")");
-          let n = this.getGeneralDecoder().decodeGeneralPurposeField(Ct.HEADER_SIZE + nt.GTIN_SIZE + Ct.LAST_DIGIT_SIZE, null);
+          let n = this.getGeneralDecoder().decodeGeneralPurposeField(pt.HEADER_SIZE + nt.GTIN_SIZE + pt.LAST_DIGIT_SIZE, null);
           return e.append(n.getNewString()), e.toString();
         }
       }
-      Ct.HEADER_SIZE = 8, Ct.LAST_DIGIT_SIZE = 2;
+      pt.HEADER_SIZE = 8, pt.LAST_DIGIT_SIZE = 2;
       class $e extends nt {
         constructor(e) {
           super(e);
@@ -6919,7 +6919,7 @@ function Ys() {
           }
           switch (nn.extractNumericValueFromBitArray(f, 1, 5)) {
             case 12:
-              return new Ct(f);
+              return new pt(f);
             case 13:
               return new $e(f);
           }
@@ -6942,7 +6942,7 @@ function Ys() {
               return new _e(f, "320", "17");
           }
         } catch (e) {
-          throw console.log(e), new wt("unknown decoder: " + f);
+          throw console.log(e), new At("unknown decoder: " + f);
         }
       }
       class Dt {
@@ -7301,7 +7301,7 @@ function Ys() {
           let N = y + _;
           if ((I & 1) != 0 || I > 13 || I < 4)
             throw new D();
-          let L = (13 - I) / 2, F = B.SYMBOL_WIDEST[L], P = 9 - F, re = At.getRSSvalue(l, F, !0), $ = At.getRSSvalue(u, P, !1), it = B.EVEN_TOTAL_SUBSET[L], xt = B.GSUM[L], st = re * it + $ + xt;
+          let L = (13 - I) / 2, F = B.SYMBOL_WIDEST[L], P = 9 - F, re = Et.getRSSvalue(l, F, !0), $ = Et.getRSSvalue(u, P, !1), it = B.EVEN_TOTAL_SUBSET[L], xt = B.GSUM[L], st = re * it + $ + xt;
           return new tn(st, N);
         }
         static isNotA1left(e, t, n) {
@@ -7506,12 +7506,12 @@ function Ys() {
           if (n) {
             if ((d & 1) !== 0 || d > 12 || d < 4)
               throw new D();
-            let _ = (12 - d) / 2, N = Ne.OUTSIDE_ODD_WIDEST[_], L = 9 - N, F = At.getRSSvalue(o, N, !1), P = At.getRSSvalue(a, L, !0), re = Ne.OUTSIDE_EVEN_TOTAL_SUBSET[_], $ = Ne.OUTSIDE_GSUM[_];
+            let _ = (12 - d) / 2, N = Ne.OUTSIDE_ODD_WIDEST[_], L = 9 - N, F = Et.getRSSvalue(o, N, !1), P = Et.getRSSvalue(a, L, !0), re = Ne.OUTSIDE_EVEN_TOTAL_SUBSET[_], $ = Ne.OUTSIDE_GSUM[_];
             return new tn(F * re + P + $, y);
           } else {
             if ((I & 1) !== 0 || I > 10 || I < 4)
               throw new D();
-            let _ = (10 - I) / 2, N = Ne.INSIDE_ODD_WIDEST[_], L = 9 - N, F = At.getRSSvalue(o, N, !0), P = At.getRSSvalue(a, L, !1), re = Ne.INSIDE_ODD_TOTAL_SUBSET[_], $ = Ne.INSIDE_GSUM[_];
+            let _ = (10 - I) / 2, N = Ne.INSIDE_ODD_WIDEST[_], L = 9 - N, F = Et.getRSSvalue(o, N, !0), P = Et.getRSSvalue(a, L, !1), re = Ne.INSIDE_ODD_TOTAL_SUBSET[_], $ = Ne.INSIDE_GSUM[_];
             return new tn(P * re + F + $, y);
           }
         }
@@ -7624,7 +7624,7 @@ function Ys() {
           this.readers.forEach((e) => e.reset());
         }
       }
-      class Yi extends Ut {
+      class Yi extends Ht {
         /**
          * Creates an instance of BrowserBarcodeReader.
          * @param {number} [timeBetweenScansMillis=500] the time delay between subsequent decode tries
@@ -8307,7 +8307,7 @@ function Ys() {
           try {
             t.append(Je.decode(o, Q.ISO88591));
           } catch (a) {
-            throw new wt("Platform does not support required encoding: " + a.message);
+            throw new At("Platform does not support required encoding: " + a.message);
           }
         }
         /**
@@ -8682,7 +8682,7 @@ function Ys() {
         }
       }
       vt.NO_POINTS = [];
-      class ji extends Ut {
+      class ji extends Ht {
         /**
          * Creates an instance of BrowserQRCodeReader.
          * @param {number} [timeBetweenScansMillis=500] the time delay between subsequent decode tries
@@ -16610,9 +16610,9 @@ function Ys() {
           return a;
         }
       }
-      class Wt {
+      class zt {
         constructor(e, t, n, r, i) {
-          e instanceof Wt ? this.constructor_2(e) : this.constructor_1(e, t, n, r, i);
+          e instanceof zt ? this.constructor_2(e) : this.constructor_1(e, t, n, r, i);
         }
         /**
          *
@@ -16637,7 +16637,7 @@ function Ys() {
          * @throws NotFoundException
          */
         static merge(e, t) {
-          return e == null ? t : t == null ? e : new Wt(e.image, e.topLeft, e.bottomLeft, t.topRight, t.bottomRight);
+          return e == null ? t : t == null ? e : new zt(e.image, e.topLeft, e.bottomLeft, t.topRight, t.bottomRight);
         }
         /**
          * @throws NotFoundException
@@ -16656,7 +16656,7 @@ function Ys() {
             let u = new W(a.getX(), l);
             n ? i = u : o = u;
           }
-          return new Wt(this.image, r, i, s, o);
+          return new zt(this.image, r, i, s, o);
         }
         getMinX() {
           return this.minX;
@@ -16772,7 +16772,7 @@ function Ys() {
       }
       class In {
         constructor(e) {
-          this.boundingBox = new Wt(e), this.codewords = new Array(e.getMaxY() - e.getMinY() + 1);
+          this.boundingBox = new zt(e), this.codewords = new Array(e.getMaxY() - e.getMinY() + 1);
         }
         /*final*/
         getCodewordNearby(e) {
@@ -17397,7 +17397,7 @@ function Ys() {
           if (e == null)
             throw new ni();
           if (t < 0 || t > e.length || n < 0 || t + n > e.length || t + n < 0)
-            throw new gt();
+            throw new wt();
           if (n === 0)
             return;
           for (let r = 0; r < n; r++)
@@ -17505,7 +17505,7 @@ function Ys() {
          */
         writeBytesOffset(e, t, n) {
           if (t < 0 || t > e.length || n < 0 || t + n - e.length > 0)
-            throw new gt();
+            throw new wt();
           this.ensureCapacity(this.count + n), ie.arraycopy(e, t, this.buf, this.count, n), this.count += n;
         }
         /**
@@ -18200,7 +18200,7 @@ function Ys() {
          * @throws ChecksumException
          */
         static decode(e, t, n, r, i, s, o) {
-          let a = new Wt(e, t, n, r, i), l = null, u = null, d;
+          let a = new zt(e, t, n, r, i), l = null, u = null, d;
           for (let I = !0; ; I = !1) {
             if (t != null && (l = te.getRowIndicatorColumn(e, a, t, !0, s, o)), r != null && (u = te.getRowIndicatorColumn(e, a, r, !1, s, o)), d = te.merge(l, u), d == null)
               throw D.getNotFoundInstance();
@@ -18247,7 +18247,7 @@ function Ys() {
           let n = te.getBarcodeMetadata(e, t);
           if (n == null)
             return null;
-          let r = Wt.merge(te.adjustBoundingBox(e), te.adjustBoundingBox(t));
+          let r = zt.merge(te.adjustBoundingBox(e), te.adjustBoundingBox(t));
           return new yn(n, r);
         }
         /**
@@ -18700,7 +18700,7 @@ function Ys() {
           throw new D("No MultiFormat Readers were able to detect the code.");
         }
       }
-      class ss extends Ut {
+      class ss extends Ht {
         constructor(e = null, t = 500) {
           const n = new ii();
           n.setHints(e), super(n, t);
@@ -18713,7 +18713,7 @@ function Ys() {
           return this.reader.decodeWithState(e);
         }
       }
-      class os extends Ut {
+      class os extends Ht {
         /**
          * Creates an instance of BrowserPDF417Reader.
          * @param {number} [timeBetweenScansMillis=500] the time delay between subsequent decode tries
@@ -18722,7 +18722,7 @@ function Ys() {
           super(new ze(), e);
         }
       }
-      class as extends Ut {
+      class as extends Ht {
         /**
          * Creates an instance of BrowserQRCodeReader.
          * @param {number} [timeBetweenScansMillis=500] the time delay between subsequent decode tries
@@ -18996,7 +18996,7 @@ function Ys() {
           return e.toString();
         }
       }
-      class Xt {
+      class Yt {
         constructor() {
           this.maskPattern = -1;
         }
@@ -19046,10 +19046,10 @@ function Ys() {
         }
         // Check if "mask_pattern" is valid.
         static isValidMaskPattern(e) {
-          return e >= 0 && e < Xt.NUM_MASK_PATTERNS;
+          return e >= 0 && e < Yt.NUM_MASK_PATTERNS;
         }
       }
-      Xt.NUM_MASK_PATTERNS = 8;
+      Yt.NUM_MASK_PATTERNS = 8;
       class Ee extends m {
       }
       Ee.kind = "WriterException";
@@ -19176,7 +19176,7 @@ function Ys() {
         // Encode error correction level and mask pattern. See 8.9 of
         // JISX0510:2004 (p.45) for details.
         static makeTypeInfoBits(e, t, n) {
-          if (!Xt.isValidMaskPattern(t))
+          if (!Yt.isValidMaskPattern(t))
             throw new Ee("Invalid mask pattern");
           const r = e.getBits() << 3 | t;
           n.appendBits(r, 5);
@@ -19391,7 +19391,7 @@ function Ys() {
           this.appendLengthInfo(d, l, s, u), u.appendBitArray(a);
           const E = l.getECBlocksForLevel(t), p = l.getTotalCodewords() - E.getTotalECCodewords();
           this.terminateBits(p, u);
-          const I = this.interleaveWithECBytes(u, l.getTotalCodewords(), p, E.getNumBlocks()), y = new Xt();
+          const I = this.interleaveWithECBytes(u, l.getTotalCodewords(), p, E.getNumBlocks()), y = new Yt();
           y.setECLevel(t), y.setMode(s), y.setVersion(l);
           const _ = l.getDimensionForVersion(), N = new Zn(_, _), L = this.chooseMaskPattern(I, t, l, N);
           return y.setMaskPattern(L), Z.buildMatrix(I, t, l, L, N), y.setMatrix(N), y;
@@ -19456,7 +19456,7 @@ function Ys() {
         }
         static chooseMaskPattern(e, t, n, r) {
           let i = Number.MAX_SAFE_INTEGER, s = -1;
-          for (let o = 0; o < Xt.NUM_MASK_PATTERNS; o++) {
+          for (let o = 0; o < Yt.NUM_MASK_PATTERNS; o++) {
             Z.buildMatrix(e, t, n, o, r);
             let a = this.calculateMaskPenalty(r);
             a < i && (i = a, s = o);
@@ -19768,7 +19768,7 @@ function Ys() {
         -1,
         -1
       ]), be.DEFAULT_BYTE_MODE_ENCODING = k.UTF8.getName();
-      class zt {
+      class Zt {
         /**
          * Writes and renders a QRCode SVG element.
          *
@@ -19782,7 +19782,7 @@ function Ys() {
             throw new R("Found empty contents");
           if (t < 0 || n < 0)
             throw new R("Requested dimensions are too small: " + t + "x" + n);
-          let i = Ie.L, s = zt.QUIET_ZONE_SIZE;
+          let i = Ie.L, s = Zt.QUIET_ZONE_SIZE;
           r !== null && (r.get(Le.ERROR_CORRECTION) !== void 0 && (i = Ie.fromString(r.get(Le.ERROR_CORRECTION).toString())), r.get(Le.MARGIN) !== void 0 && (s = Number.parseInt(r.get(Le.MARGIN).toString(), 10)));
           const o = be.encode(e, i, r);
           return this.renderResult(o, t, n, s);
@@ -19802,7 +19802,7 @@ function Ys() {
         renderResult(e, t, n, r) {
           const i = e.getMatrix();
           if (i === null)
-            throw new wt();
+            throw new At();
           const s = i.getWidth(), o = i.getHeight(), a = s + r * 2, l = o + r * 2, u = Math.max(t, a), d = Math.max(n, l), E = Math.min(Math.floor(u / a), Math.floor(d / l)), p = Math.floor((u - s * E) / 2), I = Math.floor((d - o * E) / 2), y = this.createSVGElement(u, d);
           for (let _ = 0, N = I; _ < o; _++, N += E)
             for (let L = 0, F = p; L < s; L++, F += E)
@@ -19819,7 +19819,7 @@ function Ys() {
          * @param h SVG's height attribute
          */
         createSVGElement(e, t) {
-          const n = document.createElementNS(zt.SVG_NS, "svg");
+          const n = document.createElementNS(Zt.SVG_NS, "svg");
           return n.setAttributeNS(null, "height", e.toString()), n.setAttributeNS(null, "width", t.toString()), n;
         }
         /**
@@ -19831,11 +19831,11 @@ function Ys() {
          * @param h Element's height attribute
          */
         createSvgRectElement(e, t, n, r) {
-          const i = document.createElementNS(zt.SVG_NS, "rect");
+          const i = document.createElementNS(Zt.SVG_NS, "rect");
           return i.setAttributeNS(null, "x", e.toString()), i.setAttributeNS(null, "y", t.toString()), i.setAttributeNS(null, "height", n.toString()), i.setAttributeNS(null, "width", r.toString()), i.setAttributeNS(null, "fill", "#000000"), i;
         }
       }
-      zt.QUIET_ZONE_SIZE = 4, zt.SVG_NS = "http://www.w3.org/2000/svg";
+      Zt.QUIET_ZONE_SIZE = 4, Zt.SVG_NS = "http://www.w3.org/2000/svg";
       class an {
         /*@Override*/
         // public encode(contents: string, format: BarcodeFormat, width: number /*int*/, height: number /*int*/): BitMatrix
@@ -19860,7 +19860,7 @@ function Ys() {
         static renderResult(e, t, n, r) {
           const i = e.getMatrix();
           if (i === null)
-            throw new wt();
+            throw new At();
           const s = i.getWidth(), o = i.getHeight(), a = s + r * 2, l = o + r * 2, u = Math.max(t, a), d = Math.max(n, l), E = Math.min(Math.floor(u / a), Math.floor(d / l)), p = Math.floor((u - s * E) / 2), I = Math.floor((d - o * E) / 2), y = new Fe(u, d);
           for (let _ = 0, N = I; _ < o; _++, N += E)
             for (let L = 0, F = p; L < s; L++, F += E)
@@ -19926,7 +19926,7 @@ function Ys() {
           return s.encode(e, t, n, r, i);
         }
       }
-      class pt extends gn {
+      class mt extends gn {
         constructor(e, t, n, r, i, s, o, a) {
           if (super(s, o), this.yuvData = e, this.dataWidth = t, this.dataHeight = n, this.left = r, this.top = i, r + s > t || i + o > n)
             throw new R("Crop rectangle does not fit within image data.");
@@ -19962,18 +19962,18 @@ function Ys() {
         }
         /*@Override*/
         crop(e, t, n, r) {
-          return new pt(this.yuvData, this.dataWidth, this.dataHeight, this.left + e, this.top + t, n, r, !1);
+          return new mt(this.yuvData, this.dataWidth, this.dataHeight, this.left + e, this.top + t, n, r, !1);
         }
         renderThumbnail() {
-          const e = this.getWidth() / pt.THUMBNAIL_SCALE_FACTOR, t = this.getHeight() / pt.THUMBNAIL_SCALE_FACTOR, n = new Int32Array(e * t), r = this.yuvData;
+          const e = this.getWidth() / mt.THUMBNAIL_SCALE_FACTOR, t = this.getHeight() / mt.THUMBNAIL_SCALE_FACTOR, n = new Int32Array(e * t), r = this.yuvData;
           let i = this.top * this.dataWidth + this.left;
           for (let s = 0; s < t; s++) {
             const o = s * e;
             for (let a = 0; a < e; a++) {
-              const l = r[i + a * pt.THUMBNAIL_SCALE_FACTOR] & 255;
+              const l = r[i + a * mt.THUMBNAIL_SCALE_FACTOR] & 255;
               n[o + a] = 4278190080 | l * 65793;
             }
-            i += this.dataWidth * pt.THUMBNAIL_SCALE_FACTOR;
+            i += this.dataWidth * mt.THUMBNAIL_SCALE_FACTOR;
           }
           return n;
         }
@@ -19981,13 +19981,13 @@ function Ys() {
          * @return width of image from {@link #renderThumbnail()}
          */
         getThumbnailWidth() {
-          return this.getWidth() / pt.THUMBNAIL_SCALE_FACTOR;
+          return this.getWidth() / mt.THUMBNAIL_SCALE_FACTOR;
         }
         /**
          * @return height of image from {@link #renderThumbnail()}
          */
         getThumbnailHeight() {
-          return this.getHeight() / pt.THUMBNAIL_SCALE_FACTOR;
+          return this.getHeight() / mt.THUMBNAIL_SCALE_FACTOR;
         }
         reverseHorizontal(e, t) {
           const n = this.yuvData;
@@ -20003,7 +20003,7 @@ function Ys() {
           return new Nt(this);
         }
       }
-      pt.THUMBNAIL_SCALE_FACTOR = 2;
+      mt.THUMBNAIL_SCALE_FACTOR = 2;
       class yr extends gn {
         constructor(e, t, n, r, i, s, o) {
           if (super(t, n), this.dataWidth = r, this.dataHeight = i, this.left = s, this.top = o, e.BYTES_PER_ELEMENT === 4) {
@@ -20189,7 +20189,7 @@ function Ys() {
         "DIGIT",
         "MIXED",
         "PUNCT"
-      ], Lt = 0, jn = 1, ut = 2, li = 3, mt = 4, ds = new ln(null, 0, 0), Tr = [
+      ], Lt = 0, jn = 1, ut = 2, li = 3, It = 4, ds = new ln(null, 0, 0), Tr = [
         Int32Array.from([
           0,
           (5 << 16) + 28,
@@ -20233,10 +20233,10 @@ function Ys() {
       function xs(f) {
         for (let e of f)
           pe.fill(e, -1);
-        return f[Lt][mt] = 0, f[jn][mt] = 0, f[jn][Lt] = 28, f[li][mt] = 0, f[ut][mt] = 0, f[ut][Lt] = 15, f;
+        return f[Lt][It] = 0, f[jn][It] = 0, f[jn][Lt] = 28, f[li][It] = 0, f[ut][It] = 0, f[ut][Lt] = 15, f;
       }
       const ci = xs(pe.createInt32Array(6, 6));
-      class It {
+      class bt {
         constructor(e, t, n, r) {
           this.token = e, this.mode = t, this.binaryShiftByteCount = n, this.bitCount = r;
         }
@@ -20261,23 +20261,23 @@ function Ys() {
             r = Sn(r, s & 65535, s >> 16), n += s >> 16;
           }
           let i = e === ut ? 4 : 5;
-          return r = Sn(r, t, i), new It(r, e, 0, n + i);
+          return r = Sn(r, t, i), new bt(r, e, 0, n + i);
         }
         // Create a new state representing this state, with a temporary shift
         // to a different mode to output a single value.
         shiftAndAppend(e, t) {
           let n = this.token, r = this.mode === ut ? 4 : 5;
-          return n = Sn(n, ci[this.mode][e], r), n = Sn(n, t, 5), new It(n, this.mode, 0, this.bitCount + r + 5);
+          return n = Sn(n, ci[this.mode][e], r), n = Sn(n, t, 5), new bt(n, this.mode, 0, this.bitCount + r + 5);
         }
         // Create a new state representing this state, but an additional character
         // output in Binary Shift mode.
         addBinaryShiftChar(e) {
           let t = this.token, n = this.mode, r = this.bitCount;
-          if (this.mode === mt || this.mode === ut) {
+          if (this.mode === It || this.mode === ut) {
             let o = Tr[n][Lt];
             t = Sn(t, o & 65535, o >> 16), r += o >> 16, n = Lt;
           }
-          let i = this.binaryShiftByteCount === 0 || this.binaryShiftByteCount === 31 ? 18 : this.binaryShiftByteCount === 62 ? 9 : 8, s = new It(t, n, this.binaryShiftByteCount + 1, r + i);
+          let i = this.binaryShiftByteCount === 0 || this.binaryShiftByteCount === 31 ? 18 : this.binaryShiftByteCount === 62 ? 9 : 8, s = new bt(t, n, this.binaryShiftByteCount + 1, r + i);
           return s.binaryShiftByteCount === 2078 && (s = s.endBinaryShift(e + 1)), s;
         }
         // Create the state identical to this one, but we are no longer in
@@ -20286,13 +20286,13 @@ function Ys() {
           if (this.binaryShiftByteCount === 0)
             return this;
           let t = this.token;
-          return t = us(t, e - this.binaryShiftByteCount, this.binaryShiftByteCount), new It(t, this.mode, 0, this.bitCount);
+          return t = us(t, e - this.binaryShiftByteCount, this.binaryShiftByteCount), new bt(t, this.mode, 0, this.bitCount);
         }
         // Returns true if "this" state is better (equal: or) to be in than "that"
         // state under all possible circumstances.
         isBetterThanOrEqualTo(e) {
           let t = this.bitCount + (Tr[this.mode][e.mode] >> 16);
-          return this.binaryShiftByteCount < e.binaryShiftByteCount ? t += It.calculateBinaryShiftCost(e) - It.calculateBinaryShiftCost(this) : this.binaryShiftByteCount > e.binaryShiftByteCount && e.binaryShiftByteCount > 0 && (t += 10), t <= e.bitCount;
+          return this.binaryShiftByteCount < e.binaryShiftByteCount ? t += bt.calculateBinaryShiftCost(e) - bt.calculateBinaryShiftCost(this) : this.binaryShiftByteCount > e.binaryShiftByteCount && e.binaryShiftByteCount > 0 && (t += 10), t <= e.bitCount;
         }
         toBitArray(e) {
           let t = [];
@@ -20313,7 +20313,7 @@ function Ys() {
           return e.binaryShiftByteCount > 62 ? 21 : e.binaryShiftByteCount > 31 ? 20 : e.binaryShiftByteCount > 0 ? 10 : 0;
         }
       }
-      It.INITIAL_STATE = new It(ds, Lt, 0, 0);
+      bt.INITIAL_STATE = new bt(ds, Lt, 0, 0);
       function gs(f) {
         const e = Q.getCharCode(" "), t = Q.getCharCode("."), n = Q.getCharCode(",");
         f[Lt][e] = 1;
@@ -20396,7 +20396,7 @@ function Ys() {
           "}"
         ];
         for (let E = 0; E < d.length; E++)
-          Q.getCharCode(d[E]) > 0 && (f[mt][Q.getCharCode(d[E])] = E);
+          Q.getCharCode(d[E]) > 0 && (f[It][Q.getCharCode(d[E])] = E);
         return f;
       }
       const Nr = gs(pe.createInt32Array(5, 256));
@@ -20410,7 +20410,7 @@ function Ys() {
         encode() {
           const e = Q.getCharCode(" "), t = Q.getCharCode(`
 `);
-          let n = ai.singletonList(It.INITIAL_STATE);
+          let n = ai.singletonList(bt.INITIAL_STATE);
           for (let i = 0; i < this.text.length; i++) {
             let s, o = i + 1 < this.text.length ? this.text[i + 1] : 0;
             switch (this.text[i]) {
@@ -20447,7 +20447,7 @@ function Ys() {
         // the "result" list.
         updateStateForChar(e, t, n) {
           let r = this.text[t] & 255, i = Nr[e.getMode()][r] > 0, s = null;
-          for (let o = 0; o <= mt; o++) {
+          for (let o = 0; o <= It; o++) {
             let a = Nr[o][r];
             if (a > 0) {
               if (s == null && (s = e.endBinaryShift(t)), !i || o === e.getMode() || o === ut) {
@@ -20473,7 +20473,7 @@ function Ys() {
         }
         static updateStateForPair(e, t, n, r) {
           let i = e.endBinaryShift(t);
-          if (r.push(i.latchAndAppend(mt, n)), e.getMode() !== mt && r.push(i.shiftAndAppend(mt, n)), n === 3 || n === 4) {
+          if (r.push(i.latchAndAppend(It, n)), e.getMode() !== It && r.push(i.shiftAndAppend(It, n)), n === 3 || n === 4) {
             let s = i.latchAndAppend(ut, 16 - n).latchAndAppend(ut, 1);
             r.push(s);
           }
@@ -20703,7 +20703,7 @@ function Ys() {
         static renderResult(e, t, n) {
           let r = e.getMatrix();
           if (r == null)
-            throw new wt();
+            throw new At();
           let i = r.getWidth(), s = r.getHeight(), o = Math.max(t, i), a = Math.max(n, s), l = Math.min(o / i, a / s), u = (o - i * l) / 2, d = (a - s * l) / 2, E = new Fe(o, a);
           for (let p = 0, I = d; p < s; p++, I += l)
             for (let y = 0, _ = u; y < i; y++, _ += l)
@@ -20711,7 +20711,7 @@ function Ys() {
           return E;
         }
       }
-      h.AbstractExpandedDecoder = dr, h.ArgumentException = v, h.ArithmeticException = Fn, h.AztecCode = oi, h.AztecCodeReader = Vn, h.AztecCodeWriter = Kn, h.AztecDecoder = me, h.AztecDetector = Yr, h.AztecDetectorResult = Xr, h.AztecEncoder = ae, h.AztecHighLevelEncoder = Tn, h.AztecPoint = Qe, h.BarcodeFormat = Y, h.Binarizer = Me, h.BinaryBitmap = ne, h.BitArray = le, h.BitMatrix = Fe, h.BitSource = Ar, h.BrowserAztecCodeReader = Hi, h.BrowserBarcodeReader = Yi, h.BrowserCodeReader = Ut, h.BrowserDatamatrixCodeReader = ji, h.BrowserMultiFormatReader = ss, h.BrowserPDF417Reader = os, h.BrowserQRCodeReader = as, h.BrowserQRCodeSvgWriter = zt, h.CharacterSetECI = k, h.ChecksumException = q, h.Code128Reader = V, h.Code39Reader = Be, h.DataMatrixDecodedBitStreamParser = Mt, h.DataMatrixReader = vt, h.DecodeHintType = xe, h.DecoderResult = wn, h.DefaultGridSampler = zr, h.DetectorResult = Un, h.EAN13Reader = Vt, h.EncodeHintType = Le, h.Exception = m, h.FormatException = U, h.GenericGF = ce, h.GenericGFPoly = et, h.GlobalHistogramBinarizer = ke, h.GridSampler = cr, h.GridSamplerInstance = Rt, h.HTMLCanvasElementLuminanceSource = Ot, h.HybridBinarizer = J, h.ITFReader = Ae, h.IllegalArgumentException = R, h.IllegalStateException = wt, h.InvertedLuminanceSource = Nt, h.LuminanceSource = gn, h.MathUtils = oe, h.MultiFormatOneDReader = sn, h.MultiFormatReader = ii, h.MultiFormatWriter = cs, h.NotFoundException = D, h.OneDReader = ve, h.PDF417DecodedBitStreamParser = T, h.PDF417DecoderErrorCorrection = $r, h.PDF417Reader = ze, h.PDF417ResultMetadata = ei, h.PerspectiveTransform = ft, h.PlanarYUVLuminanceSource = pt, h.QRCodeByteMatrix = Zn, h.QRCodeDataMask = ct, h.QRCodeDecodedBitStreamParser = Se, h.QRCodeDecoderErrorCorrectionLevel = Ie, h.QRCodeDecoderFormatInformation = je, h.QRCodeEncoder = be, h.QRCodeEncoderQRCode = Xt, h.QRCodeMaskUtil = Oe, h.QRCodeMatrixUtil = Z, h.QRCodeMode = z, h.QRCodeReader = Bt, h.QRCodeVersion = X, h.QRCodeWriter = an, h.RGBLuminanceSource = yr, h.RSS14Reader = Ne, h.RSSExpandedReader = B, h.ReaderException = Yn, h.ReedSolomonDecoder = En, h.ReedSolomonEncoder = br, h.ReedSolomonException = en, h.Result = qe, h.ResultMetadataType = Ue, h.ResultPoint = W, h.StringUtils = Q, h.UnsupportedOperationException = Jt, h.VideoInputDevice = Wr, h.WhiteRectangleDetector = yt, h.WriterException = Ee, h.ZXingArrays = pe, h.ZXingCharset = si, h.ZXingInteger = K, h.ZXingStandardCharsets = _r, h.ZXingStringBuilder = ge, h.ZXingStringEncoding = Je, h.ZXingSystem = ie, h.createAbstractExpandedDecoder = qr, Object.defineProperty(h, "__esModule", { value: !0 });
+      h.AbstractExpandedDecoder = dr, h.ArgumentException = v, h.ArithmeticException = Fn, h.AztecCode = oi, h.AztecCodeReader = Vn, h.AztecCodeWriter = Kn, h.AztecDecoder = me, h.AztecDetector = Yr, h.AztecDetectorResult = Xr, h.AztecEncoder = ae, h.AztecHighLevelEncoder = Tn, h.AztecPoint = Qe, h.BarcodeFormat = Y, h.Binarizer = Me, h.BinaryBitmap = ne, h.BitArray = le, h.BitMatrix = Fe, h.BitSource = Ar, h.BrowserAztecCodeReader = Hi, h.BrowserBarcodeReader = Yi, h.BrowserCodeReader = Ht, h.BrowserDatamatrixCodeReader = ji, h.BrowserMultiFormatReader = ss, h.BrowserPDF417Reader = os, h.BrowserQRCodeReader = as, h.BrowserQRCodeSvgWriter = Zt, h.CharacterSetECI = k, h.ChecksumException = q, h.Code128Reader = V, h.Code39Reader = Be, h.DataMatrixDecodedBitStreamParser = Mt, h.DataMatrixReader = vt, h.DecodeHintType = xe, h.DecoderResult = wn, h.DefaultGridSampler = zr, h.DetectorResult = Un, h.EAN13Reader = Gt, h.EncodeHintType = Le, h.Exception = m, h.FormatException = U, h.GenericGF = ce, h.GenericGFPoly = et, h.GlobalHistogramBinarizer = ke, h.GridSampler = cr, h.GridSamplerInstance = Rt, h.HTMLCanvasElementLuminanceSource = Ot, h.HybridBinarizer = J, h.ITFReader = Ae, h.IllegalArgumentException = R, h.IllegalStateException = At, h.InvertedLuminanceSource = Nt, h.LuminanceSource = gn, h.MathUtils = oe, h.MultiFormatOneDReader = sn, h.MultiFormatReader = ii, h.MultiFormatWriter = cs, h.NotFoundException = D, h.OneDReader = ve, h.PDF417DecodedBitStreamParser = T, h.PDF417DecoderErrorCorrection = $r, h.PDF417Reader = ze, h.PDF417ResultMetadata = ei, h.PerspectiveTransform = ft, h.PlanarYUVLuminanceSource = mt, h.QRCodeByteMatrix = Zn, h.QRCodeDataMask = ct, h.QRCodeDecodedBitStreamParser = Se, h.QRCodeDecoderErrorCorrectionLevel = Ie, h.QRCodeDecoderFormatInformation = je, h.QRCodeEncoder = be, h.QRCodeEncoderQRCode = Yt, h.QRCodeMaskUtil = Oe, h.QRCodeMatrixUtil = Z, h.QRCodeMode = z, h.QRCodeReader = Bt, h.QRCodeVersion = X, h.QRCodeWriter = an, h.RGBLuminanceSource = yr, h.RSS14Reader = Ne, h.RSSExpandedReader = B, h.ReaderException = Yn, h.ReedSolomonDecoder = En, h.ReedSolomonEncoder = br, h.ReedSolomonException = en, h.Result = qe, h.ResultMetadataType = Ue, h.ResultPoint = W, h.StringUtils = Q, h.UnsupportedOperationException = Jt, h.VideoInputDevice = Wr, h.WhiteRectangleDetector = yt, h.WriterException = Ee, h.ZXingArrays = pe, h.ZXingCharset = si, h.ZXingInteger = K, h.ZXingStandardCharsets = _r, h.ZXingStringBuilder = ge, h.ZXingStringEncoding = Je, h.ZXingSystem = ie, h.createAbstractExpandedDecoder = qr, Object.defineProperty(h, "__esModule", { value: !0 });
     });
   }(On, On.exports)), On.exports;
 }
@@ -21752,8 +21752,8 @@ var lo = function() {
         ne.cancel(), Me("videoConstraints should be defined");
         return;
       }
-      var gt = {};
-      (!m || M.aspectRatio) && (gt.aspectRatio = M.aspectRatio);
+      var wt = {};
+      (!m || M.aspectRatio) && (wt.aspectRatio = M.aspectRatio);
       var St = {
         onRenderSurfaceReady: function(pe, K) {
           R.setupUi(pe, K, M), R.isScanning = !0, R.foreverScan(M, w, b);
@@ -21761,7 +21761,7 @@ var lo = function() {
       };
       io.failIfNotSupported().then(function(pe) {
         pe.create(ie).then(function(K) {
-          return K.render(g.element, gt, St).then(function(le) {
+          return K.render(g.element, wt, St).then(function(le) {
             R.renderedCamera = le, ne.execute(), q(null);
           }).catch(function(le) {
             ne.cancel(), Me(le);
@@ -21832,12 +21832,12 @@ var lo = function() {
             throw "Unable to get 2d context from canvas";
           Me.canvas.width = v, Me.canvas.height = R, Me.drawImage(b, 0, 0, M, O, ne.x, ne.y, ne.width, ne.height);
         }
-        var ie = at.FILE_SCAN_HIDDEN_CANVAS_PADDING, gt = Math.max(b.width, ne.width), St = Math.max(b.height, ne.height), pe = gt + 2 * ie, K = St + 2 * ie, le = w.createCanvasElement(pe, K);
+        var ie = at.FILE_SCAN_HIDDEN_CANVAS_PADDING, wt = Math.max(b.width, ne.width), St = Math.max(b.height, ne.height), pe = wt + 2 * ie, K = St + 2 * ie, le = w.createCanvasElement(pe, K);
         m.appendChild(le);
         var Tt = le.getContext("2d");
         if (!Tt)
           throw "Unable to get 2d context from canvas";
-        Tt.canvas.width = pe, Tt.canvas.height = K, Tt.drawImage(b, 0, 0, M, O, ie, ie, gt, St);
+        Tt.canvas.width = pe, Tt.canvas.height = K, Tt.drawImage(b, 0, 0, M, O, ie, ie, wt, St);
         try {
           w.qrcode.decodeRobustlyAsync(le).then(function(xe) {
             A(Ii.createFromQrcodeResult(xe));
@@ -22139,7 +22139,7 @@ var go = Object.defineProperty, wo = (x, c, h, w) => {
     (b = x[g]) && (A = b(c, h, A) || A);
   return A && go(c, h, A), A;
 };
-const Hr = class Hr extends Kt {
+const Hr = class Hr extends Qt {
   constructor() {
     super(...arguments), this.disabled = !1;
   }
@@ -22213,7 +22213,7 @@ var Eo = Object.defineProperty, Co = (x, c, h, w) => {
     (b = x[g]) && (A = b(c, h, A) || A);
   return A && Eo(c, h, A), A;
 };
-const Gr = class Gr extends Kt {
+const Gr = class Gr extends Qt {
   constructor() {
     super(...arguments), this.disabled = !1;
   }
@@ -22422,14 +22422,14 @@ const po = Lr`
     }
   }
 `;
-var mo = Object.defineProperty, $t = (x, c, h, w) => {
+var mo = Object.defineProperty, Vt = (x, c, h, w) => {
   for (var A = void 0, g = x.length - 1, b; g >= 0; g--)
     (b = x[g]) && (A = b(c, h, A) || A);
   return A && mo(c, h, A), A;
 };
-const sr = class sr extends Kt {
+const sr = class sr extends Qt {
   constructor() {
-    super(...arguments), this.showScanner = !1, this.previewImg = null, this.cameras = [], this.camIndex = 0, this.lastResult = "", this.isMobile = !1, this.notify = {
+    super(...arguments), this.showScanner = !1, this.previewImg = null, this.cameras = [], this.camIndex = 0, this.lastResult = "", this.isMobile = !1, this.width = 600, this.notify = {
       display: !1,
       type: "success",
       message: ""
@@ -22450,7 +22450,7 @@ const sr = class sr extends Kt {
   }
   _checkIfMobile() {
     const c = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    this.isMobile = c <= 768;
+    this.width = c, this.isMobile = c <= 768;
   }
   _startCamera() {
     var A;
@@ -22458,8 +22458,8 @@ const sr = class sr extends Kt {
       aspectRatio: this.isMobile ? 8 / 16 : 9 / 16,
       fps: 2,
       qrbox: {
-        height: this.isMobile ? 420 : 620,
-        width: this.isMobile ? 320 : 420
+        height: this.isMobile ? this.width : 400,
+        width: this.isMobile ? this.width - 40 : 400
       }
     }, w = (g) => {
       this.lastResult = g, this._showNotification(g, "success");
@@ -22595,26 +22595,29 @@ const sr = class sr extends Kt {
 sr.styles = po, sr.properties = {
   showScanner: { type: Boolean }
 };
-let bt = sr;
-$t([
-  Qt()
-], bt.prototype, "showScanner");
-$t([
-  Qt()
-], bt.prototype, "previewImg");
-$t([
-  Qt()
-], bt.prototype, "cameras");
-$t([
-  Qt()
-], bt.prototype, "camIndex");
-$t([
-  Qt()
-], bt.prototype, "lastResult");
-$t([
-  Qt()
-], bt.prototype, "isMobile");
-$t([
-  Qt()
-], bt.prototype, "notify");
-customElements.define("qr-widget", bt);
+let gt = sr;
+Vt([
+  Ut()
+], gt.prototype, "showScanner");
+Vt([
+  Ut()
+], gt.prototype, "previewImg");
+Vt([
+  Ut()
+], gt.prototype, "cameras");
+Vt([
+  Ut()
+], gt.prototype, "camIndex");
+Vt([
+  Ut()
+], gt.prototype, "lastResult");
+Vt([
+  Ut()
+], gt.prototype, "isMobile");
+Vt([
+  Ut()
+], gt.prototype, "width");
+Vt([
+  Ut()
+], gt.prototype, "notify");
+customElements.define("qr-widget", gt);
