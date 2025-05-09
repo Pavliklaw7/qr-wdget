@@ -10520,7 +10520,7 @@ const j0 = class j0 extends E0 {
               @on-click="${this.triggerSuccessCallback}"
             ></camera-button>
 
-            <!-- <button
+            <button
               class="controls__button"
               ?disabled="${this.cameras.length < 2}"
               @click="${this.switchCamera}"
@@ -10534,10 +10534,10 @@ const j0 = class j0 extends E0 {
                 </svg>
               </div>
               <p class="controls__text">Switch Camera</p>
-            </button> -->
+            </button>
           </div>
 
-          <div class="controls">
+          <!-- <div class="controls">
             <button
               @click=${this.switchCamera}
               ?disabled=${this.cameras.length < 1}
@@ -10549,7 +10549,7 @@ const j0 = class j0 extends E0 {
               accept="image/*"
               @change=${this.handleFileUpload}
             />
-          </div>
+          </div> -->
           ${this.notify.visible ? i0`<div class="notify ${this.notify.type}">
                 ${this.notify.message}
               </div>` : ""}
