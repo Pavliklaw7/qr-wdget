@@ -1,6 +1,43 @@
-## QR Widget Integration Guide
+# QR Widget
 
-This tutorial describes the process of integrating the **QR Widget** (implemented as a Web Component) into your website.
+A lightweight Web Component for scanning QR codes using Lit and jsQR.
+
+## Installation & Integration guide
+
+1. **Clone the repository**
+
+```bash
+  git clone https://github.com/Pavliklaw7/qr-wdget.git
+  cd qr-wdget
+```
+
+2. **Install dependencies**
+
+```bash
+  npm install
+```
+
+3. **Build the component**
+
+```bash
+  npm run build
+```
+
+4. **Build the component**
+
+```bash
+  npm run build
+```
+
+After building, the distributable file will be generated in the dist/ folder, e.g.:
+
+```bash
+  dist/qr-widget.js
+```
+
+## Integration
+
+Copy the built file (qr-widget.js) from dist/ into your web project (for example, into a public/js/ folder), then include it in your HTML:
 
 ### 1. Connecting JavaScript
 
