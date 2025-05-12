@@ -22,12 +22,12 @@ let ex = class {
     return this.cssText;
   }
 };
-const sx = (i) => new ex(typeof i == "string" ? i : i + "", void 0, O0), N0 = (i, ...x) => {
-  const E = i.length === 1 ? i[0] : x.reduce((o, e, A) => o + ((r) => {
+const Fx = (i) => new ex(typeof i == "string" ? i : i + "", void 0, O0), N0 = (i, ...x) => {
+  const E = i.length === 1 ? i[0] : x.reduce((o, e, C) => o + ((r) => {
     if (r._$cssResult$ === !0) return r.cssText;
     if (typeof r == "number") return r;
     throw Error("Value passed to 'css' function must be a 'css' function result: " + r + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
-  })(e) + i[A + 1], i[0]);
+  })(e) + i[C + 1], i[0]);
   return new ex(E, i, O0);
 }, Dx = (i, x) => {
   if (L0) i.adoptedStyleSheets = x.map((E) => E instanceof CSSStyleSheet ? E : E.styleSheet);
@@ -38,7 +38,7 @@ const sx = (i) => new ex(typeof i == "string" ? i : i + "", void 0, O0), N0 = (i
 }, X0 = L0 ? (i) => i : (i) => i instanceof CSSStyleSheet ? ((x) => {
   let E = "";
   for (const o of x.cssRules) E += o.cssText;
-  return sx(E);
+  return Fx(E);
 })(i) : i;
 /**
  * @license
@@ -73,9 +73,9 @@ const { is: ax, defineProperty: nx, getOwnPropertyDescriptor: cx, getOwnProperty
       }
   }
   return E;
-} }, I0 = (i, x) => !ax(i, x), V0 = { attribute: !0, type: String, converter: p0, reflect: !1, useDefault: !1, hasChanged: I0 };
+} }, T0 = (i, x) => !ax(i, x), V0 = { attribute: !0, type: String, converter: p0, reflect: !1, useDefault: !1, hasChanged: T0 };
 Symbol.metadata ?? (Symbol.metadata = Symbol("metadata")), K.litPropertyMetadata ?? (K.litPropertyMetadata = /* @__PURE__ */ new WeakMap());
-let B0 = class extends HTMLElement {
+let t0 = class extends HTMLElement {
   static addInitializer(x) {
     this._$Ei(), (this.l ?? (this.l = [])).push(x);
   }
@@ -89,14 +89,14 @@ let B0 = class extends HTMLElement {
     }
   }
   static getPropertyDescriptor(x, E, o) {
-    const { get: e, set: A } = cx(this.prototype, x) ?? { get() {
+    const { get: e, set: C } = cx(this.prototype, x) ?? { get() {
       return this[E];
     }, set(r) {
       this[E] = r;
     } };
     return { get: e, set(r) {
       const n = e == null ? void 0 : e.call(this);
-      A == null || A.call(this, r), this.requestUpdate(x, n, o);
+      C == null || C.call(this, r), this.requestUpdate(x, n, o);
     }, configurable: !0, enumerable: !0 };
   }
   static getPropertyOptions(x) {
@@ -181,32 +181,32 @@ let B0 = class extends HTMLElement {
     this._$AK(x, o);
   }
   _$ET(x, E) {
-    var A;
+    var C;
     const o = this.constructor.elementProperties.get(x), e = this.constructor._$Eu(x, o);
     if (e !== void 0 && o.reflect === !0) {
-      const r = (((A = o.converter) == null ? void 0 : A.toAttribute) !== void 0 ? o.converter : p0).toAttribute(E, o.type);
+      const r = (((C = o.converter) == null ? void 0 : C.toAttribute) !== void 0 ? o.converter : p0).toAttribute(E, o.type);
       this._$Em = x, r == null ? this.removeAttribute(e) : this.setAttribute(e, r), this._$Em = null;
     }
   }
   _$AK(x, E) {
-    var A, r;
+    var C, r;
     const o = this.constructor, e = o._$Eh.get(x);
     if (e !== void 0 && this._$Em !== e) {
-      const n = o.getPropertyOptions(e), D = typeof n.converter == "function" ? { fromAttribute: n.converter } : ((A = n.converter) == null ? void 0 : A.fromAttribute) !== void 0 ? n.converter : p0;
+      const n = o.getPropertyOptions(e), D = typeof n.converter == "function" ? { fromAttribute: n.converter } : ((C = n.converter) == null ? void 0 : C.fromAttribute) !== void 0 ? n.converter : p0;
       this._$Em = e, this[e] = D.fromAttribute(E, n.type) ?? ((r = this._$Ej) == null ? void 0 : r.get(e)) ?? null, this._$Em = null;
     }
   }
   requestUpdate(x, E, o) {
     var e;
     if (x !== void 0) {
-      const A = this.constructor, r = this[x];
-      if (o ?? (o = A.getPropertyOptions(x)), !((o.hasChanged ?? I0)(r, E) || o.useDefault && o.reflect && r === ((e = this._$Ej) == null ? void 0 : e.get(x)) && !this.hasAttribute(A._$Eu(x, o)))) return;
+      const C = this.constructor, r = this[x];
+      if (o ?? (o = C.getPropertyOptions(x)), !((o.hasChanged ?? T0)(r, E) || o.useDefault && o.reflect && r === ((e = this._$Ej) == null ? void 0 : e.get(x)) && !this.hasAttribute(C._$Eu(x, o)))) return;
       this.C(x, E, o);
     }
     this.isUpdatePending === !1 && (this._$ES = this._$EP());
   }
-  C(x, E, { useDefault: o, reflect: e, wrapped: A }, r) {
-    o && !(this._$Ej ?? (this._$Ej = /* @__PURE__ */ new Map())).has(x) && (this._$Ej.set(x, r ?? E ?? this[x]), A !== !0 || r !== void 0) || (this._$AL.has(x) || (this.hasUpdated || o || (E = void 0), this._$AL.set(x, E)), e === !0 && this._$Em !== x && (this._$Eq ?? (this._$Eq = /* @__PURE__ */ new Set())).add(x));
+  C(x, E, { useDefault: o, reflect: e, wrapped: C }, r) {
+    o && !(this._$Ej ?? (this._$Ej = /* @__PURE__ */ new Map())).has(x) && (this._$Ej.set(x, r ?? E ?? this[x]), C !== !0 || r !== void 0) || (this._$AL.has(x) || (this.hasUpdated || o || (E = void 0), this._$AL.set(x, E)), e === !0 && this._$Em !== x && (this._$Eq ?? (this._$Eq = /* @__PURE__ */ new Set())).add(x));
   }
   async _$EP() {
     this.isUpdatePending = !0;
@@ -226,21 +226,21 @@ let B0 = class extends HTMLElement {
     if (!this.isUpdatePending) return;
     if (!this.hasUpdated) {
       if (this.renderRoot ?? (this.renderRoot = this.createRenderRoot()), this._$Ep) {
-        for (const [A, r] of this._$Ep) this[A] = r;
+        for (const [C, r] of this._$Ep) this[C] = r;
         this._$Ep = void 0;
       }
       const e = this.constructor.elementProperties;
-      if (e.size > 0) for (const [A, r] of e) {
-        const { wrapped: n } = r, D = this[A];
-        n !== !0 || this._$AL.has(A) || D === void 0 || this.C(A, void 0, r, D);
+      if (e.size > 0) for (const [C, r] of e) {
+        const { wrapped: n } = r, D = this[C];
+        n !== !0 || this._$AL.has(C) || D === void 0 || this.C(C, void 0, r, D);
       }
     }
     let x = !1;
     const E = this._$AL;
     try {
       x = this.shouldUpdate(E), x ? (this.willUpdate(E), (o = this._$EO) == null || o.forEach((e) => {
-        var A;
-        return (A = e.hostUpdate) == null ? void 0 : A.call(e);
+        var C;
+        return (C = e.hostUpdate) == null ? void 0 : C.call(e);
       }), this.update(E)) : this._$EM();
     } catch (e) {
       throw x = !1, this._$EM(), e;
@@ -276,61 +276,61 @@ let B0 = class extends HTMLElement {
   firstUpdated(x) {
   }
 };
-B0.elementStyles = [], B0.shadowRootOptions = { mode: "open" }, B0[n0("elementProperties")] = /* @__PURE__ */ new Map(), B0[n0("finalized")] = /* @__PURE__ */ new Map(), $0 == null || $0({ ReactiveElement: B0 }), (K.reactiveElementVersions ?? (K.reactiveElementVersions = [])).push("2.1.0");
+t0.elementStyles = [], t0.shadowRootOptions = { mode: "open" }, t0[n0("elementProperties")] = /* @__PURE__ */ new Map(), t0[n0("finalized")] = /* @__PURE__ */ new Map(), $0 == null || $0({ ReactiveElement: t0 }), (K.reactiveElementVersions ?? (K.reactiveElementVersions = [])).push("2.1.0");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const c0 = globalThis, P0 = c0.trustedTypes, Q0 = P0 ? P0.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, ox = "$lit$", W = `lit$${Math.random().toFixed(9).slice(2)}$`, Bx = "?" + W, kx = `<${Bx}>`, e0 = document, l0 = () => e0.createComment(""), d0 = (i) => i === null || typeof i != "object" && typeof i != "function", T0 = Array.isArray, hx = (i) => T0(i) || typeof (i == null ? void 0 : i[Symbol.iterator]) == "function", _0 = `[ 	
+const c0 = globalThis, P0 = c0.trustedTypes, Q0 = P0 ? P0.createPolicy("lit-html", { createHTML: (i) => i }) : void 0, ox = "$lit$", W = `lit$${Math.random().toFixed(9).slice(2)}$`, tx = "?" + W, hx = `<${tx}>`, e0 = document, l0 = () => e0.createComment(""), d0 = (i) => i === null || typeof i != "object" && typeof i != "function", I0 = Array.isArray, kx = (i) => I0(i) || typeof (i == null ? void 0 : i[Symbol.iterator]) == "function", _0 = `[ 	
 \f\r]`, a0 = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, W0 = /-->/g, K0 = />/g, Y = RegExp(`>|${_0}(?:([^\\s"'>=/]+)(${_0}*=${_0}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), J0 = /'/g, Z0 = /"/g, tx = /^(?:script|style|textarea|title)$/i, fx = (i) => (x, ...E) => ({ _$litType$: i, strings: x, values: E }), i0 = fx(1), t0 = Symbol.for("lit-noChange"), R = Symbol.for("lit-nothing"), Y0 = /* @__PURE__ */ new WeakMap(), q = e0.createTreeWalker(e0, 129);
+\f\r"'\`<>=]|("|')|))|$)`, "g"), J0 = /'/g, Z0 = /"/g, Bx = /^(?:script|style|textarea|title)$/i, fx = (i) => (x, ...E) => ({ _$litType$: i, strings: x, values: E }), i0 = fx(1), B0 = Symbol.for("lit-noChange"), z = Symbol.for("lit-nothing"), Y0 = /* @__PURE__ */ new WeakMap(), q = e0.createTreeWalker(e0, 129);
 function rx(i, x) {
-  if (!T0(i) || !i.hasOwnProperty("raw")) throw Error("invalid template strings array");
+  if (!I0(i) || !i.hasOwnProperty("raw")) throw Error("invalid template strings array");
   return Q0 !== void 0 ? Q0.createHTML(x) : x;
 }
 const mx = (i, x) => {
   const E = i.length - 1, o = [];
-  let e, A = x === 2 ? "<svg>" : x === 3 ? "<math>" : "", r = a0;
+  let e, C = x === 2 ? "<svg>" : x === 3 ? "<math>" : "", r = a0;
   for (let n = 0; n < E; n++) {
     const D = i[n];
-    let u, a, B = -1, d = 0;
-    for (; d < D.length && (r.lastIndex = d, a = r.exec(D), a !== null); ) d = r.lastIndex, r === a0 ? a[1] === "!--" ? r = W0 : a[1] !== void 0 ? r = K0 : a[2] !== void 0 ? (tx.test(a[2]) && (e = RegExp("</" + a[2], "g")), r = Y) : a[3] !== void 0 && (r = Y) : r === Y ? a[0] === ">" ? (r = e ?? a0, B = -1) : a[1] === void 0 ? B = -2 : (B = r.lastIndex - a[2].length, u = a[1], r = a[3] === void 0 ? Y : a[3] === '"' ? Z0 : J0) : r === Z0 || r === J0 ? r = Y : r === W0 || r === K0 ? r = a0 : (r = Y, e = void 0);
-    const k = r === Y && i[n + 1].startsWith("/>") ? " " : "";
-    A += r === a0 ? D + kx : B >= 0 ? (o.push(u), D.slice(0, B) + ox + D.slice(B) + W + k) : D + W + (B === -2 ? n : k);
+    let u, a, t = -1, l = 0;
+    for (; l < D.length && (r.lastIndex = l, a = r.exec(D), a !== null); ) l = r.lastIndex, r === a0 ? a[1] === "!--" ? r = W0 : a[1] !== void 0 ? r = K0 : a[2] !== void 0 ? (Bx.test(a[2]) && (e = RegExp("</" + a[2], "g")), r = Y) : a[3] !== void 0 && (r = Y) : r === Y ? a[0] === ">" ? (r = e ?? a0, t = -1) : a[1] === void 0 ? t = -2 : (t = r.lastIndex - a[2].length, u = a[1], r = a[3] === void 0 ? Y : a[3] === '"' ? Z0 : J0) : r === Z0 || r === J0 ? r = Y : r === W0 || r === K0 ? r = a0 : (r = Y, e = void 0);
+    const h = r === Y && i[n + 1].startsWith("/>") ? " " : "";
+    C += r === a0 ? D + hx : t >= 0 ? (o.push(u), D.slice(0, t) + ox + D.slice(t) + W + h) : D + W + (t === -2 ? n : h);
   }
-  return [rx(i, A + (i[E] || "<?>") + (x === 2 ? "</svg>" : x === 3 ? "</math>" : "")), o];
+  return [rx(i, C + (i[E] || "<?>") + (x === 2 ? "</svg>" : x === 3 ? "</math>" : "")), o];
 };
 class u0 {
   constructor({ strings: x, _$litType$: E }, o) {
     let e;
     this.parts = [];
-    let A = 0, r = 0;
+    let C = 0, r = 0;
     const n = x.length - 1, D = this.parts, [u, a] = mx(x, E);
     if (this.el = u0.createElement(u, o), q.currentNode = this.el.content, E === 2 || E === 3) {
-      const B = this.el.content.firstChild;
-      B.replaceWith(...B.childNodes);
+      const t = this.el.content.firstChild;
+      t.replaceWith(...t.childNodes);
     }
     for (; (e = q.nextNode()) !== null && D.length < n; ) {
       if (e.nodeType === 1) {
-        if (e.hasAttributes()) for (const B of e.getAttributeNames()) if (B.endsWith(ox)) {
-          const d = a[r++], k = e.getAttribute(B).split(W), c = /([.?@])?(.*)/.exec(d);
-          D.push({ type: 1, index: A, name: c[2], strings: k, ctor: c[1] === "." ? wx : c[1] === "?" ? px : c[1] === "@" ? Px : b0 }), e.removeAttribute(B);
-        } else B.startsWith(W) && (D.push({ type: 6, index: A }), e.removeAttribute(B));
-        if (tx.test(e.tagName)) {
-          const B = e.textContent.split(W), d = B.length - 1;
-          if (d > 0) {
+        if (e.hasAttributes()) for (const t of e.getAttributeNames()) if (t.endsWith(ox)) {
+          const l = a[r++], h = e.getAttribute(t).split(W), c = /([.?@])?(.*)/.exec(l);
+          D.push({ type: 1, index: C, name: c[2], strings: h, ctor: c[1] === "." ? wx : c[1] === "?" ? px : c[1] === "@" ? Px : b0 }), e.removeAttribute(t);
+        } else t.startsWith(W) && (D.push({ type: 6, index: C }), e.removeAttribute(t));
+        if (Bx.test(e.tagName)) {
+          const t = e.textContent.split(W), l = t.length - 1;
+          if (l > 0) {
             e.textContent = P0 ? P0.emptyScript : "";
-            for (let k = 0; k < d; k++) e.append(B[k], l0()), q.nextNode(), D.push({ type: 2, index: ++A });
-            e.append(B[d], l0());
+            for (let h = 0; h < l; h++) e.append(t[h], l0()), q.nextNode(), D.push({ type: 2, index: ++C });
+            e.append(t[l], l0());
           }
         }
-      } else if (e.nodeType === 8) if (e.data === Bx) D.push({ type: 2, index: A });
+      } else if (e.nodeType === 8) if (e.data === tx) D.push({ type: 2, index: C });
       else {
-        let B = -1;
-        for (; (B = e.data.indexOf(W, B + 1)) !== -1; ) D.push({ type: 7, index: A }), B += W.length - 1;
+        let t = -1;
+        for (; (t = e.data.indexOf(W, t + 1)) !== -1; ) D.push({ type: 7, index: C }), t += W.length - 1;
       }
-      A++;
+      C++;
     }
   }
   static createElement(x, E) {
@@ -340,10 +340,10 @@ class u0 {
 }
 function r0(i, x, E = i, o) {
   var r, n;
-  if (x === t0) return x;
+  if (x === B0) return x;
   let e = o !== void 0 ? (r = E._$Co) == null ? void 0 : r[o] : E._$Cl;
-  const A = d0(x) ? void 0 : x._$litDirective$;
-  return (e == null ? void 0 : e.constructor) !== A && ((n = e == null ? void 0 : e._$AO) == null || n.call(e, !1), A === void 0 ? e = void 0 : (e = new A(i), e._$AT(i, E, o)), o !== void 0 ? (E._$Co ?? (E._$Co = []))[o] = e : E._$Cl = e), e !== void 0 && (x = r0(i, e._$AS(i, x.values), e, o)), x;
+  const C = d0(x) ? void 0 : x._$litDirective$;
+  return (e == null ? void 0 : e.constructor) !== C && ((n = e == null ? void 0 : e._$AO) == null || n.call(e, !1), C === void 0 ? e = void 0 : (e = new C(i), e._$AT(i, E, o)), o !== void 0 ? (E._$Co ?? (E._$Co = []))[o] = e : E._$Cl = e), e !== void 0 && (x = r0(i, e._$AS(i, x.values), e, o)), x;
 }
 class vx {
   constructor(x, E) {
@@ -358,13 +358,13 @@ class vx {
   u(x) {
     const { el: { content: E }, parts: o } = this._$AD, e = ((x == null ? void 0 : x.creationScope) ?? e0).importNode(E, !0);
     q.currentNode = e;
-    let A = q.nextNode(), r = 0, n = 0, D = o[0];
+    let C = q.nextNode(), r = 0, n = 0, D = o[0];
     for (; D !== void 0; ) {
       if (r === D.index) {
         let u;
-        D.type === 2 ? u = new k0(A, A.nextSibling, this, x) : D.type === 1 ? u = new D.ctor(A, D.name, D.strings, this, x) : D.type === 6 && (u = new gx(A, this, x)), this._$AV.push(u), D = o[++n];
+        D.type === 2 ? u = new h0(C, C.nextSibling, this, x) : D.type === 1 ? u = new D.ctor(C, D.name, D.strings, this, x) : D.type === 6 && (u = new yx(C, this, x)), this._$AV.push(u), D = o[++n];
       }
-      r !== (D == null ? void 0 : D.index) && (A = q.nextNode(), r++);
+      r !== (D == null ? void 0 : D.index) && (C = q.nextNode(), r++);
     }
     return q.currentNode = e0, e;
   }
@@ -373,13 +373,13 @@ class vx {
     for (const o of this._$AV) o !== void 0 && (o.strings !== void 0 ? (o._$AI(x, o, E), E += o.strings.length - 2) : o._$AI(x[E])), E++;
   }
 }
-class k0 {
+class h0 {
   get _$AU() {
     var x;
     return ((x = this._$AM) == null ? void 0 : x._$AU) ?? this._$Cv;
   }
   constructor(x, E, o, e) {
-    this.type = 2, this._$AH = R, this._$AN = void 0, this._$AA = x, this._$AB = E, this._$AM = o, this.options = e, this._$Cv = (e == null ? void 0 : e.isConnected) ?? !0;
+    this.type = 2, this._$AH = z, this._$AN = void 0, this._$AA = x, this._$AB = E, this._$AM = o, this.options = e, this._$Cv = (e == null ? void 0 : e.isConnected) ?? !0;
   }
   get parentNode() {
     let x = this._$AA.parentNode;
@@ -393,7 +393,7 @@ class k0 {
     return this._$AB;
   }
   _$AI(x, E = this) {
-    x = r0(this, x, E), d0(x) ? x === R || x == null || x === "" ? (this._$AH !== R && this._$AR(), this._$AH = R) : x !== this._$AH && x !== t0 && this._(x) : x._$litType$ !== void 0 ? this.$(x) : x.nodeType !== void 0 ? this.T(x) : hx(x) ? this.k(x) : this._(x);
+    x = r0(this, x, E), d0(x) ? x === z || x == null || x === "" ? (this._$AH !== z && this._$AR(), this._$AH = z) : x !== this._$AH && x !== B0 && this._(x) : x._$litType$ !== void 0 ? this.$(x) : x.nodeType !== void 0 ? this.T(x) : kx(x) ? this.k(x) : this._(x);
   }
   O(x) {
     return this._$AA.parentNode.insertBefore(x, this._$AB);
@@ -402,12 +402,12 @@ class k0 {
     this._$AH !== x && (this._$AR(), this._$AH = this.O(x));
   }
   _(x) {
-    this._$AH !== R && d0(this._$AH) ? this._$AA.nextSibling.data = x : this.T(e0.createTextNode(x)), this._$AH = x;
+    this._$AH !== z && d0(this._$AH) ? this._$AA.nextSibling.data = x : this.T(e0.createTextNode(x)), this._$AH = x;
   }
   $(x) {
-    var A;
+    var C;
     const { values: E, _$litType$: o } = x, e = typeof o == "number" ? this._$AC(x) : (o.el === void 0 && (o.el = u0.createElement(rx(o.h, o.h[0]), this.options)), o);
-    if (((A = this._$AH) == null ? void 0 : A._$AD) === e) this._$AH.p(E);
+    if (((C = this._$AH) == null ? void 0 : C._$AD) === e) this._$AH.p(E);
     else {
       const r = new vx(e, this), n = r.u(this.options);
       r.p(E), this.T(n), this._$AH = r;
@@ -418,10 +418,10 @@ class k0 {
     return E === void 0 && Y0.set(x.strings, E = new u0(x)), E;
   }
   k(x) {
-    T0(this._$AH) || (this._$AH = [], this._$AR());
+    I0(this._$AH) || (this._$AH = [], this._$AR());
     const E = this._$AH;
     let o, e = 0;
-    for (const A of x) e === E.length ? E.push(o = new k0(this.O(l0()), this.O(l0()), this, this.options)) : o = E[e], o._$AI(A), e++;
+    for (const C of x) e === E.length ? E.push(o = new h0(this.O(l0()), this.O(l0()), this, this.options)) : o = E[e], o._$AI(C), e++;
     e < E.length && (this._$AR(o && o._$AB.nextSibling, e), E.length = e);
   }
   _$AR(x = this._$AA.nextSibling, E) {
@@ -443,22 +443,22 @@ class b0 {
   get _$AU() {
     return this._$AM._$AU;
   }
-  constructor(x, E, o, e, A) {
-    this.type = 1, this._$AH = R, this._$AN = void 0, this.element = x, this.name = E, this._$AM = e, this.options = A, o.length > 2 || o[0] !== "" || o[1] !== "" ? (this._$AH = Array(o.length - 1).fill(new String()), this.strings = o) : this._$AH = R;
+  constructor(x, E, o, e, C) {
+    this.type = 1, this._$AH = z, this._$AN = void 0, this.element = x, this.name = E, this._$AM = e, this.options = C, o.length > 2 || o[0] !== "" || o[1] !== "" ? (this._$AH = Array(o.length - 1).fill(new String()), this.strings = o) : this._$AH = z;
   }
   _$AI(x, E = this, o, e) {
-    const A = this.strings;
+    const C = this.strings;
     let r = !1;
-    if (A === void 0) x = r0(this, x, E, 0), r = !d0(x) || x !== this._$AH && x !== t0, r && (this._$AH = x);
+    if (C === void 0) x = r0(this, x, E, 0), r = !d0(x) || x !== this._$AH && x !== B0, r && (this._$AH = x);
     else {
       const n = x;
       let D, u;
-      for (x = A[0], D = 0; D < A.length - 1; D++) u = r0(this, n[o + D], E, D), u === t0 && (u = this._$AH[D]), r || (r = !d0(u) || u !== this._$AH[D]), u === R ? x = R : x !== R && (x += (u ?? "") + A[D + 1]), this._$AH[D] = u;
+      for (x = C[0], D = 0; D < C.length - 1; D++) u = r0(this, n[o + D], E, D), u === B0 && (u = this._$AH[D]), r || (r = !d0(u) || u !== this._$AH[D]), u === z ? x = z : x !== z && (x += (u ?? "") + C[D + 1]), this._$AH[D] = u;
     }
     r && !e && this.j(x);
   }
   j(x) {
-    x === R ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, x ?? "");
+    x === z ? this.element.removeAttribute(this.name) : this.element.setAttribute(this.name, x ?? "");
   }
 }
 class wx extends b0 {
@@ -466,7 +466,7 @@ class wx extends b0 {
     super(...arguments), this.type = 3;
   }
   j(x) {
-    this.element[this.name] = x === R ? void 0 : x;
+    this.element[this.name] = x === z ? void 0 : x;
   }
 }
 class px extends b0 {
@@ -474,24 +474,24 @@ class px extends b0 {
     super(...arguments), this.type = 4;
   }
   j(x) {
-    this.element.toggleAttribute(this.name, !!x && x !== R);
+    this.element.toggleAttribute(this.name, !!x && x !== z);
   }
 }
 class Px extends b0 {
-  constructor(x, E, o, e, A) {
-    super(x, E, o, e, A), this.type = 5;
+  constructor(x, E, o, e, C) {
+    super(x, E, o, e, C), this.type = 5;
   }
   _$AI(x, E = this) {
-    if ((x = r0(this, x, E, 0) ?? R) === t0) return;
-    const o = this._$AH, e = x === R && o !== R || x.capture !== o.capture || x.once !== o.once || x.passive !== o.passive, A = x !== R && (o === R || e);
-    e && this.element.removeEventListener(this.name, this, o), A && this.element.addEventListener(this.name, this, x), this._$AH = x;
+    if ((x = r0(this, x, E, 0) ?? z) === B0) return;
+    const o = this._$AH, e = x === z && o !== z || x.capture !== o.capture || x.once !== o.once || x.passive !== o.passive, C = x !== z && (o === z || e);
+    e && this.element.removeEventListener(this.name, this, o), C && this.element.addEventListener(this.name, this, x), this._$AH = x;
   }
   handleEvent(x) {
     var E;
     typeof this._$AH == "function" ? this._$AH.call(((E = this.options) == null ? void 0 : E.host) ?? this.element, x) : this._$AH.handleEvent(x);
   }
 }
-class gx {
+class yx {
   constructor(x, E, o) {
     this.element = x, this.type = 6, this._$AN = void 0, this._$AM = E, this.options = o;
   }
@@ -503,13 +503,13 @@ class gx {
   }
 }
 const M0 = c0.litHtmlPolyfillSupport;
-M0 == null || M0(u0, k0), (c0.litHtmlVersions ?? (c0.litHtmlVersions = [])).push("3.3.0");
-const yx = (i, x, E) => {
+M0 == null || M0(u0, h0), (c0.litHtmlVersions ?? (c0.litHtmlVersions = [])).push("3.3.0");
+const gx = (i, x, E) => {
   const o = (E == null ? void 0 : E.renderBefore) ?? x;
   let e = o._$litPart$;
   if (e === void 0) {
-    const A = (E == null ? void 0 : E.renderBefore) ?? null;
-    o._$litPart$ = e = new k0(x.insertBefore(l0(), A), A, void 0, E ?? {});
+    const C = (E == null ? void 0 : E.renderBefore) ?? null;
+    o._$litPart$ = e = new h0(x.insertBefore(l0(), C), C, void 0, E ?? {});
   }
   return e._$AI(i), e;
 };
@@ -519,7 +519,7 @@ const yx = (i, x, E) => {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 const x0 = globalThis;
-class E0 extends B0 {
+class E0 extends t0 {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
   }
@@ -530,7 +530,7 @@ class E0 extends B0 {
   }
   update(x) {
     const E = this.render();
-    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(x), this._$Do = yx(E, this.renderRoot, this.renderOptions);
+    this.hasUpdated || (this.renderOptions.isConnected = this.isConnected), super.update(x), this._$Do = gx(E, this.renderRoot, this.renderOptions);
   }
   connectedCallback() {
     var x;
@@ -541,7 +541,7 @@ class E0 extends B0 {
     super.disconnectedCallback(), (x = this._$Do) == null || x.setConnected(!1);
   }
   render() {
-    return t0;
+    return B0;
   }
 }
 var Ex;
@@ -554,10 +554,10 @@ S0 == null || S0({ LitElement: E0 });
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const bx = { attribute: !0, type: String, converter: p0, reflect: !1, hasChanged: I0 }, $x = (i = bx, x, E) => {
+const bx = { attribute: !0, type: String, converter: p0, reflect: !1, hasChanged: T0 }, $x = (i = bx, x, E) => {
   const { kind: o, metadata: e } = E;
-  let A = globalThis.litPropertyMetadata.get(e);
-  if (A === void 0 && globalThis.litPropertyMetadata.set(e, A = /* @__PURE__ */ new Map()), o === "setter" && ((i = Object.create(i)).wrapped = !0), A.set(E.name, i), o === "accessor") {
+  let C = globalThis.litPropertyMetadata.get(e);
+  if (C === void 0 && globalThis.litPropertyMetadata.set(e, C = /* @__PURE__ */ new Map()), o === "setter" && ((i = Object.create(i)).wrapped = !0), C.set(E.name, i), o === "accessor") {
     const { name: r } = E;
     return { set(n) {
       const D = x.get.call(this);
@@ -575,10 +575,10 @@ const bx = { attribute: !0, type: String, converter: p0, reflect: !1, hasChanged
   }
   throw Error("Unsupported decorator location: " + o);
 };
-function U0(i) {
-  return (x, E) => typeof E == "object" ? $x(i, x, E) : ((o, e, A) => {
-    const r = e.hasOwnProperty(A);
-    return e.constructor.createProperty(A, o), r ? Object.getOwnPropertyDescriptor(e, A) : void 0;
+function R0(i) {
+  return (x, E) => typeof E == "object" ? $x(i, x, E) : ((o, e, C) => {
+    const r = e.hasOwnProperty(C);
+    return e.constructor.createProperty(C, o), r ? Object.getOwnPropertyDescriptor(e, C) : void 0;
   })(i, x, E);
 }
 /**
@@ -587,7 +587,7 @@ function U0(i) {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 function C0(i) {
-  return U0({ ...i, state: !0, attribute: !1 });
+  return R0({ ...i, state: !0, attribute: !1 });
 }
 /**
  * @license
@@ -602,12 +602,12 @@ const _x = (i, x, E) => (E.configurable = !0, E.enumerable = !0, Reflect.decorat
  */
 function Cx(i, x) {
   return (E, o, e) => {
-    const A = (r) => {
+    const C = (r) => {
       var n;
       return ((n = r.renderRoot) == null ? void 0 : n.querySelector(i)) ?? null;
     };
     return _x(E, o, { get() {
-      return A(this);
+      return C(this);
     } });
   };
 }
@@ -624,22 +624,22 @@ function Lx() {
         /******/
         function(E) {
           var o = {};
-          function e(A) {
-            if (o[A])
-              return o[A].exports;
-            var r = o[A] = {
+          function e(C) {
+            if (o[C])
+              return o[C].exports;
+            var r = o[C] = {
               /******/
-              i: A,
+              i: C,
               /******/
               l: !1,
               /******/
               exports: {}
               /******/
             };
-            return E[A].call(r.exports, r, r.exports, e), r.l = !0, r.exports;
+            return E[C].call(r.exports, r, r.exports, e), r.l = !0, r.exports;
           }
-          return e.m = E, e.c = o, e.d = function(A, r, n) {
-            e.o(A, r) || Object.defineProperty(A, r, {
+          return e.m = E, e.c = o, e.d = function(C, r, n) {
+            e.o(C, r) || Object.defineProperty(C, r, {
               /******/
               configurable: !1,
               /******/
@@ -648,28 +648,28 @@ function Lx() {
               get: n
               /******/
             });
-          }, e.n = function(A) {
-            var r = A && A.__esModule ? (
+          }, e.n = function(C) {
+            var r = C && C.__esModule ? (
               /******/
               function() {
-                return A.default;
+                return C.default;
               }
             ) : (
               /******/
               function() {
-                return A;
+                return C;
               }
             );
             return e.d(r, "a", r), r;
-          }, e.o = function(A, r) {
-            return Object.prototype.hasOwnProperty.call(A, r);
+          }, e.o = function(C, r) {
+            return Object.prototype.hasOwnProperty.call(C, r);
           }, e.p = "", e(e.s = 3);
         }([
           /* 0 */
           /***/
           function(E, o, e) {
             Object.defineProperty(o, "__esModule", { value: !0 });
-            var A = (
+            var C = (
               /** @class */
               function() {
                 function r(n, D) {
@@ -681,20 +681,20 @@ function Lx() {
                   return n < 0 || n >= this.width || D < 0 || D >= this.height ? !1 : !!this.data[D * this.width + n];
                 }, r.prototype.set = function(n, D, u) {
                   this.data[D * this.width + n] = u ? 1 : 0;
-                }, r.prototype.setRegion = function(n, D, u, a, B) {
-                  for (var d = D; d < D + a; d++)
-                    for (var k = n; k < n + u; k++)
-                      this.set(k, d, !!B);
+                }, r.prototype.setRegion = function(n, D, u, a, t) {
+                  for (var l = D; l < D + a; l++)
+                    for (var h = n; h < n + u; h++)
+                      this.set(h, l, !!t);
                 }, r;
               }()
             );
-            o.BitMatrix = A;
+            o.BitMatrix = C;
           },
           /* 1 */
           /***/
           function(E, o, e) {
             Object.defineProperty(o, "__esModule", { value: !0 });
-            var A = e(2);
+            var C = e(2);
             function r(D, u) {
               return D ^ u;
             }
@@ -702,13 +702,13 @@ function Lx() {
             var n = (
               /** @class */
               function() {
-                function D(u, a, B) {
-                  this.primitive = u, this.size = a, this.generatorBase = B, this.expTable = new Array(this.size), this.logTable = new Array(this.size);
-                  for (var d = 1, k = 0; k < this.size; k++)
-                    this.expTable[k] = d, d = d * 2, d >= this.size && (d = (d ^ this.primitive) & this.size - 1);
-                  for (var k = 0; k < this.size - 1; k++)
-                    this.logTable[this.expTable[k]] = k;
-                  this.zero = new A.default(this, Uint8ClampedArray.from([0])), this.one = new A.default(this, Uint8ClampedArray.from([1]));
+                function D(u, a, t) {
+                  this.primitive = u, this.size = a, this.generatorBase = t, this.expTable = new Array(this.size), this.logTable = new Array(this.size);
+                  for (var l = 1, h = 0; h < this.size; h++)
+                    this.expTable[h] = l, l = l * 2, l >= this.size && (l = (l ^ this.primitive) & this.size - 1);
+                  for (var h = 0; h < this.size - 1; h++)
+                    this.logTable[this.expTable[h]] = h;
+                  this.zero = new C.default(this, Uint8ClampedArray.from([0])), this.one = new C.default(this, Uint8ClampedArray.from([1]));
                 }
                 return D.prototype.multiply = function(u, a) {
                   return u === 0 || a === 0 ? 0 : this.expTable[(this.logTable[u] + this.logTable[a]) % (this.size - 1)];
@@ -721,8 +721,8 @@ function Lx() {
                     throw new Error("Invalid monomial degree less than 0");
                   if (a === 0)
                     return this.zero;
-                  var B = new Uint8ClampedArray(u + 1);
-                  return B[0] = a, new A.default(this, B);
+                  var t = new Uint8ClampedArray(u + 1);
+                  return t[0] = a, new C.default(this, t);
                 }, D.prototype.log = function(u) {
                   if (u === 0)
                     throw new Error("Can't take log(0)");
@@ -738,7 +738,7 @@ function Lx() {
           /***/
           function(E, o, e) {
             Object.defineProperty(o, "__esModule", { value: !0 });
-            var A = e(1), r = (
+            var C = e(1), r = (
               /** @class */
               function() {
                 function n(D, u) {
@@ -747,14 +747,14 @@ function Lx() {
                   this.field = D;
                   var a = u.length;
                   if (a > 1 && u[0] === 0) {
-                    for (var B = 1; B < a && u[B] === 0; )
-                      B++;
-                    if (B === a)
+                    for (var t = 1; t < a && u[t] === 0; )
+                      t++;
+                    if (t === a)
                       this.coefficients = D.zero.coefficients;
                     else {
-                      this.coefficients = new Uint8ClampedArray(a - B);
-                      for (var d = 0; d < this.coefficients.length; d++)
-                        this.coefficients[d] = u[B + d];
+                      this.coefficients = new Uint8ClampedArray(a - t);
+                      for (var l = 0; l < this.coefficients.length; l++)
+                        this.coefficients[l] = u[t + l];
                     }
                   } else
                     this.coefficients = u;
@@ -771,48 +771,48 @@ function Lx() {
                     return D;
                   if (D.isZero())
                     return this;
-                  var a = this.coefficients, B = D.coefficients;
-                  a.length > B.length && (u = [B, a], a = u[0], B = u[1]);
-                  for (var d = new Uint8ClampedArray(B.length), k = B.length - a.length, c = 0; c < k; c++)
-                    d[c] = B[c];
-                  for (var c = k; c < B.length; c++)
-                    d[c] = A.addOrSubtractGF(a[c - k], B[c]);
-                  return new n(this.field, d);
+                  var a = this.coefficients, t = D.coefficients;
+                  a.length > t.length && (u = [t, a], a = u[0], t = u[1]);
+                  for (var l = new Uint8ClampedArray(t.length), h = t.length - a.length, c = 0; c < h; c++)
+                    l[c] = t[c];
+                  for (var c = h; c < t.length; c++)
+                    l[c] = C.addOrSubtractGF(a[c - h], t[c]);
+                  return new n(this.field, l);
                 }, n.prototype.multiply = function(D) {
                   if (D === 0)
                     return this.field.zero;
                   if (D === 1)
                     return this;
-                  for (var u = this.coefficients.length, a = new Uint8ClampedArray(u), B = 0; B < u; B++)
-                    a[B] = this.field.multiply(this.coefficients[B], D);
+                  for (var u = this.coefficients.length, a = new Uint8ClampedArray(u), t = 0; t < u; t++)
+                    a[t] = this.field.multiply(this.coefficients[t], D);
                   return new n(this.field, a);
                 }, n.prototype.multiplyPoly = function(D) {
                   if (this.isZero() || D.isZero())
                     return this.field.zero;
-                  for (var u = this.coefficients, a = u.length, B = D.coefficients, d = B.length, k = new Uint8ClampedArray(a + d - 1), c = 0; c < a; c++)
-                    for (var v = u[c], h = 0; h < d; h++)
-                      k[c + h] = A.addOrSubtractGF(k[c + h], this.field.multiply(v, B[h]));
-                  return new n(this.field, k);
+                  for (var u = this.coefficients, a = u.length, t = D.coefficients, l = t.length, h = new Uint8ClampedArray(a + l - 1), c = 0; c < a; c++)
+                    for (var v = u[c], k = 0; k < l; k++)
+                      h[c + k] = C.addOrSubtractGF(h[c + k], this.field.multiply(v, t[k]));
+                  return new n(this.field, h);
                 }, n.prototype.multiplyByMonomial = function(D, u) {
                   if (D < 0)
                     throw new Error("Invalid degree less than 0");
                   if (u === 0)
                     return this.field.zero;
-                  for (var a = this.coefficients.length, B = new Uint8ClampedArray(a + D), d = 0; d < a; d++)
-                    B[d] = this.field.multiply(this.coefficients[d], u);
-                  return new n(this.field, B);
+                  for (var a = this.coefficients.length, t = new Uint8ClampedArray(a + D), l = 0; l < a; l++)
+                    t[l] = this.field.multiply(this.coefficients[l], u);
+                  return new n(this.field, t);
                 }, n.prototype.evaluateAt = function(D) {
                   var u = 0;
                   if (D === 0)
                     return this.getCoefficient(0);
                   var a = this.coefficients.length;
                   if (D === 1)
-                    return this.coefficients.forEach(function(d) {
-                      u = A.addOrSubtractGF(u, d);
+                    return this.coefficients.forEach(function(l) {
+                      u = C.addOrSubtractGF(u, l);
                     }), u;
                   u = this.coefficients[0];
-                  for (var B = 1; B < a; B++)
-                    u = A.addOrSubtractGF(this.field.multiply(D, u), this.coefficients[B]);
+                  for (var t = 1; t < a; t++)
+                    u = C.addOrSubtractGF(this.field.multiply(D, u), this.coefficients[t]);
                   return u;
                 }, n;
               }()
@@ -823,28 +823,28 @@ function Lx() {
           /***/
           function(E, o, e) {
             Object.defineProperty(o, "__esModule", { value: !0 });
-            var A = e(4), r = e(5), n = e(11), D = e(12);
-            function u(d) {
-              var k = D.locate(d);
-              if (!k)
+            var C = e(4), r = e(5), n = e(11), D = e(12);
+            function u(l) {
+              var h = D.locate(l);
+              if (!h)
                 return null;
-              for (var c = 0, v = k; c < v.length; c++) {
-                var h = v[c], w = n.extract(d, h), y = r.decode(w.matrix);
-                if (y)
+              for (var c = 0, v = h; c < v.length; c++) {
+                var k = v[c], w = n.extract(l, k), g = r.decode(w.matrix);
+                if (g)
                   return {
-                    binaryData: y.bytes,
-                    data: y.text,
-                    chunks: y.chunks,
-                    version: y.version,
+                    binaryData: g.bytes,
+                    data: g.text,
+                    chunks: g.chunks,
+                    version: g.version,
                     location: {
-                      topRightCorner: w.mappingFunction(h.dimension, 0),
+                      topRightCorner: w.mappingFunction(k.dimension, 0),
                       topLeftCorner: w.mappingFunction(0, 0),
-                      bottomRightCorner: w.mappingFunction(h.dimension, h.dimension),
-                      bottomLeftCorner: w.mappingFunction(0, h.dimension),
-                      topRightFinderPattern: h.topRight,
-                      topLeftFinderPattern: h.topLeft,
-                      bottomLeftFinderPattern: h.bottomLeft,
-                      bottomRightAlignmentPattern: h.alignmentPattern
+                      bottomRightCorner: w.mappingFunction(k.dimension, k.dimension),
+                      bottomLeftCorner: w.mappingFunction(0, k.dimension),
+                      topRightFinderPattern: k.topRight,
+                      topLeftFinderPattern: k.topLeft,
+                      bottomLeftFinderPattern: k.bottomLeft,
+                      bottomRightAlignmentPattern: k.alignmentPattern
                     }
                   };
               }
@@ -853,71 +853,71 @@ function Lx() {
             var a = {
               inversionAttempts: "attemptBoth"
             };
-            function B(d, k, c, v) {
+            function t(l, h, c, v) {
               v === void 0 && (v = {});
-              var h = a;
-              Object.keys(h || {}).forEach(function(F) {
-                h[F] = v[F] || h[F];
+              var k = a;
+              Object.keys(k || {}).forEach(function(s) {
+                k[s] = v[s] || k[s];
               });
-              var w = h.inversionAttempts === "attemptBoth" || h.inversionAttempts === "invertFirst", y = h.inversionAttempts === "onlyInvert" || h.inversionAttempts === "invertFirst", l = A.binarize(d, k, c, w), t = l.binarized, C = l.inverted, s = u(y ? C : t);
-              return !s && (h.inversionAttempts === "attemptBoth" || h.inversionAttempts === "invertFirst") && (s = u(y ? t : C)), s;
+              var w = k.inversionAttempts === "attemptBoth" || k.inversionAttempts === "invertFirst", g = k.inversionAttempts === "onlyInvert" || k.inversionAttempts === "invertFirst", d = C.binarize(l, h, c, w), B = d.binarized, A = d.inverted, F = u(g ? A : B);
+              return !F && (k.inversionAttempts === "attemptBoth" || k.inversionAttempts === "invertFirst") && (F = u(g ? B : A)), F;
             }
-            B.default = B, o.default = B;
+            t.default = t, o.default = t;
           },
           /* 4 */
           /***/
           function(E, o, e) {
             Object.defineProperty(o, "__esModule", { value: !0 });
-            var A = e(0), r = 8, n = 24;
-            function D(B, d, k) {
-              return B < d ? d : B > k ? k : B;
+            var C = e(0), r = 8, n = 24;
+            function D(t, l, h) {
+              return t < l ? l : t > h ? h : t;
             }
             var u = (
               /** @class */
               function() {
-                function B(d, k) {
-                  this.width = d, this.data = new Uint8ClampedArray(d * k);
+                function t(l, h) {
+                  this.width = l, this.data = new Uint8ClampedArray(l * h);
                 }
-                return B.prototype.get = function(d, k) {
-                  return this.data[k * this.width + d];
-                }, B.prototype.set = function(d, k, c) {
-                  this.data[k * this.width + d] = c;
-                }, B;
+                return t.prototype.get = function(l, h) {
+                  return this.data[h * this.width + l];
+                }, t.prototype.set = function(l, h, c) {
+                  this.data[h * this.width + l] = c;
+                }, t;
               }()
             );
-            function a(B, d, k, c) {
-              if (B.length !== d * k * 4)
+            function a(t, l, h, c) {
+              if (t.length !== l * h * 4)
                 throw new Error("Malformed data passed to binarizer.");
-              for (var v = new u(d, k), h = 0; h < d; h++)
-                for (var w = 0; w < k; w++) {
-                  var y = B[(w * d + h) * 4 + 0], l = B[(w * d + h) * 4 + 1], t = B[(w * d + h) * 4 + 2];
-                  v.set(h, w, 0.2126 * y + 0.7152 * l + 0.0722 * t);
+              for (var v = new u(l, h), k = 0; k < l; k++)
+                for (var w = 0; w < h; w++) {
+                  var g = t[(w * l + k) * 4 + 0], d = t[(w * l + k) * 4 + 1], B = t[(w * l + k) * 4 + 2];
+                  v.set(k, w, 0.2126 * g + 0.7152 * d + 0.0722 * B);
                 }
-              for (var C = Math.ceil(d / r), s = Math.ceil(k / r), F = new u(C, s), f = 0; f < s; f++)
-                for (var m = 0; m < C; m++) {
-                  for (var p = 0, P = 1 / 0, g = 0, w = 0; w < r; w++)
-                    for (var h = 0; h < r; h++) {
-                      var S = v.get(m * r + h, f * r + w);
-                      p += S, P = Math.min(P, S), g = Math.max(g, S);
+              for (var A = Math.ceil(l / r), F = Math.ceil(h / r), s = new u(A, F), f = 0; f < F; f++)
+                for (var m = 0; m < A; m++) {
+                  for (var p = 0, P = 1 / 0, y = 0, w = 0; w < r; w++)
+                    for (var k = 0; k < r; k++) {
+                      var S = v.get(m * r + k, f * r + w);
+                      p += S, P = Math.min(P, S), y = Math.max(y, S);
                     }
                   var M = p / Math.pow(r, 2);
-                  if (g - P <= n && (M = P / 2, f > 0 && m > 0)) {
-                    var $ = (F.get(m, f - 1) + 2 * F.get(m - 1, f) + F.get(m - 1, f - 1)) / 4;
+                  if (y - P <= n && (M = P / 2, f > 0 && m > 0)) {
+                    var $ = (s.get(m, f - 1) + 2 * s.get(m - 1, f) + s.get(m - 1, f - 1)) / 4;
                     P < $ && (M = $);
                   }
-                  F.set(m, f, M);
+                  s.set(m, f, M);
                 }
-              var O = A.BitMatrix.createEmpty(d, k), _ = null;
-              c && (_ = A.BitMatrix.createEmpty(d, k));
-              for (var f = 0; f < s; f++)
-                for (var m = 0; m < C; m++) {
-                  for (var N = D(m, 2, C - 3), I = D(f, 2, s - 3), p = 0, T = -2; T <= 2; T++)
+              var O = C.BitMatrix.createEmpty(l, h), _ = null;
+              c && (_ = C.BitMatrix.createEmpty(l, h));
+              for (var f = 0; f < F; f++)
+                for (var m = 0; m < A; m++) {
+                  for (var N = D(m, 2, A - 3), T = D(f, 2, F - 3), p = 0, I = -2; I <= 2; I++)
                     for (var b = -2; b <= 2; b++)
-                      p += F.get(N + T, I + b);
-                  for (var U = p / 25, T = 0; T < r; T++)
+                      p += s.get(N + I, T + b);
+                  for (var R = p / 25, I = 0; I < r; I++)
                     for (var b = 0; b < r; b++) {
-                      var h = m * r + T, w = f * r + b, j = v.get(h, w);
-                      O.set(h, w, j <= U), c && _.set(h, w, !(j <= U));
+                      var k = m * r + I, w = f * r + b, j = v.get(k, w);
+                      O.set(k, w, j <= R), c && _.set(k, w, !(j <= R));
                     }
                 }
               return c ? { binarized: O, inverted: _ } : { binarized: O };
@@ -928,16 +928,16 @@ function Lx() {
           /***/
           function(E, o, e) {
             Object.defineProperty(o, "__esModule", { value: !0 });
-            var A = e(0), r = e(6), n = e(9), D = e(10);
-            function u(t, C) {
-              for (var s = t ^ C, F = 0; s; )
-                F++, s &= s - 1;
-              return F;
+            var C = e(0), r = e(6), n = e(9), D = e(10);
+            function u(B, A) {
+              for (var F = B ^ A, s = 0; F; )
+                s++, F &= F - 1;
+              return s;
             }
-            function a(t, C) {
-              return C << 1 | t;
+            function a(B, A) {
+              return A << 1 | B;
             }
-            var B = [
+            var t = [
               { bits: 21522, formatInfo: { errorCorrectionLevel: 1, dataMask: 0 } },
               { bits: 20773, formatInfo: { errorCorrectionLevel: 1, dataMask: 1 } },
               { bits: 24188, formatInfo: { errorCorrectionLevel: 1, dataMask: 2 } },
@@ -970,162 +970,162 @@ function Lx() {
               { bits: 8579, formatInfo: { errorCorrectionLevel: 2, dataMask: 5 } },
               { bits: 11994, formatInfo: { errorCorrectionLevel: 2, dataMask: 6 } },
               { bits: 11245, formatInfo: { errorCorrectionLevel: 2, dataMask: 7 } }
-            ], d = [
-              function(t) {
-                return (t.y + t.x) % 2 === 0;
+            ], l = [
+              function(B) {
+                return (B.y + B.x) % 2 === 0;
               },
-              function(t) {
-                return t.y % 2 === 0;
+              function(B) {
+                return B.y % 2 === 0;
               },
-              function(t) {
-                return t.x % 3 === 0;
+              function(B) {
+                return B.x % 3 === 0;
               },
-              function(t) {
-                return (t.y + t.x) % 3 === 0;
+              function(B) {
+                return (B.y + B.x) % 3 === 0;
               },
-              function(t) {
-                return (Math.floor(t.y / 2) + Math.floor(t.x / 3)) % 2 === 0;
+              function(B) {
+                return (Math.floor(B.y / 2) + Math.floor(B.x / 3)) % 2 === 0;
               },
-              function(t) {
-                return t.x * t.y % 2 + t.x * t.y % 3 === 0;
+              function(B) {
+                return B.x * B.y % 2 + B.x * B.y % 3 === 0;
               },
-              function(t) {
-                return (t.y * t.x % 2 + t.y * t.x % 3) % 2 === 0;
+              function(B) {
+                return (B.y * B.x % 2 + B.y * B.x % 3) % 2 === 0;
               },
-              function(t) {
-                return ((t.y + t.x) % 2 + t.y * t.x % 3) % 2 === 0;
+              function(B) {
+                return ((B.y + B.x) % 2 + B.y * B.x % 3) % 2 === 0;
               }
             ];
-            function k(t) {
-              var C = 17 + 4 * t.versionNumber, s = A.BitMatrix.createEmpty(C, C);
-              s.setRegion(0, 0, 9, 9, !0), s.setRegion(C - 8, 0, 8, 9, !0), s.setRegion(0, C - 8, 9, 8, !0);
-              for (var F = 0, f = t.alignmentPatternCenters; F < f.length; F++)
-                for (var m = f[F], p = 0, P = t.alignmentPatternCenters; p < P.length; p++) {
-                  var g = P[p];
-                  m === 6 && g === 6 || m === 6 && g === C - 7 || m === C - 7 && g === 6 || s.setRegion(m - 2, g - 2, 5, 5, !0);
+            function h(B) {
+              var A = 17 + 4 * B.versionNumber, F = C.BitMatrix.createEmpty(A, A);
+              F.setRegion(0, 0, 9, 9, !0), F.setRegion(A - 8, 0, 8, 9, !0), F.setRegion(0, A - 8, 9, 8, !0);
+              for (var s = 0, f = B.alignmentPatternCenters; s < f.length; s++)
+                for (var m = f[s], p = 0, P = B.alignmentPatternCenters; p < P.length; p++) {
+                  var y = P[p];
+                  m === 6 && y === 6 || m === 6 && y === A - 7 || m === A - 7 && y === 6 || F.setRegion(m - 2, y - 2, 5, 5, !0);
                 }
-              return s.setRegion(6, 9, 1, C - 17, !0), s.setRegion(9, 6, C - 17, 1, !0), t.versionNumber > 6 && (s.setRegion(C - 11, 0, 3, 6, !0), s.setRegion(0, C - 11, 6, 3, !0)), s;
+              return F.setRegion(6, 9, 1, A - 17, !0), F.setRegion(9, 6, A - 17, 1, !0), B.versionNumber > 6 && (F.setRegion(A - 11, 0, 3, 6, !0), F.setRegion(0, A - 11, 6, 3, !0)), F;
             }
-            function c(t, C, s) {
-              for (var F = d[s.dataMask], f = t.height, m = k(C), p = [], P = 0, g = 0, S = !0, M = f - 1; M > 0; M -= 2) {
+            function c(B, A, F) {
+              for (var s = l[F.dataMask], f = B.height, m = h(A), p = [], P = 0, y = 0, S = !0, M = f - 1; M > 0; M -= 2) {
                 M === 6 && M--;
                 for (var $ = 0; $ < f; $++)
                   for (var O = S ? f - 1 - $ : $, _ = 0; _ < 2; _++) {
                     var N = M - _;
                     if (!m.get(N, O)) {
-                      g++;
-                      var I = t.get(N, O);
-                      F({ y: O, x: N }) && (I = !I), P = a(I, P), g === 8 && (p.push(P), g = 0, P = 0);
+                      y++;
+                      var T = B.get(N, O);
+                      s({ y: O, x: N }) && (T = !T), P = a(T, P), y === 8 && (p.push(P), y = 0, P = 0);
                     }
                   }
                 S = !S;
               }
               return p;
             }
-            function v(t) {
-              var C = t.height, s = Math.floor((C - 17) / 4);
-              if (s <= 6)
-                return D.VERSIONS[s - 1];
-              for (var F = 0, f = 5; f >= 0; f--)
-                for (var m = C - 9; m >= C - 11; m--)
-                  F = a(t.get(m, f), F);
+            function v(B) {
+              var A = B.height, F = Math.floor((A - 17) / 4);
+              if (F <= 6)
+                return D.VERSIONS[F - 1];
+              for (var s = 0, f = 5; f >= 0; f--)
+                for (var m = A - 9; m >= A - 11; m--)
+                  s = a(B.get(m, f), s);
               for (var p = 0, m = 5; m >= 0; m--)
-                for (var f = C - 9; f >= C - 11; f--)
-                  p = a(t.get(m, f), p);
-              for (var P = 1 / 0, g, S = 0, M = D.VERSIONS; S < M.length; S++) {
+                for (var f = A - 9; f >= A - 11; f--)
+                  p = a(B.get(m, f), p);
+              for (var P = 1 / 0, y, S = 0, M = D.VERSIONS; S < M.length; S++) {
                 var $ = M[S];
-                if ($.infoBits === F || $.infoBits === p)
+                if ($.infoBits === s || $.infoBits === p)
                   return $;
-                var O = u(F, $.infoBits);
-                O < P && (g = $, P = O), O = u(p, $.infoBits), O < P && (g = $, P = O);
+                var O = u(s, $.infoBits);
+                O < P && (y = $, P = O), O = u(p, $.infoBits), O < P && (y = $, P = O);
               }
               if (P <= 3)
-                return g;
+                return y;
             }
-            function h(t) {
-              for (var C = 0, s = 0; s <= 8; s++)
-                s !== 6 && (C = a(t.get(s, 8), C));
-              for (var F = 7; F >= 0; F--)
-                F !== 6 && (C = a(t.get(8, F), C));
-              for (var f = t.height, m = 0, F = f - 1; F >= f - 7; F--)
-                m = a(t.get(8, F), m);
-              for (var s = f - 8; s < f; s++)
-                m = a(t.get(s, 8), m);
-              for (var p = 1 / 0, P = null, g = 0, S = B; g < S.length; g++) {
-                var M = S[g], $ = M.bits, O = M.formatInfo;
-                if ($ === C || $ === m)
+            function k(B) {
+              for (var A = 0, F = 0; F <= 8; F++)
+                F !== 6 && (A = a(B.get(F, 8), A));
+              for (var s = 7; s >= 0; s--)
+                s !== 6 && (A = a(B.get(8, s), A));
+              for (var f = B.height, m = 0, s = f - 1; s >= f - 7; s--)
+                m = a(B.get(8, s), m);
+              for (var F = f - 8; F < f; F++)
+                m = a(B.get(F, 8), m);
+              for (var p = 1 / 0, P = null, y = 0, S = t; y < S.length; y++) {
+                var M = S[y], $ = M.bits, O = M.formatInfo;
+                if ($ === A || $ === m)
                   return O;
-                var _ = u(C, $);
-                _ < p && (P = O, p = _), C !== m && (_ = u(m, $), _ < p && (P = O, p = _));
+                var _ = u(A, $);
+                _ < p && (P = O, p = _), A !== m && (_ = u(m, $), _ < p && (P = O, p = _));
               }
               return p <= 3 ? P : null;
             }
-            function w(t, C, s) {
-              var F = C.errorCorrectionLevels[s], f = [], m = 0;
-              if (F.ecBlocks.forEach(function(I) {
-                for (var T = 0; T < I.numBlocks; T++)
-                  f.push({ numDataCodewords: I.dataCodewordsPerBlock, codewords: [] }), m += I.dataCodewordsPerBlock + F.ecCodewordsPerBlock;
-              }), t.length < m)
+            function w(B, A, F) {
+              var s = A.errorCorrectionLevels[F], f = [], m = 0;
+              if (s.ecBlocks.forEach(function(T) {
+                for (var I = 0; I < T.numBlocks; I++)
+                  f.push({ numDataCodewords: T.dataCodewordsPerBlock, codewords: [] }), m += T.dataCodewordsPerBlock + s.ecCodewordsPerBlock;
+              }), B.length < m)
                 return null;
-              t = t.slice(0, m);
-              for (var p = F.ecBlocks[0].dataCodewordsPerBlock, P = 0; P < p; P++)
-                for (var g = 0, S = f; g < S.length; g++) {
-                  var M = S[g];
-                  M.codewords.push(t.shift());
+              B = B.slice(0, m);
+              for (var p = s.ecBlocks[0].dataCodewordsPerBlock, P = 0; P < p; P++)
+                for (var y = 0, S = f; y < S.length; y++) {
+                  var M = S[y];
+                  M.codewords.push(B.shift());
                 }
-              if (F.ecBlocks.length > 1)
-                for (var $ = F.ecBlocks[0].numBlocks, O = F.ecBlocks[1].numBlocks, P = 0; P < O; P++)
-                  f[$ + P].codewords.push(t.shift());
-              for (; t.length > 0; )
+              if (s.ecBlocks.length > 1)
+                for (var $ = s.ecBlocks[0].numBlocks, O = s.ecBlocks[1].numBlocks, P = 0; P < O; P++)
+                  f[$ + P].codewords.push(B.shift());
+              for (; B.length > 0; )
                 for (var _ = 0, N = f; _ < N.length; _++) {
                   var M = N[_];
-                  M.codewords.push(t.shift());
+                  M.codewords.push(B.shift());
                 }
               return f;
             }
-            function y(t) {
-              var C = v(t);
-              if (!C)
+            function g(B) {
+              var A = v(B);
+              if (!A)
                 return null;
-              var s = h(t);
-              if (!s)
+              var F = k(B);
+              if (!F)
                 return null;
-              var F = c(t, C, s), f = w(F, C, s.errorCorrectionLevel);
+              var s = c(B, A, F), f = w(s, A, F.errorCorrectionLevel);
               if (!f)
                 return null;
               for (var m = f.reduce(function(_, N) {
                 return _ + N.numDataCodewords;
-              }, 0), p = new Uint8ClampedArray(m), P = 0, g = 0, S = f; g < S.length; g++) {
-                var M = S[g], $ = n.decode(M.codewords, M.codewords.length - M.numDataCodewords);
+              }, 0), p = new Uint8ClampedArray(m), P = 0, y = 0, S = f; y < S.length; y++) {
+                var M = S[y], $ = n.decode(M.codewords, M.codewords.length - M.numDataCodewords);
                 if (!$)
                   return null;
                 for (var O = 0; O < M.numDataCodewords; O++)
                   p[P++] = $[O];
               }
               try {
-                return r.decode(p, C.versionNumber);
+                return r.decode(p, A.versionNumber);
               } catch {
                 return null;
               }
             }
-            function l(t) {
-              if (t == null)
+            function d(B) {
+              if (B == null)
                 return null;
-              var C = y(t);
-              if (C)
-                return C;
-              for (var s = 0; s < t.width; s++)
-                for (var F = s + 1; F < t.height; F++)
-                  t.get(s, F) !== t.get(F, s) && (t.set(s, F, !t.get(s, F)), t.set(F, s, !t.get(F, s)));
-              return y(t);
+              var A = g(B);
+              if (A)
+                return A;
+              for (var F = 0; F < B.width; F++)
+                for (var s = F + 1; s < B.height; s++)
+                  B.get(F, s) !== B.get(s, F) && (B.set(F, s, !B.get(F, s)), B.set(s, F, !B.get(s, F)));
+              return g(B);
             }
-            o.decode = l;
+            o.decode = d;
           },
           /* 6 */
           /***/
           function(E, o, e) {
             Object.defineProperty(o, "__esModule", { value: !0 });
-            var A = e(7), r = e(8), n;
+            var C = e(7), r = e(8), n;
             (function(v) {
               v.Numeric = "numeric", v.Alphanumeric = "alphanumeric", v.Byte = "byte", v.Kanji = "kanji", v.ECI = "eci";
             })(n = o.Mode || (o.Mode = {}));
@@ -1133,27 +1133,27 @@ function Lx() {
             (function(v) {
               v[v.Terminator = 0] = "Terminator", v[v.Numeric = 1] = "Numeric", v[v.Alphanumeric = 2] = "Alphanumeric", v[v.Byte = 4] = "Byte", v[v.Kanji = 8] = "Kanji", v[v.ECI = 7] = "ECI";
             })(D || (D = {}));
-            function u(v, h) {
-              for (var w = [], y = "", l = [10, 12, 14][h], t = v.readBits(l); t >= 3; ) {
-                var C = v.readBits(10);
-                if (C >= 1e3)
+            function u(v, k) {
+              for (var w = [], g = "", d = [10, 12, 14][k], B = v.readBits(d); B >= 3; ) {
+                var A = v.readBits(10);
+                if (A >= 1e3)
                   throw new Error("Invalid numeric value above 999");
-                var s = Math.floor(C / 100), F = Math.floor(C / 10) % 10, f = C % 10;
-                w.push(48 + s, 48 + F, 48 + f), y += s.toString() + F.toString() + f.toString(), t -= 3;
+                var F = Math.floor(A / 100), s = Math.floor(A / 10) % 10, f = A % 10;
+                w.push(48 + F, 48 + s, 48 + f), g += F.toString() + s.toString() + f.toString(), B -= 3;
               }
-              if (t === 2) {
-                var C = v.readBits(7);
-                if (C >= 100)
+              if (B === 2) {
+                var A = v.readBits(7);
+                if (A >= 100)
                   throw new Error("Invalid numeric value above 99");
-                var s = Math.floor(C / 10), F = C % 10;
-                w.push(48 + s, 48 + F), y += s.toString() + F.toString();
-              } else if (t === 1) {
-                var C = v.readBits(4);
-                if (C >= 10)
+                var F = Math.floor(A / 10), s = A % 10;
+                w.push(48 + F, 48 + s), g += F.toString() + s.toString();
+              } else if (B === 1) {
+                var A = v.readBits(4);
+                if (A >= 10)
                   throw new Error("Invalid numeric value above 9");
-                w.push(48 + C), y += C.toString();
+                w.push(48 + A), g += A.toString();
               }
-              return { bytes: w, text: y };
+              return { bytes: w, text: g };
             }
             var a = [
               "0",
@@ -1202,91 +1202,91 @@ function Lx() {
               "/",
               ":"
             ];
-            function B(v, h) {
-              for (var w = [], y = "", l = [9, 11, 13][h], t = v.readBits(l); t >= 2; ) {
-                var C = v.readBits(11), s = Math.floor(C / 45), F = C % 45;
-                w.push(a[s].charCodeAt(0), a[F].charCodeAt(0)), y += a[s] + a[F], t -= 2;
+            function t(v, k) {
+              for (var w = [], g = "", d = [9, 11, 13][k], B = v.readBits(d); B >= 2; ) {
+                var A = v.readBits(11), F = Math.floor(A / 45), s = A % 45;
+                w.push(a[F].charCodeAt(0), a[s].charCodeAt(0)), g += a[F] + a[s], B -= 2;
               }
-              if (t === 1) {
-                var s = v.readBits(6);
-                w.push(a[s].charCodeAt(0)), y += a[s];
+              if (B === 1) {
+                var F = v.readBits(6);
+                w.push(a[F].charCodeAt(0)), g += a[F];
               }
-              return { bytes: w, text: y };
+              return { bytes: w, text: g };
             }
-            function d(v, h) {
-              for (var w = [], y = "", l = [8, 16, 16][h], t = v.readBits(l), C = 0; C < t; C++) {
-                var s = v.readBits(8);
-                w.push(s);
+            function l(v, k) {
+              for (var w = [], g = "", d = [8, 16, 16][k], B = v.readBits(d), A = 0; A < B; A++) {
+                var F = v.readBits(8);
+                w.push(F);
               }
               try {
-                y += decodeURIComponent(w.map(function(F) {
-                  return "%" + ("0" + F.toString(16)).substr(-2);
+                g += decodeURIComponent(w.map(function(s) {
+                  return "%" + ("0" + s.toString(16)).substr(-2);
                 }).join(""));
               } catch {
               }
-              return { bytes: w, text: y };
+              return { bytes: w, text: g };
             }
-            function k(v, h) {
-              for (var w = [], y = "", l = [8, 10, 12][h], t = v.readBits(l), C = 0; C < t; C++) {
-                var s = v.readBits(13), F = Math.floor(s / 192) << 8 | s % 192;
-                F < 7936 ? F += 33088 : F += 49472, w.push(F >> 8, F & 255), y += String.fromCharCode(r.shiftJISTable[F]);
+            function h(v, k) {
+              for (var w = [], g = "", d = [8, 10, 12][k], B = v.readBits(d), A = 0; A < B; A++) {
+                var F = v.readBits(13), s = Math.floor(F / 192) << 8 | F % 192;
+                s < 7936 ? s += 33088 : s += 49472, w.push(s >> 8, s & 255), g += String.fromCharCode(r.shiftJISTable[s]);
               }
-              return { bytes: w, text: y };
+              return { bytes: w, text: g };
             }
-            function c(v, h) {
-              for (var w, y, l, t, C = new A.BitStream(v), s = h <= 9 ? 0 : h <= 26 ? 1 : 2, F = {
+            function c(v, k) {
+              for (var w, g, d, B, A = new C.BitStream(v), F = k <= 9 ? 0 : k <= 26 ? 1 : 2, s = {
                 text: "",
                 bytes: [],
                 chunks: [],
-                version: h
-              }; C.available() >= 4; ) {
-                var f = C.readBits(4);
+                version: k
+              }; A.available() >= 4; ) {
+                var f = A.readBits(4);
                 if (f === D.Terminator)
-                  return F;
+                  return s;
                 if (f === D.ECI)
-                  C.readBits(1) === 0 ? F.chunks.push({
+                  A.readBits(1) === 0 ? s.chunks.push({
                     type: n.ECI,
-                    assignmentNumber: C.readBits(7)
-                  }) : C.readBits(1) === 0 ? F.chunks.push({
+                    assignmentNumber: A.readBits(7)
+                  }) : A.readBits(1) === 0 ? s.chunks.push({
                     type: n.ECI,
-                    assignmentNumber: C.readBits(14)
-                  }) : C.readBits(1) === 0 ? F.chunks.push({
+                    assignmentNumber: A.readBits(14)
+                  }) : A.readBits(1) === 0 ? s.chunks.push({
                     type: n.ECI,
-                    assignmentNumber: C.readBits(21)
-                  }) : F.chunks.push({
+                    assignmentNumber: A.readBits(21)
+                  }) : s.chunks.push({
                     type: n.ECI,
                     assignmentNumber: -1
                   });
                 else if (f === D.Numeric) {
-                  var m = u(C, s);
-                  F.text += m.text, (w = F.bytes).push.apply(w, m.bytes), F.chunks.push({
+                  var m = u(A, F);
+                  s.text += m.text, (w = s.bytes).push.apply(w, m.bytes), s.chunks.push({
                     type: n.Numeric,
                     text: m.text
                   });
                 } else if (f === D.Alphanumeric) {
-                  var p = B(C, s);
-                  F.text += p.text, (y = F.bytes).push.apply(y, p.bytes), F.chunks.push({
+                  var p = t(A, F);
+                  s.text += p.text, (g = s.bytes).push.apply(g, p.bytes), s.chunks.push({
                     type: n.Alphanumeric,
                     text: p.text
                   });
                 } else if (f === D.Byte) {
-                  var P = d(C, s);
-                  F.text += P.text, (l = F.bytes).push.apply(l, P.bytes), F.chunks.push({
+                  var P = l(A, F);
+                  s.text += P.text, (d = s.bytes).push.apply(d, P.bytes), s.chunks.push({
                     type: n.Byte,
                     bytes: P.bytes,
                     text: P.text
                   });
                 } else if (f === D.Kanji) {
-                  var g = k(C, s);
-                  F.text += g.text, (t = F.bytes).push.apply(t, g.bytes), F.chunks.push({
+                  var y = h(A, F);
+                  s.text += y.text, (B = s.bytes).push.apply(B, y.bytes), s.chunks.push({
                     type: n.Kanji,
-                    bytes: g.bytes,
-                    text: g.text
+                    bytes: y.bytes,
+                    text: y.text
                   });
                 }
               }
-              if (C.available() === 0 || C.readBits(C.available()) === 0)
-                return F;
+              if (A.available() === 0 || A.readBits(A.available()) === 0)
+                return s;
             }
             o.decode = c;
           },
@@ -1294,7 +1294,7 @@ function Lx() {
           /***/
           function(E, o, e) {
             Object.defineProperty(o, "__esModule", { value: !0 });
-            var A = (
+            var C = (
               /** @class */
               function() {
                 function r(n) {
@@ -1305,15 +1305,15 @@ function Lx() {
                     throw new Error("Cannot read " + n.toString() + " bits");
                   var D = 0;
                   if (this.bitOffset > 0) {
-                    var u = 8 - this.bitOffset, a = n < u ? n : u, B = u - a, d = 255 >> 8 - a << B;
-                    D = (this.bytes[this.byteOffset] & d) >> B, n -= a, this.bitOffset += a, this.bitOffset === 8 && (this.bitOffset = 0, this.byteOffset++);
+                    var u = 8 - this.bitOffset, a = n < u ? n : u, t = u - a, l = 255 >> 8 - a << t;
+                    D = (this.bytes[this.byteOffset] & l) >> t, n -= a, this.bitOffset += a, this.bitOffset === 8 && (this.bitOffset = 0, this.byteOffset++);
                   }
                   if (n > 0) {
                     for (; n >= 8; )
                       D = D << 8 | this.bytes[this.byteOffset] & 255, this.byteOffset++, n -= 8;
                     if (n > 0) {
-                      var B = 8 - n, d = 255 >> B << B;
-                      D = D << n | (this.bytes[this.byteOffset] & d) >> B, this.bitOffset += n;
+                      var t = 8 - n, l = 255 >> t << t;
+                      D = D << n | (this.bytes[this.byteOffset] & l) >> t, this.bitOffset += n;
                     }
                   }
                   return D;
@@ -1322,7 +1322,7 @@ function Lx() {
                 }, r;
               }()
             );
-            o.BitStream = A;
+            o.BitStream = C;
           },
           /* 8 */
           /***/
@@ -8371,66 +8371,66 @@ function Lx() {
           /***/
           function(E, o, e) {
             Object.defineProperty(o, "__esModule", { value: !0 });
-            var A = e(1), r = e(2);
-            function n(B, d, k, c) {
+            var C = e(1), r = e(2);
+            function n(t, l, h, c) {
               var v;
-              d.degree() < k.degree() && (v = [k, d], d = v[0], k = v[1]);
-              for (var h = d, w = k, y = B.zero, l = B.one; w.degree() >= c / 2; ) {
-                var t = h, C = y;
-                if (h = w, y = l, h.isZero())
+              l.degree() < h.degree() && (v = [h, l], l = v[0], h = v[1]);
+              for (var k = l, w = h, g = t.zero, d = t.one; w.degree() >= c / 2; ) {
+                var B = k, A = g;
+                if (k = w, g = d, k.isZero())
                   return null;
-                w = t;
-                for (var s = B.zero, F = h.getCoefficient(h.degree()), f = B.inverse(F); w.degree() >= h.degree() && !w.isZero(); ) {
-                  var m = w.degree() - h.degree(), p = B.multiply(w.getCoefficient(w.degree()), f);
-                  s = s.addOrSubtract(B.buildMonomial(m, p)), w = w.addOrSubtract(h.multiplyByMonomial(m, p));
+                w = B;
+                for (var F = t.zero, s = k.getCoefficient(k.degree()), f = t.inverse(s); w.degree() >= k.degree() && !w.isZero(); ) {
+                  var m = w.degree() - k.degree(), p = t.multiply(w.getCoefficient(w.degree()), f);
+                  F = F.addOrSubtract(t.buildMonomial(m, p)), w = w.addOrSubtract(k.multiplyByMonomial(m, p));
                 }
-                if (l = s.multiplyPoly(y).addOrSubtract(C), w.degree() >= h.degree())
+                if (d = F.multiplyPoly(g).addOrSubtract(A), w.degree() >= k.degree())
                   return null;
               }
-              var P = l.getCoefficient(0);
+              var P = d.getCoefficient(0);
               if (P === 0)
                 return null;
-              var g = B.inverse(P);
-              return [l.multiply(g), w.multiply(g)];
+              var y = t.inverse(P);
+              return [d.multiply(y), w.multiply(y)];
             }
-            function D(B, d) {
-              var k = d.degree();
-              if (k === 1)
-                return [d.getCoefficient(1)];
-              for (var c = new Array(k), v = 0, h = 1; h < B.size && v < k; h++)
-                d.evaluateAt(h) === 0 && (c[v] = B.inverse(h), v++);
-              return v !== k ? null : c;
+            function D(t, l) {
+              var h = l.degree();
+              if (h === 1)
+                return [l.getCoefficient(1)];
+              for (var c = new Array(h), v = 0, k = 1; k < t.size && v < h; k++)
+                l.evaluateAt(k) === 0 && (c[v] = t.inverse(k), v++);
+              return v !== h ? null : c;
             }
-            function u(B, d, k) {
-              for (var c = k.length, v = new Array(c), h = 0; h < c; h++) {
-                for (var w = B.inverse(k[h]), y = 1, l = 0; l < c; l++)
-                  h !== l && (y = B.multiply(y, A.addOrSubtractGF(1, B.multiply(k[l], w))));
-                v[h] = B.multiply(d.evaluateAt(w), B.inverse(y)), B.generatorBase !== 0 && (v[h] = B.multiply(v[h], w));
+            function u(t, l, h) {
+              for (var c = h.length, v = new Array(c), k = 0; k < c; k++) {
+                for (var w = t.inverse(h[k]), g = 1, d = 0; d < c; d++)
+                  k !== d && (g = t.multiply(g, C.addOrSubtractGF(1, t.multiply(h[d], w))));
+                v[k] = t.multiply(l.evaluateAt(w), t.inverse(g)), t.generatorBase !== 0 && (v[k] = t.multiply(v[k], w));
               }
               return v;
             }
-            function a(B, d) {
-              var k = new Uint8ClampedArray(B.length);
-              k.set(B);
-              for (var c = new A.default(285, 256, 0), v = new r.default(c, k), h = new Uint8ClampedArray(d), w = !1, y = 0; y < d; y++) {
-                var l = v.evaluateAt(c.exp(y + c.generatorBase));
-                h[h.length - 1 - y] = l, l !== 0 && (w = !0);
+            function a(t, l) {
+              var h = new Uint8ClampedArray(t.length);
+              h.set(t);
+              for (var c = new C.default(285, 256, 0), v = new r.default(c, h), k = new Uint8ClampedArray(l), w = !1, g = 0; g < l; g++) {
+                var d = v.evaluateAt(c.exp(g + c.generatorBase));
+                k[k.length - 1 - g] = d, d !== 0 && (w = !0);
               }
               if (!w)
-                return k;
-              var t = new r.default(c, h), C = n(c, c.buildMonomial(d, 1), t, d);
-              if (C === null)
+                return h;
+              var B = new r.default(c, k), A = n(c, c.buildMonomial(l, 1), B, l);
+              if (A === null)
                 return null;
-              var s = D(c, C[0]);
-              if (s == null)
+              var F = D(c, A[0]);
+              if (F == null)
                 return null;
-              for (var F = u(c, C[1], s), f = 0; f < s.length; f++) {
-                var m = k.length - 1 - c.log(s[f]);
+              for (var s = u(c, A[1], F), f = 0; f < F.length; f++) {
+                var m = h.length - 1 - c.log(F[f]);
                 if (m < 0)
                   return null;
-                k[m] = A.addOrSubtractGF(k[m], F[f]);
+                h[m] = C.addOrSubtractGF(h[m], s[f]);
               }
-              return k;
+              return h;
             }
             o.decode = a;
           },
@@ -9748,36 +9748,36 @@ function Lx() {
           /***/
           function(E, o, e) {
             Object.defineProperty(o, "__esModule", { value: !0 });
-            var A = e(0);
-            function r(a, B, d, k) {
-              var c = a.x - B.x + d.x - k.x, v = a.y - B.y + d.y - k.y;
+            var C = e(0);
+            function r(a, t, l, h) {
+              var c = a.x - t.x + l.x - h.x, v = a.y - t.y + l.y - h.y;
               if (c === 0 && v === 0)
                 return {
-                  a11: B.x - a.x,
-                  a12: B.y - a.y,
+                  a11: t.x - a.x,
+                  a12: t.y - a.y,
                   a13: 0,
-                  a21: d.x - B.x,
-                  a22: d.y - B.y,
+                  a21: l.x - t.x,
+                  a22: l.y - t.y,
                   a23: 0,
                   a31: a.x,
                   a32: a.y,
                   a33: 1
                 };
-              var h = B.x - d.x, w = k.x - d.x, y = B.y - d.y, l = k.y - d.y, t = h * l - w * y, C = (c * l - w * v) / t, s = (h * v - c * y) / t;
+              var k = t.x - l.x, w = h.x - l.x, g = t.y - l.y, d = h.y - l.y, B = k * d - w * g, A = (c * d - w * v) / B, F = (k * v - c * g) / B;
               return {
-                a11: B.x - a.x + C * B.x,
-                a12: B.y - a.y + C * B.y,
-                a13: C,
-                a21: k.x - a.x + s * k.x,
-                a22: k.y - a.y + s * k.y,
-                a23: s,
+                a11: t.x - a.x + A * t.x,
+                a12: t.y - a.y + A * t.y,
+                a13: A,
+                a21: h.x - a.x + F * h.x,
+                a22: h.y - a.y + F * h.y,
+                a23: F,
                 a31: a.x,
                 a32: a.y,
                 a33: 1
               };
             }
-            function n(a, B, d, k) {
-              var c = r(a, B, d, k);
+            function n(a, t, l, h) {
+              var c = r(a, t, l, h);
               return {
                 a11: c.a22 * c.a33 - c.a23 * c.a32,
                 a12: c.a13 * c.a32 - c.a12 * c.a33,
@@ -9790,34 +9790,34 @@ function Lx() {
                 a33: c.a11 * c.a22 - c.a12 * c.a21
               };
             }
-            function D(a, B) {
+            function D(a, t) {
               return {
-                a11: a.a11 * B.a11 + a.a21 * B.a12 + a.a31 * B.a13,
-                a12: a.a12 * B.a11 + a.a22 * B.a12 + a.a32 * B.a13,
-                a13: a.a13 * B.a11 + a.a23 * B.a12 + a.a33 * B.a13,
-                a21: a.a11 * B.a21 + a.a21 * B.a22 + a.a31 * B.a23,
-                a22: a.a12 * B.a21 + a.a22 * B.a22 + a.a32 * B.a23,
-                a23: a.a13 * B.a21 + a.a23 * B.a22 + a.a33 * B.a23,
-                a31: a.a11 * B.a31 + a.a21 * B.a32 + a.a31 * B.a33,
-                a32: a.a12 * B.a31 + a.a22 * B.a32 + a.a32 * B.a33,
-                a33: a.a13 * B.a31 + a.a23 * B.a32 + a.a33 * B.a33
+                a11: a.a11 * t.a11 + a.a21 * t.a12 + a.a31 * t.a13,
+                a12: a.a12 * t.a11 + a.a22 * t.a12 + a.a32 * t.a13,
+                a13: a.a13 * t.a11 + a.a23 * t.a12 + a.a33 * t.a13,
+                a21: a.a11 * t.a21 + a.a21 * t.a22 + a.a31 * t.a23,
+                a22: a.a12 * t.a21 + a.a22 * t.a22 + a.a32 * t.a23,
+                a23: a.a13 * t.a21 + a.a23 * t.a22 + a.a33 * t.a23,
+                a31: a.a11 * t.a31 + a.a21 * t.a32 + a.a31 * t.a33,
+                a32: a.a12 * t.a31 + a.a22 * t.a32 + a.a32 * t.a33,
+                a33: a.a13 * t.a31 + a.a23 * t.a32 + a.a33 * t.a33
               };
             }
-            function u(a, B) {
-              for (var d = n({ x: 3.5, y: 3.5 }, { x: B.dimension - 3.5, y: 3.5 }, { x: B.dimension - 6.5, y: B.dimension - 6.5 }, { x: 3.5, y: B.dimension - 3.5 }), k = r(B.topLeft, B.topRight, B.alignmentPattern, B.bottomLeft), c = D(k, d), v = A.BitMatrix.createEmpty(B.dimension, B.dimension), h = function(s, F) {
-                var f = c.a13 * s + c.a23 * F + c.a33;
+            function u(a, t) {
+              for (var l = n({ x: 3.5, y: 3.5 }, { x: t.dimension - 3.5, y: 3.5 }, { x: t.dimension - 6.5, y: t.dimension - 6.5 }, { x: 3.5, y: t.dimension - 3.5 }), h = r(t.topLeft, t.topRight, t.alignmentPattern, t.bottomLeft), c = D(h, l), v = C.BitMatrix.createEmpty(t.dimension, t.dimension), k = function(F, s) {
+                var f = c.a13 * F + c.a23 * s + c.a33;
                 return {
-                  x: (c.a11 * s + c.a21 * F + c.a31) / f,
-                  y: (c.a12 * s + c.a22 * F + c.a32) / f
+                  x: (c.a11 * F + c.a21 * s + c.a31) / f,
+                  y: (c.a12 * F + c.a22 * s + c.a32) / f
                 };
-              }, w = 0; w < B.dimension; w++)
-                for (var y = 0; y < B.dimension; y++) {
-                  var l = y + 0.5, t = w + 0.5, C = h(l, t);
-                  v.set(y, w, a.get(Math.floor(C.x), Math.floor(C.y)));
+              }, w = 0; w < t.dimension; w++)
+                for (var g = 0; g < t.dimension; g++) {
+                  var d = g + 0.5, B = w + 0.5, A = k(d, B);
+                  v.set(g, w, a.get(Math.floor(A.x), Math.floor(A.y)));
                 }
               return {
                 matrix: v,
-                mappingFunction: h
+                mappingFunction: k
               };
             }
             o.extract = u;
@@ -9826,24 +9826,24 @@ function Lx() {
           /***/
           function(E, o, e) {
             Object.defineProperty(o, "__esModule", { value: !0 });
-            var A = 4, r = 0.5, n = 1.5, D = function(l, t) {
-              return Math.sqrt(Math.pow(t.x - l.x, 2) + Math.pow(t.y - l.y, 2));
+            var C = 4, r = 0.5, n = 1.5, D = function(d, B) {
+              return Math.sqrt(Math.pow(B.x - d.x, 2) + Math.pow(B.y - d.y, 2));
             };
-            function u(l) {
-              return l.reduce(function(t, C) {
-                return t + C;
+            function u(d) {
+              return d.reduce(function(B, A) {
+                return B + A;
               });
             }
-            function a(l, t, C) {
-              var s, F, f, m, p = D(l, t), P = D(t, C), g = D(l, C), S, M, $;
-              return P >= p && P >= g ? (s = [t, l, C], S = s[0], M = s[1], $ = s[2]) : g >= P && g >= p ? (F = [l, t, C], S = F[0], M = F[1], $ = F[2]) : (f = [l, C, t], S = f[0], M = f[1], $ = f[2]), ($.x - M.x) * (S.y - M.y) - ($.y - M.y) * (S.x - M.x) < 0 && (m = [$, S], S = m[0], $ = m[1]), { bottomLeft: S, topLeft: M, topRight: $ };
+            function a(d, B, A) {
+              var F, s, f, m, p = D(d, B), P = D(B, A), y = D(d, A), S, M, $;
+              return P >= p && P >= y ? (F = [B, d, A], S = F[0], M = F[1], $ = F[2]) : y >= P && y >= p ? (s = [d, B, A], S = s[0], M = s[1], $ = s[2]) : (f = [d, A, B], S = f[0], M = f[1], $ = f[2]), ($.x - M.x) * (S.y - M.y) - ($.y - M.y) * (S.x - M.x) < 0 && (m = [$, S], S = m[0], $ = m[1]), { bottomLeft: S, topLeft: M, topRight: $ };
             }
-            function B(l, t, C, s) {
-              var F = (u(k(l, C, s, 5)) / 7 + // Divide by 7 since the ratio is 1:1:3:1:1
-              u(k(l, t, s, 5)) / 7 + u(k(C, l, s, 5)) / 7 + u(k(t, l, s, 5)) / 7) / 4;
-              if (F < 1)
+            function t(d, B, A, F) {
+              var s = (u(h(d, A, F, 5)) / 7 + // Divide by 7 since the ratio is 1:1:3:1:1
+              u(h(d, B, F, 5)) / 7 + u(h(A, d, F, 5)) / 7 + u(h(B, d, F, 5)) / 7) / 4;
+              if (s < 1)
                 throw new Error("Invalid module size");
-              var f = Math.round(D(l, t) / F), m = Math.round(D(l, C) / F), p = Math.floor((f + m) / 2) + 7;
+              var f = Math.round(D(d, B) / s), m = Math.round(D(d, A) / s), p = Math.floor((f + m) / 2) + 7;
               switch (p % 4) {
                 case 0:
                   p++;
@@ -9852,120 +9852,120 @@ function Lx() {
                   p--;
                   break;
               }
-              return { dimension: p, moduleSize: F };
+              return { dimension: p, moduleSize: s };
             }
-            function d(l, t, C, s) {
-              var F = [{ x: Math.floor(l.x), y: Math.floor(l.y) }], f = Math.abs(t.y - l.y) > Math.abs(t.x - l.x), m, p, P, g;
-              f ? (m = Math.floor(l.y), p = Math.floor(l.x), P = Math.floor(t.y), g = Math.floor(t.x)) : (m = Math.floor(l.x), p = Math.floor(l.y), P = Math.floor(t.x), g = Math.floor(t.y));
-              for (var S = Math.abs(P - m), M = Math.abs(g - p), $ = Math.floor(-S / 2), O = m < P ? 1 : -1, _ = p < g ? 1 : -1, N = !0, I = m, T = p; I !== P + O; I += O) {
-                var b = f ? T : I, U = f ? I : T;
-                if (C.get(b, U) !== N && (N = !N, F.push({ x: b, y: U }), F.length === s + 1))
+            function l(d, B, A, F) {
+              var s = [{ x: Math.floor(d.x), y: Math.floor(d.y) }], f = Math.abs(B.y - d.y) > Math.abs(B.x - d.x), m, p, P, y;
+              f ? (m = Math.floor(d.y), p = Math.floor(d.x), P = Math.floor(B.y), y = Math.floor(B.x)) : (m = Math.floor(d.x), p = Math.floor(d.y), P = Math.floor(B.x), y = Math.floor(B.y));
+              for (var S = Math.abs(P - m), M = Math.abs(y - p), $ = Math.floor(-S / 2), O = m < P ? 1 : -1, _ = p < y ? 1 : -1, N = !0, T = m, I = p; T !== P + O; T += O) {
+                var b = f ? I : T, R = f ? T : I;
+                if (A.get(b, R) !== N && (N = !N, s.push({ x: b, y: R }), s.length === F + 1))
                   break;
                 if ($ += M, $ > 0) {
-                  if (T === g)
+                  if (I === y)
                     break;
-                  T += _, $ -= S;
+                  I += _, $ -= S;
                 }
               }
-              for (var j = [], L = 0; L < s; L++)
-                F[L] && F[L + 1] ? j.push(D(F[L], F[L + 1])) : j.push(0);
+              for (var j = [], L = 0; L < F; L++)
+                s[L] && s[L + 1] ? j.push(D(s[L], s[L + 1])) : j.push(0);
               return j;
             }
-            function k(l, t, C, s) {
-              var F, f = t.y - l.y, m = t.x - l.x, p = d(l, t, C, Math.ceil(s / 2)), P = d(l, { x: l.x - m, y: l.y - f }, C, Math.ceil(s / 2)), g = p.shift() + P.shift() - 1;
-              return (F = P.concat(g)).concat.apply(F, p);
+            function h(d, B, A, F) {
+              var s, f = B.y - d.y, m = B.x - d.x, p = l(d, B, A, Math.ceil(F / 2)), P = l(d, { x: d.x - m, y: d.y - f }, A, Math.ceil(F / 2)), y = p.shift() + P.shift() - 1;
+              return (s = P.concat(y)).concat.apply(s, p);
             }
-            function c(l, t) {
-              var C = u(l) / u(t), s = 0;
-              return t.forEach(function(F, f) {
-                s += Math.pow(l[f] - F * C, 2);
-              }), { averageSize: C, error: s };
+            function c(d, B) {
+              var A = u(d) / u(B), F = 0;
+              return B.forEach(function(s, f) {
+                F += Math.pow(d[f] - s * A, 2);
+              }), { averageSize: A, error: F };
             }
-            function v(l, t, C) {
+            function v(d, B, A) {
               try {
-                var s = k(l, { x: -1, y: l.y }, C, t.length), F = k(l, { x: l.x, y: -1 }, C, t.length), f = {
-                  x: Math.max(0, l.x - l.y) - 1,
-                  y: Math.max(0, l.y - l.x) - 1
-                }, m = k(l, f, C, t.length), p = {
-                  x: Math.min(C.width, l.x + l.y) + 1,
-                  y: Math.min(C.height, l.y + l.x) + 1
-                }, P = k(l, p, C, t.length), g = c(s, t), S = c(F, t), M = c(m, t), $ = c(P, t), O = Math.sqrt(g.error * g.error + S.error * S.error + M.error * M.error + $.error * $.error), _ = (g.averageSize + S.averageSize + M.averageSize + $.averageSize) / 4, N = (Math.pow(g.averageSize - _, 2) + Math.pow(S.averageSize - _, 2) + Math.pow(M.averageSize - _, 2) + Math.pow($.averageSize - _, 2)) / _;
+                var F = h(d, { x: -1, y: d.y }, A, B.length), s = h(d, { x: d.x, y: -1 }, A, B.length), f = {
+                  x: Math.max(0, d.x - d.y) - 1,
+                  y: Math.max(0, d.y - d.x) - 1
+                }, m = h(d, f, A, B.length), p = {
+                  x: Math.min(A.width, d.x + d.y) + 1,
+                  y: Math.min(A.height, d.y + d.x) + 1
+                }, P = h(d, p, A, B.length), y = c(F, B), S = c(s, B), M = c(m, B), $ = c(P, B), O = Math.sqrt(y.error * y.error + S.error * S.error + M.error * M.error + $.error * $.error), _ = (y.averageSize + S.averageSize + M.averageSize + $.averageSize) / 4, N = (Math.pow(y.averageSize - _, 2) + Math.pow(S.averageSize - _, 2) + Math.pow(M.averageSize - _, 2) + Math.pow($.averageSize - _, 2)) / _;
                 return O + N;
               } catch {
                 return 1 / 0;
               }
             }
-            function h(l, t) {
-              for (var C = Math.round(t.x); l.get(C, Math.round(t.y)); )
-                C--;
-              for (var s = Math.round(t.x); l.get(s, Math.round(t.y)); )
-                s++;
-              for (var F = (C + s) / 2, f = Math.round(t.y); l.get(Math.round(F), f); )
+            function k(d, B) {
+              for (var A = Math.round(B.x); d.get(A, Math.round(B.y)); )
+                A--;
+              for (var F = Math.round(B.x); d.get(F, Math.round(B.y)); )
+                F++;
+              for (var s = (A + F) / 2, f = Math.round(B.y); d.get(Math.round(s), f); )
                 f--;
-              for (var m = Math.round(t.y); l.get(Math.round(F), m); )
+              for (var m = Math.round(B.y); d.get(Math.round(s), m); )
                 m++;
               var p = (f + m) / 2;
-              return { x: F, y: p };
+              return { x: s, y: p };
             }
-            function w(l) {
-              for (var t = [], C = [], s = [], F = [], f = function(b) {
-                for (var U = 0, j = !1, L = [0, 0, 0, 0, 0], A0 = function(z) {
-                  var h0 = l.get(z, b);
-                  if (h0 === j)
-                    U++;
+            function w(d) {
+              for (var B = [], A = [], F = [], s = [], f = function(b) {
+                for (var R = 0, j = !1, L = [0, 0, 0, 0, 0], A0 = function(U) {
+                  var k0 = d.get(U, b);
+                  if (k0 === j)
+                    R++;
                   else {
-                    L = [L[1], L[2], L[3], L[4], U], U = 1, j = h0;
-                    var G = u(L) / 7, Ax = Math.abs(L[0] - G) < G && Math.abs(L[1] - G) < G && Math.abs(L[2] - 3 * G) < 3 * G && Math.abs(L[3] - G) < G && Math.abs(L[4] - G) < G && !h0, o0 = u(L.slice(-3)) / 3, Fx = Math.abs(L[2] - o0) < o0 && Math.abs(L[3] - o0) < o0 && Math.abs(L[4] - o0) < o0 && h0;
+                    L = [L[1], L[2], L[3], L[4], R], R = 1, j = k0;
+                    var G = u(L) / 7, Ax = Math.abs(L[0] - G) < G && Math.abs(L[1] - G) < G && Math.abs(L[2] - 3 * G) < 3 * G && Math.abs(L[3] - G) < G && Math.abs(L[4] - G) < G && !k0, o0 = u(L.slice(-3)) / 3, sx = Math.abs(L[2] - o0) < o0 && Math.abs(L[3] - o0) < o0 && Math.abs(L[4] - o0) < o0 && k0;
                     if (Ax) {
-                      var f0 = z - L[3] - L[4], F0 = f0 - L[2], Z = { startX: F0, endX: f0, y: b }, s0 = C.filter(function(V) {
-                        return F0 >= V.bottom.startX && F0 <= V.bottom.endX || f0 >= V.bottom.startX && F0 <= V.bottom.endX || F0 <= V.bottom.startX && f0 >= V.bottom.endX && L[2] / (V.bottom.endX - V.bottom.startX) < n && L[2] / (V.bottom.endX - V.bottom.startX) > r;
+                      var f0 = U - L[3] - L[4], s0 = f0 - L[2], Z = { startX: s0, endX: f0, y: b }, F0 = A.filter(function(V) {
+                        return s0 >= V.bottom.startX && s0 <= V.bottom.endX || f0 >= V.bottom.startX && s0 <= V.bottom.endX || s0 <= V.bottom.startX && f0 >= V.bottom.endX && L[2] / (V.bottom.endX - V.bottom.startX) < n && L[2] / (V.bottom.endX - V.bottom.startX) > r;
                       });
-                      s0.length > 0 ? s0[0].bottom = Z : C.push({ top: Z, bottom: Z });
+                      F0.length > 0 ? F0[0].bottom = Z : A.push({ top: Z, bottom: Z });
                     }
-                    if (Fx) {
-                      var m0 = z - L[4], D0 = m0 - L[3], Z = { startX: D0, y: b, endX: m0 }, s0 = F.filter(function(Q) {
+                    if (sx) {
+                      var m0 = U - L[4], D0 = m0 - L[3], Z = { startX: D0, y: b, endX: m0 }, F0 = s.filter(function(Q) {
                         return D0 >= Q.bottom.startX && D0 <= Q.bottom.endX || m0 >= Q.bottom.startX && D0 <= Q.bottom.endX || D0 <= Q.bottom.startX && m0 >= Q.bottom.endX && L[2] / (Q.bottom.endX - Q.bottom.startX) < n && L[2] / (Q.bottom.endX - Q.bottom.startX) > r;
                       });
-                      s0.length > 0 ? s0[0].bottom = Z : F.push({ top: Z, bottom: Z });
+                      F0.length > 0 ? F0[0].bottom = Z : s.push({ top: Z, bottom: Z });
                     }
                   }
-                }, H = -1; H <= l.width; H++)
+                }, H = -1; H <= d.width; H++)
                   A0(H);
-                t.push.apply(t, C.filter(function(z) {
-                  return z.bottom.y !== b && z.bottom.y - z.top.y >= 2;
-                })), C = C.filter(function(z) {
-                  return z.bottom.y === b;
-                }), s.push.apply(s, F.filter(function(z) {
-                  return z.bottom.y !== b;
-                })), F = F.filter(function(z) {
-                  return z.bottom.y === b;
+                B.push.apply(B, A.filter(function(U) {
+                  return U.bottom.y !== b && U.bottom.y - U.top.y >= 2;
+                })), A = A.filter(function(U) {
+                  return U.bottom.y === b;
+                }), F.push.apply(F, s.filter(function(U) {
+                  return U.bottom.y !== b;
+                })), s = s.filter(function(U) {
+                  return U.bottom.y === b;
                 });
-              }, m = 0; m <= l.height; m++)
+              }, m = 0; m <= d.height; m++)
                 f(m);
-              t.push.apply(t, C.filter(function(b) {
+              B.push.apply(B, A.filter(function(b) {
                 return b.bottom.y - b.top.y >= 2;
-              })), s.push.apply(s, F);
-              var p = t.filter(function(b) {
+              })), F.push.apply(F, s);
+              var p = B.filter(function(b) {
                 return b.bottom.y - b.top.y >= 2;
               }).map(function(b) {
-                var U = (b.top.startX + b.top.endX + b.bottom.startX + b.bottom.endX) / 4, j = (b.top.y + b.bottom.y + 1) / 2;
-                if (l.get(Math.round(U), Math.round(j))) {
-                  var L = [b.top.endX - b.top.startX, b.bottom.endX - b.bottom.startX, b.bottom.y - b.top.y + 1], A0 = u(L) / L.length, H = v({ x: Math.round(U), y: Math.round(j) }, [1, 1, 3, 1, 1], l);
-                  return { score: H, x: U, y: j, size: A0 };
+                var R = (b.top.startX + b.top.endX + b.bottom.startX + b.bottom.endX) / 4, j = (b.top.y + b.bottom.y + 1) / 2;
+                if (d.get(Math.round(R), Math.round(j))) {
+                  var L = [b.top.endX - b.top.startX, b.bottom.endX - b.bottom.startX, b.bottom.y - b.top.y + 1], A0 = u(L) / L.length, H = v({ x: Math.round(R), y: Math.round(j) }, [1, 1, 3, 1, 1], d);
+                  return { score: H, x: R, y: j, size: A0 };
                 }
               }).filter(function(b) {
                 return !!b;
-              }).sort(function(b, U) {
-                return b.score - U.score;
-              }).map(function(b, U, j) {
-                if (U > A)
+              }).sort(function(b, R) {
+                return b.score - R.score;
+              }).map(function(b, R, j) {
+                if (R > C)
                   return null;
-                var L = j.filter(function(H, z) {
-                  return U !== z;
+                var L = j.filter(function(H, U) {
+                  return R !== U;
                 }).map(function(H) {
                   return { x: H.x, y: H.y, score: H.score + Math.pow(H.size - b.size, 2) / b.size, size: H.size };
-                }).sort(function(H, z) {
-                  return H.score - z.score;
+                }).sort(function(H, U) {
+                  return H.score - U.score;
                 });
                 if (L.length < 2)
                   return null;
@@ -9973,55 +9973,55 @@ function Lx() {
                 return { points: [b].concat(L.slice(0, 2)), score: A0 };
               }).filter(function(b) {
                 return !!b;
-              }).sort(function(b, U) {
-                return b.score - U.score;
+              }).sort(function(b, R) {
+                return b.score - R.score;
               });
               if (p.length === 0)
                 return null;
-              var P = a(p[0].points[0], p[0].points[1], p[0].points[2]), g = P.topRight, S = P.topLeft, M = P.bottomLeft, $ = y(l, s, g, S, M), O = [];
+              var P = a(p[0].points[0], p[0].points[1], p[0].points[2]), y = P.topRight, S = P.topLeft, M = P.bottomLeft, $ = g(d, F, y, S, M), O = [];
               $ && O.push({
                 alignmentPattern: { x: $.alignmentPattern.x, y: $.alignmentPattern.y },
                 bottomLeft: { x: M.x, y: M.y },
                 dimension: $.dimension,
                 topLeft: { x: S.x, y: S.y },
-                topRight: { x: g.x, y: g.y }
+                topRight: { x: y.x, y: y.y }
               });
-              var _ = h(l, g), N = h(l, S), I = h(l, M), T = y(l, s, _, N, I);
-              return T && O.push({
-                alignmentPattern: { x: T.alignmentPattern.x, y: T.alignmentPattern.y },
-                bottomLeft: { x: I.x, y: I.y },
+              var _ = k(d, y), N = k(d, S), T = k(d, M), I = g(d, F, _, N, T);
+              return I && O.push({
+                alignmentPattern: { x: I.alignmentPattern.x, y: I.alignmentPattern.y },
+                bottomLeft: { x: T.x, y: T.y },
                 topLeft: { x: N.x, y: N.y },
                 topRight: { x: _.x, y: _.y },
-                dimension: T.dimension
+                dimension: I.dimension
               }), O.length === 0 ? null : O;
             }
             o.locate = w;
-            function y(l, t, C, s, F) {
+            function g(d, B, A, F, s) {
               var f, m, p;
               try {
-                f = B(s, C, F, l), m = f.dimension, p = f.moduleSize;
+                f = t(F, A, s, d), m = f.dimension, p = f.moduleSize;
               } catch {
                 return null;
               }
               var P = {
-                x: C.x - s.x + F.x,
-                y: C.y - s.y + F.y
-              }, g = (D(s, F) + D(s, C)) / 2 / p, S = 1 - 3 / g, M = {
-                x: s.x + S * (P.x - s.x),
-                y: s.y + S * (P.y - s.y)
-              }, $ = t.map(function(_) {
-                var N = (_.top.startX + _.top.endX + _.bottom.startX + _.bottom.endX) / 4, I = (_.top.y + _.bottom.y + 1) / 2;
-                if (l.get(Math.floor(N), Math.floor(I))) {
-                  var T = [_.top.endX - _.top.startX, _.bottom.endX - _.bottom.startX, _.bottom.y - _.top.y + 1];
-                  u(T) / T.length;
-                  var b = v({ x: Math.floor(N), y: Math.floor(I) }, [1, 1, 1], l), U = b + D({ x: N, y: I }, M);
-                  return { x: N, y: I, score: U };
+                x: A.x - F.x + s.x,
+                y: A.y - F.y + s.y
+              }, y = (D(F, s) + D(F, A)) / 2 / p, S = 1 - 3 / y, M = {
+                x: F.x + S * (P.x - F.x),
+                y: F.y + S * (P.y - F.y)
+              }, $ = B.map(function(_) {
+                var N = (_.top.startX + _.top.endX + _.bottom.startX + _.bottom.endX) / 4, T = (_.top.y + _.bottom.y + 1) / 2;
+                if (d.get(Math.floor(N), Math.floor(T))) {
+                  var I = [_.top.endX - _.top.startX, _.bottom.endX - _.bottom.startX, _.bottom.y - _.top.y + 1];
+                  u(I) / I.length;
+                  var b = v({ x: Math.floor(N), y: Math.floor(T) }, [1, 1, 1], d), R = b + D({ x: N, y: T }, M);
+                  return { x: N, y: T, score: R };
                 }
               }).filter(function(_) {
                 return !!_;
               }).sort(function(_, N) {
                 return _.score - N.score;
-              }), O = g >= 15 && $.length ? $[0] : M;
+              }), O = y >= 15 && $.length ? $[0] : M;
               return { alignmentPattern: O, dimension: m };
             }
           }
@@ -10073,16 +10073,24 @@ const xx = /* @__PURE__ */ Mx(Ox), Nx = N0`
     object-fit: cover;
   }
 
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    /* вместо display:none */
+    visibility: hidden;
+  }
+
   canvas {
     position: absolute;
     top: 0;
     left: 0;
     pointer-events: none;
     z-index: 1;
-  }
-
-  video {
-    display: none;
   }
 
   .controls,
@@ -10153,28 +10161,6 @@ const xx = /* @__PURE__ */ Mx(Ox), Nx = N0`
     cursor: pointer;
   }
 
-  .scan-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: none;
-    background: rgba(0, 255, 0, 0.3);
-    border: 2px solid #00ff00;
-    z-index: 999;
-  }
-
-  .modal .overlay::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-  }
-
   .scan-area {
     --size: 75%;
     position: absolute;
@@ -10236,7 +10222,7 @@ const xx = /* @__PURE__ */ Mx(Ox), Nx = N0`
       opacity: 0;
     }
   }
-`, Ix = N0`
+`, Tx = N0`
   .circle {
     display: flex;
     justify-content: center;
@@ -10261,6 +10247,7 @@ const xx = /* @__PURE__ */ Mx(Ox), Nx = N0`
   .circle.disabled {
     opacity: 0.6;
     cursor: auto;
+    pointer-events: none;
   }
 
   .circle__inner {
@@ -10274,12 +10261,12 @@ const xx = /* @__PURE__ */ Mx(Ox), Nx = N0`
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
   }
 `;
-var Tx = Object.defineProperty, Ux = (i, x, E, o) => {
-  for (var e = void 0, A = i.length - 1, r; A >= 0; A--)
-    (r = i[A]) && (e = r(x, E, e) || e);
-  return e && Tx(x, E, e), e;
+var Ix = Object.defineProperty, Rx = (i, x, E, o) => {
+  for (var e = void 0, C = i.length - 1, r; C >= 0; C--)
+    (r = i[C]) && (e = r(x, E, e) || e);
+  return e && Ix(x, E, e), e;
 };
-const R0 = class R0 extends E0 {
+const z0 = class z0 extends E0 {
   constructor() {
     super(...arguments), this.disabled = !1;
   }
@@ -10294,13 +10281,13 @@ const R0 = class R0 extends E0 {
     `;
   }
 };
-R0.styles = Ix;
-let g0 = R0;
-Ux([
-  U0({ type: Boolean })
-], g0.prototype, "disabled");
-customElements.define("camera-button", g0);
-const Rx = N0`
+z0.styles = Tx;
+let y0 = z0;
+Rx([
+  R0({ type: Boolean })
+], y0.prototype, "disabled");
+customElements.define("camera-button", y0);
+const zx = N0`
   .loader {
     position: absolute;
     top: 50%;
@@ -10348,12 +10335,12 @@ const Rx = N0`
     }
   }
 `;
-var zx = Object.defineProperty, jx = (i, x, E, o) => {
-  for (var e = void 0, A = i.length - 1, r; A >= 0; A--)
-    (r = i[A]) && (e = r(x, E, e) || e);
-  return e && zx(x, E, e), e;
+var Ux = Object.defineProperty, jx = (i, x, E, o) => {
+  for (var e = void 0, C = i.length - 1, r; C >= 0; C--)
+    (r = i[C]) && (e = r(x, E, e) || e);
+  return e && Ux(x, E, e), e;
 };
-const z0 = class z0 extends E0 {
+const U0 = class U0 extends E0 {
   constructor() {
     super(...arguments), this.disabled = !1;
   }
@@ -10361,15 +10348,15 @@ const z0 = class z0 extends E0 {
     return i0` <div class="loader"></div> `;
   }
 };
-z0.styles = Rx;
-let y0 = z0;
+U0.styles = zx;
+let g0 = U0;
 jx([
-  U0({ type: Boolean })
-], y0.prototype, "disabled");
-customElements.define("camera-loader", y0);
+  R0({ type: Boolean })
+], g0.prototype, "disabled");
+customElements.define("camera-loader", g0);
 var Hx = Object.defineProperty, J = (i, x, E, o) => {
-  for (var e = void 0, A = i.length - 1, r; A >= 0; A--)
-    (r = i[A]) && (e = r(x, E, e) || e);
+  for (var e = void 0, C = i.length - 1, r; C >= 0; C--)
+    (r = i[C]) && (e = r(x, E, e) || e);
   return e && Hx(x, E, e), e;
 };
 const j0 = class j0 extends E0 {
@@ -10378,17 +10365,49 @@ const j0 = class j0 extends E0 {
       visible: !1,
       message: "",
       type: "success"
-    }, this.uploadSrc = null;
+    }, this.uploadSrc = null, this.lastScan = 0, this.scanInterval = 50, this.clearTimer = null, this.scanLoop = () => {
+      if (!this.stream) return requestAnimationFrame(this.scanLoop);
+      const x = performance.now();
+      if (x - this.lastScan < this.scanInterval)
+        return requestAnimationFrame(this.scanLoop);
+      this.lastScan = x;
+      const E = this.videoEl.videoWidth, o = this.videoEl.videoHeight;
+      if (!E || !o) return requestAnimationFrame(this.scanLoop);
+      const e = this.canvasEl.getContext("2d", { willReadFrequently: !0 });
+      e.drawImage(this.videoEl, 0, 0, E, o);
+      const C = Math.floor(E * 0.5), r = Math.floor((E - C) / 2), n = Math.floor((o - C) / 2);
+      let D;
+      try {
+        D = e.getImageData(r, n, C, C);
+      } catch {
+        return requestAnimationFrame(this.scanLoop);
+      }
+      const u = xx(D.data, C, C, {
+        inversionAttempts: "dontInvert"
+      });
+      if (u) {
+        const a = (h) => ({ x: h.x + r, y: h.y + n }), t = u.location, l = [
+          a(t.topLeftCorner),
+          a(t.topRightCorner),
+          a(t.bottomRightCorner),
+          a(t.bottomLeftCorner)
+        ];
+        e.beginPath(), e.moveTo(l[0].x, l[0].y), l.slice(1).forEach((h) => e.lineTo(h.x, h.y)), e.closePath(), e.lineWidth = 3, e.strokeStyle = "orange", e.stroke(), this.codeResult = u, this.clearTimer && clearTimeout(this.clearTimer), this.clearTimer = window.setTimeout(() => this.clearCodeResult(), 3e3);
+      }
+      console.log(u), requestAnimationFrame(this.scanLoop);
+    };
   }
   firstUpdated() {
     this.initCameraList(), this.videoEl.addEventListener("loadedmetadata", () => {
-      this.scanLoop();
+      this.resizeOverlay(), requestAnimationFrame(this.scanLoop);
     });
   }
   update(x) {
     super.update(x), x.has("stream") && this.stream && this.scanLoop();
   }
-  // Enumerate available video input devices
+  resizeOverlay() {
+    this.canvasEl.width = this.videoEl.videoWidth, this.canvasEl.height = this.videoEl.videoHeight;
+  }
   async initCameraList() {
     try {
       const x = await navigator.mediaDevices.enumerateDevices();
@@ -10397,7 +10416,6 @@ const j0 = class j0 extends E0 {
       console.error("Failed to list cameras", x);
     }
   }
-  // Open camera with given facing mode
   async openCamera() {
     if (!navigator.mediaDevices || !this.cameras.length) {
       this.showNotification("No cameras found", "warning");
@@ -10405,65 +10423,47 @@ const j0 = class j0 extends E0 {
     }
     try {
       this.stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: this.facing }
+        video: {
+          facingMode: this.facing,
+          width: { ideal: 640 },
+          height: { ideal: 480 }
+        }
       }), this.videoEl.srcObject = this.stream, await this.videoEl.play();
     } catch (x) {
       console.error("Camera access error", x), this.showNotification("Camera access denied", "danger");
     }
   }
-  // Close and stop the video stream
   closeCamera() {
     var x;
-    (x = this.stream) == null || x.getTracks().forEach((E) => E.stop()), this.stream = null, this.codeResult = null;
+    (x = this.stream) == null || x.getTracks().forEach((E) => E.stop()), this.stream = null, this.codeResult = null, this.clearOverlay(), this.clearCodeResult();
   }
-  // Continuous scan loop using requestAnimationFrame
-  scanLoop() {
-    if (!this.stream) return;
-    const x = this.videoEl.videoWidth, E = this.videoEl.videoHeight;
-    if (x === 0 || E === 0)
-      return requestAnimationFrame(() => this.scanLoop());
-    this.canvasEl.width = x, this.canvasEl.height = E;
-    const o = this.canvasEl.getContext("2d");
-    o.drawImage(this.videoEl, 0, 0, x, E);
-    let e;
-    try {
-      e = o.getImageData(0, 0, x, E);
-    } catch (r) {
-      return console.warn("getImageData failed, retrying next frame", r), requestAnimationFrame(() => this.scanLoop());
-    }
-    const A = xx(e.data, x, E, {
-      inversionAttempts: "attemptBoth"
-    });
-    A ? (this.codeResult = A, this.drawFrame(A.location), this.codeResult = A) : this.codeResult = null, requestAnimationFrame(() => this.scanLoop());
+  clearOverlay() {
+    this.canvasEl.getContext("2d").clearRect(0, 0, this.canvasEl.width, this.canvasEl.height);
   }
-  // Draw a rectangle around detected QR code
+  clearCodeResult() {
+    this.codeResult = null, this.clearTimer && (clearTimeout(this.clearTimer), this.clearTimer = null);
+  }
   drawFrame(x) {
     const E = this.canvasEl.getContext("2d");
-    E.beginPath(), E.moveTo(x.topLeftCorner.x, x.topLeftCorner.y), E.lineTo(x.topRightCorner.x, x.topRightCorner.y), E.lineTo(x.bottomRightCorner.x, x.bottomRightCorner.y), E.lineTo(x.bottomLeftCorner.x, x.bottomLeftCorner.y), E.closePath(), E.lineWidth = 4, E.strokeStyle = "red", E.stroke();
+    E.clearRect(0, 0, this.canvasEl.width, this.canvasEl.height), E.beginPath(), E.moveTo(x.topLeftCorner.x, x.topLeftCorner.y), E.lineTo(x.topRightCorner.x, x.topRightCorner.y), E.lineTo(x.bottomRightCorner.x, x.bottomRightCorner.y), E.lineTo(x.bottomLeftCorner.x, x.bottomLeftCorner.y), E.closePath(), E.lineWidth = 4, E.strokeStyle = "red", E.stroke();
   }
-  // Handle the decoded QR code result
   handleResult(x) {
-    console.log("code", x.data), this.codeResult = x;
+    console.log("code", x.data), setTimeout(() => {
+      this.closeCamera();
+    }, 1500);
   }
-  triggerSuccessCallback() {
-    var x;
-    console.log("do something with:", (x = this.codeResult) == null ? void 0 : x.data);
-  }
-  // Toggle between front and back cameras
   async switchCamera() {
     this.facing = this.facing === "environment" ? "user" : "environment", this.stream && (this.closeCamera(), await this.openCamera());
   }
-  // Handle image file uploads
   handleFileUpload(x) {
-    var A;
-    const E = x.target, o = (A = E.files) == null ? void 0 : A[0];
+    var C;
+    const E = x.target, o = (C = E.files) == null ? void 0 : C[0];
     if (!o) return;
     const e = new FileReader();
     e.onload = () => {
       this.uploadSrc = e.result, this.scanImageUpload();
     }, e.readAsDataURL(o), E.value = "";
   }
-  // Scan QR code from uploaded image
   scanImageUpload() {
     const x = new Image();
     x.src = this.uploadSrc, x.onload = () => {
@@ -10475,7 +10475,6 @@ const j0 = class j0 extends E0 {
       e ? (this.drawFrame(e.location), this.handleResult(e)) : this.showNotification("No QR code found", "warning");
     };
   }
-  // Display temporary notifications
   showNotification(x, E) {
     this.notify = { visible: !0, message: x, type: E }, setTimeout(() => this.notify.visible = !1, 4e3);
   }
@@ -10486,13 +10485,14 @@ const j0 = class j0 extends E0 {
           ${this.stream ? "" : i0`<camera-loader></camera-loader>`}
 
           <button
+            class="close-button"
             @click=${() => this.stream ? this.closeCamera() : this.openCamera()}
           >
-            ${this.stream ? "Close" : "Open"}
+            X
           </button>
 
-          <video autoplay muted playsinline></video>
-          <canvas></canvas>
+          <video id="video" autoplay muted playsinline></video>
+          <canvas id="overlay"></canvas>
 
           <div class="scan-area"></div>
 
@@ -10517,10 +10517,10 @@ const j0 = class j0 extends E0 {
 
             <camera-button
               .disabled="${!this.codeResult}"
-              @on-click="${this.triggerSuccessCallback}"
+              @on-click="${this.handleResult}"
             ></camera-button>
 
-            <button
+            <!-- <button
               class="controls__button"
               ?disabled="${this.cameras.length < 2}"
               @click="${this.switchCamera}"
@@ -10534,7 +10534,7 @@ const j0 = class j0 extends E0 {
                 </svg>
               </div>
               <p class="controls__text">Switch Camera</p>
-            </button>
+            </button> -->
           </div>
 
           <!-- <div class="controls">
