@@ -5,7 +5,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": false,
     "esModuleInterop": true,
-    "types": ["vite/client", "vue"],
+    "types": ["vite/client"],
     "allowSyntheticDefaultImports": true,
 
     "useDefineForClassFields": false,

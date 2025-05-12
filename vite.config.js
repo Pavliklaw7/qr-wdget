@@ -2,14 +2,12 @@
 import { defineConfig } from 'vite';
 import env from 'vite-plugin-env-compatible';
 import { resolve } from 'path';
-import vue from '@vitejs/plugin-vue';
 
 const outDir = resolve(__dirname, 'dist');
 
 export default defineConfig({
   base: '/',
   plugins: [
-    vue(),
     env({
       prefix: 'VITE',
       mountedPath: 'import.meta.env',
