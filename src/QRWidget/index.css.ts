@@ -125,7 +125,7 @@ export const styles = css`
     border: none;
     color: white;
     font-size: 20px;
-    padding: 10px;
+    padding: 6px 10px;
     cursor: pointer;
   }
 
@@ -153,13 +153,16 @@ export const styles = css`
     left: 50%;
     transform: translate(-50%, -50%);
 
-    padding: 0.5rem;
+    padding: 12px;
 
     border-radius: 25px;
     border: 1px solid green;
 
     background-color: lightgreen;
     z-index: 999;
+    text-transform: uppercase;
+
+    box-shadow: 1px 1px 5px 1px black;
 
     font-family: 'roboto';
   }
