@@ -25,6 +25,7 @@ export const styles = css`
   .circle.disabled {
     opacity: 0.6;
     cursor: auto;
+    pointer-events: none;
   }
 
   .circle__inner {

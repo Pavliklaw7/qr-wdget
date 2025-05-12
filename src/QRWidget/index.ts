@@ -11,11 +11,9 @@ type FacingMode = 'environment' | 'user';
 export class QrWidget extends LitElement {
   static styles = styles;
 
-  // Query video and canvas elements in the template
   @query('video') private videoEl!: HTMLVideoElement;
   @query('canvas') private canvasEl!: HTMLCanvasElement;
 
-  // Reactive state
   @state() private stream: MediaStream | null = null;
   @state() private codeResult: QRCode | null = null;
   @state() private facing: FacingMode = 'environment';
@@ -25,34 +23,32 @@ export class QrWidget extends LitElement {
     message: '',
     type: 'success' as NotifyType,
   };
-  // @state() private showUploadPreview = false;
   @state() private uploadSrc: string | null = null;
 
   private lastScan = 0;
-  // минимальный интервал между сканами в мс (например, 5 FPS → 200 мс)
-  private scanInterval = 200;
-
-  // offscreen canvas для быстрого кропа ROI
-  private offscreenCanvas = document.createElement('canvas');
-  private offscreenCtx = this.offscreenCanvas.getContext('2d')!;
+  private scanInterval = 50;
+  private clearTimer: number | null = null;
 
   firstUpdated() {
     this.initCameraList();
     this.videoEl.addEventListener('loadedmetadata', () => {
-      // размеры видео уже известны — можно гонять сканер
-      this.scanLoop();
+      this.resizeOverlay();
+      requestAnimationFrame(this.scanLoop);
     });
   }
 
   protected update(changed: PropertyValues) {
     super.update(changed);
-    // If we have a stream changed, start scanning
     if (changed.has('stream') && this.stream) {
       this.scanLoop();
     }
   }
 
-  // Enumerate available video input devices
+  private resizeOverlay() {
+    this.canvasEl.width = this.videoEl.videoWidth;
+    this.canvasEl.height = this.videoEl.videoHeight;
+  }
+
   private async initCameraList() {
     try {
       const devices = await navigator.mediaDevices.enumerateDevices();
@@ -62,7 +58,6 @@ export class QrWidget extends LitElement {
     }
   }
 
-  // Open camera with given facing mode
   public async openCamera() {
     if (!navigator.mediaDevices || !this.cameras.length) {
       this.showNotification('No cameras found', 'warning');
@@ -84,14 +79,27 @@ export class QrWidget extends LitElement {
     }
   }
 
-  // Close and stop the video stream
   public closeCamera() {
     this.stream?.getTracks().forEach((t) => t.stop());
     this.stream = null;
     this.codeResult = null;
+    this.clearOverlay();
+    this.clearCodeResult();
   }
 
-  // Continuous scan loop using requestAnimationFrame
+  private clearOverlay() {
+    const ctx = this.canvasEl.getContext('2d')!;
+    ctx.clearRect(0, 0, this.canvasEl.width, this.canvasEl.height);
+  }
+
+  private clearCodeResult() {
+    this.codeResult = null;
+    if (this.clearTimer) {
+      clearTimeout(this.clearTimer);
+      this.clearTimer = null;
+    }
+  }
+
   private scanLoop = () => {
     if (!this.stream) return requestAnimationFrame(this.scanLoop);
 
@@ -105,19 +113,14 @@ export class QrWidget extends LitElement {
     const vh = this.videoEl.videoHeight;
     if (!vw || !vh) return requestAnimationFrame(this.scanLoop);
 
-    const ctx = this.canvasEl.getContext('2d')!;
+    const ctx = this.canvasEl.getContext('2d', { willReadFrequently: true })!;
 
-    // 1) полный фон (для обновления canvas)
-    this.canvasEl.width = vw;
-    this.canvasEl.height = vh;
     ctx.drawImage(this.videoEl, 0, 0, vw, vh);
 
-    // 2) ROI: 50% ширины, квадрат, центр
     const size = Math.floor(vw * 0.5);
     const x = Math.floor((vw - size) / 2);
     const y = Math.floor((vh - size) / 2);
 
-    // 3) вырезаем ROI
     let img: ImageData;
     try {
       img = ctx.getImageData(x, y, size, size);
@@ -125,12 +128,11 @@ export class QrWidget extends LitElement {
       return requestAnimationFrame(this.scanLoop);
     }
 
-    // 4) сканируем меньший фрагмент
     const code = jsQR(img.data, size, size, {
-      inversionAttempts: 'attemptBoth',
+      inversionAttempts: 'dontInvert',
     });
+
     if (code) {
-      // рисуем рамку по глобальным координатам
       const shift = (p: any) => ({ x: p.x + x, y: p.y + y });
       const loc = code.location;
       const pts = [
@@ -143,20 +145,24 @@ export class QrWidget extends LitElement {
       ctx.moveTo(pts[0].x, pts[0].y);
       pts.slice(1).forEach((p) => ctx.lineTo(p.x, p.y));
       ctx.closePath();
-      ctx.lineWidth = 4;
-      ctx.strokeStyle = 'red';
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = 'orange';
       ctx.stroke();
+      this.codeResult = code;
 
-      this.handleResult(code);
+      if (this.clearTimer) clearTimeout(this.clearTimer);
+      this.clearTimer = window.setTimeout(() => this.clearCodeResult(), 3000);
     }
 
     console.log(code);
 
     requestAnimationFrame(this.scanLoop);
   };
-  // Draw a rectangle around detected QR code
+
   private drawFrame(loc: QRCode['location']) {
     const ctx = this.canvasEl.getContext('2d')!;
+    ctx.clearRect(0, 0, this.canvasEl.width, this.canvasEl.height);
+
     ctx.beginPath();
     ctx.moveTo(loc.topLeftCorner.x, loc.topLeftCorner.y);
     ctx.lineTo(loc.topRightCorner.x, loc.topRightCorner.y);
@@ -168,22 +174,13 @@ export class QrWidget extends LitElement {
     ctx.stroke();
   }
 
-  // Handle the decoded QR code result
   private handleResult(code: QRCode) {
-    // this.showNotification(`Scanned: ${code.data}`, 'success');
     console.log('code', code.data);
-
-    this.codeResult = code;
-    // setTimeout(() => {
-    //   this.closeCamera()
-    // }, 1500)
+    setTimeout(() => {
+      this.closeCamera();
+    }, 1500);
   }
 
-  private triggerSuccessCallback() {
-    console.log('do something with:', this.codeResult?.data);
-  }
-
-  // Toggle between front and back cameras
   private async switchCamera() {
     this.facing = this.facing === 'environment' ? 'user' : 'environment';
     if (this.stream) {
@@ -192,7 +189,6 @@ export class QrWidget extends LitElement {
     }
   }
 
-  // Handle image file uploads
   private handleFileUpload(e: Event) {
     const input = e.target as HTMLInputElement;
     const file = input.files?.[0];
@@ -200,14 +196,12 @@ export class QrWidget extends LitElement {
     const reader = new FileReader();
     reader.onload = () => {
       this.uploadSrc = reader.result as string;
-      // this.showUploadPreview = true;
       this.scanImageUpload();
     };
     reader.readAsDataURL(file);
     input.value = '';
   }
 
-  // Scan QR code from uploaded image
   private scanImageUpload() {
     const img = new Image();
     img.src = this.uploadSrc!;
@@ -229,7 +223,6 @@ export class QrWidget extends LitElement {
     };
   }
 
-  // Display temporary notifications
   private showNotification(message: string, type: NotifyType) {
     this.notify = { visible: true, message, type };
     setTimeout(() => (this.notify.visible = false), 4000);
@@ -249,8 +242,8 @@ export class QrWidget extends LitElement {
             X
           </button>
 
-          <video autoplay muted playsinline></video>
-          <canvas></canvas>
+          <video id="video" autoplay muted playsinline></video>
+          <canvas id="overlay"></canvas>
 
           <div class="scan-area"></div>
 
@@ -275,7 +268,7 @@ export class QrWidget extends LitElement {
 
             <camera-button
               .disabled="${!this.codeResult}"
-              @on-click="${this.triggerSuccessCallback}"
+              @on-click="${this.handleResult}"
             ></camera-button>
 
             <!-- <button

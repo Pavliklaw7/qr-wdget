@@ -129,28 +129,6 @@ export const styles = css`
     cursor: pointer;
   }
 
-  .scan-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: none;
-    background: rgba(0, 255, 0, 0.3);
-    border: 2px solid #00ff00;
-    z-index: 999;
-  }
-
-  .modal .overlay::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-  }
-
   .scan-area {
     --size: 75%;
     position: absolute;
