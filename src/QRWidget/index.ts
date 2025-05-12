@@ -1,5 +1,5 @@
 import { LitElement, html, PropertyValues } from 'lit';
-import { state, query } from 'lit/decorators.js';
+import { state, query, property } from 'lit/decorators.js';
 import jsQR, { QRCode } from 'jsqr';
 import { styles } from './index.css';
 import '../components/CameraButton';
@@ -10,6 +10,8 @@ type FacingMode = 'environment' | 'user';
 
 export class QrWidget extends LitElement {
   static styles = styles;
+
+  @property({ type: Function }) onResult?: (data: string) => void;
 
   @query('video') private videoEl!: HTMLVideoElement;
   @query('canvas') private canvasEl!: HTMLCanvasElement;
@@ -151,7 +153,7 @@ export class QrWidget extends LitElement {
       this.codeResult = code;
 
       if (this.clearTimer) clearTimeout(this.clearTimer);
-      this.clearTimer = window.setTimeout(() => this.clearCodeResult(), 3000);
+      this.clearTimer = window.setTimeout(() => this.clearCodeResult(), 1500);
     }
 
     console.log(code);
@@ -175,7 +177,7 @@ export class QrWidget extends LitElement {
   }
 
   private handleResult(code: QRCode) {
-    console.log('code', code.data);
+    this.onResult?.(code.data);
     setTimeout(() => {
       this.closeCamera();
     }, 1500);
@@ -239,7 +241,7 @@ export class QrWidget extends LitElement {
             @click=${() =>
               this.stream ? this.closeCamera() : this.openCamera()}
           >
-            X
+            x
           </button>
 
           <video id="video" autoplay muted playsinline></video>
