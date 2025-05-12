@@ -25,8 +25,16 @@ export class QrWidget extends LitElement {
     message: '',
     type: 'success' as NotifyType,
   };
-  @state() private showUploadPreview = false;
+  // @state() private showUploadPreview = false;
   @state() private uploadSrc: string | null = null;
+
+  private lastScan = 0;
+  // минимальный интервал между сканами в мс (например, 5 FPS → 200 мс)
+  private scanInterval = 200;
+
+  // offscreen canvas для быстрого кропа ROI
+  private offscreenCanvas = document.createElement('canvas');
+  private offscreenCtx = this.offscreenCanvas.getContext('2d')!;
 
   firstUpdated() {
     this.initCameraList();
@@ -62,7 +70,11 @@ export class QrWidget extends LitElement {
     }
     try {
       this.stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: this.facing },
+        video: {
+          facingMode: this.facing,
+          width: { ideal: 640 },
+          height: { ideal: 480 },
+        },
       });
       this.videoEl.srcObject = this.stream;
       await this.videoEl.play();
@@ -80,46 +92,68 @@ export class QrWidget extends LitElement {
   }
 
   // Continuous scan loop using requestAnimationFrame
-  private scanLoop() {
-    if (!this.stream) return;
+  private scanLoop = () => {
+    if (!this.stream) return requestAnimationFrame(this.scanLoop);
 
-    const w = this.videoEl.videoWidth;
-    const h = this.videoEl.videoHeight;
-
-    // Если метаданных ещё нет — ждём
-    if (w === 0 || h === 0) {
-      return requestAnimationFrame(() => this.scanLoop());
+    const now = performance.now();
+    if (now - this.lastScan < this.scanInterval) {
+      return requestAnimationFrame(this.scanLoop);
     }
+    this.lastScan = now;
 
-    // Устанавливаем размеры canvas только когда они ненулевые
-    this.canvasEl.width = w;
-    this.canvasEl.height = h;
+    const vw = this.videoEl.videoWidth;
+    const vh = this.videoEl.videoHeight;
+    if (!vw || !vh) return requestAnimationFrame(this.scanLoop);
 
     const ctx = this.canvasEl.getContext('2d')!;
-    ctx.drawImage(this.videoEl, 0, 0, w, h);
 
-    let imageData: ImageData;
+    // 1) полный фон (для обновления canvas)
+    this.canvasEl.width = vw;
+    this.canvasEl.height = vh;
+    ctx.drawImage(this.videoEl, 0, 0, vw, vh);
+
+    // 2) ROI: 50% ширины, квадрат, центр
+    const size = Math.floor(vw * 0.5);
+    const x = Math.floor((vw - size) / 2);
+    const y = Math.floor((vh - size) / 2);
+
+    // 3) вырезаем ROI
+    let img: ImageData;
     try {
-      imageData = ctx.getImageData(0, 0, w, h);
-    } catch (e) {
-      // на всякий случай защитимся, хотя теперь ошибок уже не будет
-      console.warn('getImageData failed, retrying next frame', e);
-      return requestAnimationFrame(() => this.scanLoop());
+      img = ctx.getImageData(x, y, size, size);
+    } catch {
+      return requestAnimationFrame(this.scanLoop);
     }
 
-    const code = jsQR(imageData.data, w, h, {
+    // 4) сканируем меньший фрагмент
+    const code = jsQR(img.data, size, size, {
       inversionAttempts: 'attemptBoth',
     });
     if (code) {
-      this.codeResult = code;
-      this.drawFrame(code.location);
+      // рисуем рамку по глобальным координатам
+      const shift = (p: any) => ({ x: p.x + x, y: p.y + y });
+      const loc = code.location;
+      const pts = [
+        shift(loc.topLeftCorner),
+        shift(loc.topRightCorner),
+        shift(loc.bottomRightCorner),
+        shift(loc.bottomLeftCorner),
+      ];
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x, pts[0].y);
+      pts.slice(1).forEach((p) => ctx.lineTo(p.x, p.y));
+      ctx.closePath();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = 'red';
+      ctx.stroke();
+
       this.handleResult(code);
-      return; // если нужно остановить после первого успешного скана
     }
 
-    requestAnimationFrame(() => this.scanLoop());
-  }
+    console.log(code);
 
+    requestAnimationFrame(this.scanLoop);
+  };
   // Draw a rectangle around detected QR code
   private drawFrame(loc: QRCode['location']) {
     const ctx = this.canvasEl.getContext('2d')!;
@@ -138,9 +172,15 @@ export class QrWidget extends LitElement {
   private handleResult(code: QRCode) {
     // this.showNotification(`Scanned: ${code.data}`, 'success');
     console.log('code', code.data);
+
+    this.codeResult = code;
     // setTimeout(() => {
     //   this.closeCamera()
     // }, 1500)
+  }
+
+  private triggerSuccessCallback() {
+    console.log('do something with:', this.codeResult?.data);
   }
 
   // Toggle between front and back cameras
@@ -160,7 +200,7 @@ export class QrWidget extends LitElement {
     const reader = new FileReader();
     reader.onload = () => {
       this.uploadSrc = reader.result as string;
-      this.showUploadPreview = true;
+      // this.showUploadPreview = true;
       this.scanImageUpload();
     };
     reader.readAsDataURL(file);
@@ -198,32 +238,82 @@ export class QrWidget extends LitElement {
   render() {
     return html`
       <div class="modal ${this.stream ? 'show' : ''}">
-        ${!this.stream ? html`<camera-loader></camera-loader>` : ''}
-        <button
-          @click=${() => (this.stream ? this.closeCamera() : this.openCamera())}
-        >
-          ${this.stream ? 'Close' : 'Open'}
-        </button>
-        <video autoplay muted playsinline></video>
-        <canvas></canvas>
-        <div class="controls">
+        <div class="modal-content">
+          ${!this.stream ? html`<camera-loader></camera-loader>` : ''}
+
           <button
-            @click=${this.switchCamera}
-            ?disabled=${this.cameras.length < 2}
+            class="close-button"
+            @click=${() =>
+              this.stream ? this.closeCamera() : this.openCamera()}
           >
-            Switch
+            X
           </button>
-          <input
-            type="file"
-            accept="image/*"
-            @change=${this.handleFileUpload}
-          />
+
+          <video autoplay muted playsinline></video>
+          <canvas></canvas>
+
+          <div class="scan-area"></div>
+
+          <div class="controls">
+            <button class="controls__button">
+              <input
+                type="file"
+                class="controls__file"
+                @change="${this.handleFileUpload}"
+                accept="image/*"
+              />
+              <div class="controls__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <path
+                    fill="currentColor"
+                    d="M246.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 109.3 192 320c0 17.7 14.3 32 32 32s32-14.3 32-32l0-210.7 73.4 73.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-128-128zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-64z"
+                  />
+                </svg>
+              </div>
+              <p class="controls__text">Upload</p>
+            </button>
+
+            <camera-button
+              .disabled="${!this.codeResult}"
+              @on-click="${this.triggerSuccessCallback}"
+            ></camera-button>
+
+            <!-- <button
+              class="controls__button"
+              ?disabled="${this.cameras.length < 2}"
+              @click="${this.switchCamera}"
+            >
+              <div class="controls__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path
+                    fill="currentColor"
+                    d="M0 224c0 17.7 14.3 32 32 32s32-14.3 32-32c0-53 43-96 96-96l160 0 0 32c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-9.2-9.2-22.9-11.9-34.9-6.9S320 19.1 320 32l0 32L160 64C71.6 64 0 135.6 0 224zm512 64c0-17.7-14.3-32-32-32s-32 14.3-32 32c0 53-43 96-96 96l-160 0 0-32c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9l-64 64c-12.5 12.5-12.5 32.8 0 45.3l64 64c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-32 160 0c88.4 0 160-71.6 160-160z"
+                  />
+                </svg>
+              </div>
+              <p class="controls__text">Switch Camera</p>
+            </button> -->
+          </div>
+
+          <!-- <div class="controls">
+            <button
+              @click=${this.switchCamera}
+              ?disabled=${this.cameras.length < 1}
+            >
+              Switch
+            </button>
+            <input
+              type="file"
+              accept="image/*"
+              @change=${this.handleFileUpload}
+            />
+          </div> -->
+          ${this.notify.visible
+            ? html`<div class="notify ${this.notify.type}">
+                ${this.notify.message}
+              </div>`
+            : ''}
         </div>
-        ${this.notify.visible
-          ? html`<div class="notify ${this.notify.type}">
-              ${this.notify.message}
-            </div>`
-          : ''}
       </div>
     `;
   }
