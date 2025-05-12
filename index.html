@@ -8,17 +8,24 @@
       rel="stylesheet"
     />
     <title>QR Widget</title>
-    <script type="module" src="./qr-widget.js"></script>
-    <script defer>
-      window.addEventListener('DOMContentLoaded', () => {
-        const qrWidget = document.querySelector('qr-widget');
-        setTimeout(() => {
-          qrWidget.openCamera();
-        }, 3000);
-      });
-    </script>
   </head>
   <body>
+    <button id="openScanner">Open QR Scanner</button>
+
     <qr-widget> </qr-widget>
+
+    <script type="module" src="./qr-widget.js"></script>
+
+    <script defer>
+      const qrWidget = document.querySelector('qr-widget');
+
+      document.querySelector('#openScanner').addEventListener('click', () => {
+        qrWidget.openCamera();
+      });
+
+      qrWidget.onResult = (data) => {
+        console.log('QR code string from widget:', data);
+      };
+    </script>
   </body>
 </html>
