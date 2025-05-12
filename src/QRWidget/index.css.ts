@@ -41,16 +41,24 @@ export const styles = css`
     object-fit: cover;
   }
 
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    /* вместо display:none */
+    visibility: hidden;
+  }
+
   canvas {
     position: absolute;
     top: 0;
     left: 0;
     pointer-events: none;
     z-index: 1;
-  }
-
-  video {
-    display: none;
   }
 
   .controls,
@@ -121,21 +129,22 @@ export const styles = css`
     cursor: pointer;
   }
 
-  .scan-overlay {
+  .scan-area {
+    --size: 75%;
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: none;
-    background: rgba(0, 255, 0, 0.3);
-    border: 2px solid #00ff00;
-    z-index: 999;
+    top: 50%;
+    left: 50%;
+    width: 75%;
+    aspect-ratio: 1;
+    transform: translate(-50%, calc(-50% - 50px));
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.6);
+    border: 2px solid #fff;
+    pointer-events: none;
+    z-index: 2;
   }
 
-  .scan-overlay.show {
-    display: block;
-    animation: scanAnimation 1s ease-out;
+  .scan-area.active {
+    border: 2px solid orange;
   }
 
   .notify {
