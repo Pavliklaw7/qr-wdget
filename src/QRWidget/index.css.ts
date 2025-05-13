@@ -160,11 +160,15 @@ export const styles = css`
 
     background-color: lightgreen;
     z-index: 999;
-    text-transform: uppercase;
+    text-align: center;
 
     box-shadow: 1px 1px 5px 1px black;
 
     font-family: 'roboto';
+  }
+
+  .notify.warning {
+    background-color: orange;
   }
 
   .notify__message {

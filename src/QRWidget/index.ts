@@ -131,7 +131,7 @@ export class QrWidget extends LitElement {
     }
 
     const code = jsQR(img.data, size, size, {
-      inversionAttempts: 'dontInvert',
+      inversionAttempts: 'attemptBoth',
     });
 
     if (code) {
@@ -156,39 +156,21 @@ export class QrWidget extends LitElement {
       this.clearTimer = window.setTimeout(() => this.clearCodeResult(), 1500);
     }
 
-    console.log(code);
-
     requestAnimationFrame(this.scanLoop);
   };
 
-  private drawFrame(loc: QRCode['location']) {
-    const ctx = this.canvasEl.getContext('2d')!;
-    ctx.clearRect(0, 0, this.canvasEl.width, this.canvasEl.height);
+  private handleResult() {
+    if (!this.codeResult) return;
+    this.onResult?.(this.codeResult.data);
 
-    ctx.beginPath();
-    ctx.moveTo(loc.topLeftCorner.x, loc.topLeftCorner.y);
-    ctx.lineTo(loc.topRightCorner.x, loc.topRightCorner.y);
-    ctx.lineTo(loc.bottomRightCorner.x, loc.bottomRightCorner.y);
-    ctx.lineTo(loc.bottomLeftCorner.x, loc.bottomLeftCorner.y);
-    ctx.closePath();
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = 'red';
-    ctx.stroke();
-  }
+    this.showNotification(
+      'QR Code scanned, camera will close automatically',
+      'success'
+    );
 
-  private handleResult(code: QRCode) {
-    this.onResult?.(code.data);
     setTimeout(() => {
       this.closeCamera();
-    }, 1500);
-  }
-
-  private async switchCamera() {
-    this.facing = this.facing === 'environment' ? 'user' : 'environment';
-    if (this.stream) {
-      this.closeCamera();
-      await this.openCamera();
-    }
+    }, 2000);
   }
 
   private handleFileUpload(e: Event) {
@@ -209,25 +191,27 @@ export class QrWidget extends LitElement {
     img.src = this.uploadSrc!;
     img.onload = () => {
       const ctx = this.canvasEl.getContext('2d')!;
-      this.canvasEl.width = img.width;
-      this.canvasEl.height = img.height;
       ctx.drawImage(img, 0, 0);
       const data = ctx.getImageData(0, 0, img.width, img.height);
       const code = jsQR(data.data, img.width, img.height, {
         inversionAttempts: 'attemptBoth',
       });
       if (code) {
-        this.drawFrame(code.location);
-        this.handleResult(code);
+        this.codeResult = code;
+        this.handleResult();
       } else {
-        this.showNotification('No QR code found', 'warning');
+        this.clearOverlay();
+        this.showNotification(
+          'No QR code found, please try another image',
+          'warning'
+        );
       }
     };
   }
 
   private showNotification(message: string, type: NotifyType) {
     this.notify = { visible: true, message, type };
-    setTimeout(() => (this.notify.visible = false), 4000);
+    setTimeout(() => (this.notify = { visible: false, message, type }), 4000);
   }
 
   render() {
@@ -272,37 +256,7 @@ export class QrWidget extends LitElement {
               .disabled="${!this.codeResult}"
               @on-click="${this.handleResult}"
             ></camera-button>
-
-            <!-- <button
-              class="controls__button"
-              ?disabled="${this.cameras.length < 2}"
-              @click="${this.switchCamera}"
-            >
-              <div class="controls__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path
-                    fill="currentColor"
-                    d="M0 224c0 17.7 14.3 32 32 32s32-14.3 32-32c0-53 43-96 96-96l160 0 0 32c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-9.2-9.2-22.9-11.9-34.9-6.9S320 19.1 320 32l0 32L160 64C71.6 64 0 135.6 0 224zm512 64c0-17.7-14.3-32-32-32s-32 14.3-32 32c0 53-43 96-96 96l-160 0 0-32c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9l-64 64c-12.5 12.5-12.5 32.8 0 45.3l64 64c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-32 160 0c88.4 0 160-71.6 160-160z"
-                  />
-                </svg>
-              </div>
-              <p class="controls__text">Switch Camera</p>
-            </button> -->
           </div>
-
-          <!-- <div class="controls">
-            <button
-              @click=${this.switchCamera}
-              ?disabled=${this.cameras.length < 1}
-            >
-              Switch
-            </button>
-            <input
-              type="file"
-              accept="image/*"
-              @change=${this.handleFileUpload}
-            />
-          </div> -->
           ${this.notify.visible
             ? html`<div class="notify ${this.notify.type}">
                 ${this.notify.message}
