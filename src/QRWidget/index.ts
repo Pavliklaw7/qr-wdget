@@ -5,7 +5,6 @@ import { styles } from './index.css';
 import '../components/CameraButton';
 import '../components/CameraLoader';
 
-type NotifyType = 'success' | 'warning' | 'danger';
 type FacingMode = 'environment' | 'user';
 
 export class QrWidget extends LitElement {
@@ -20,11 +19,6 @@ export class QrWidget extends LitElement {
   @state() private codeResult: QRCode | null = null;
   @state() private facing: FacingMode = 'environment';
   @state() private cameras: MediaDeviceInfo[] = [];
-  @state() private notify = {
-    visible: false,
-    message: '',
-    type: 'success' as NotifyType,
-  };
   @state() private uploadSrc: string | null = null;
 
   private lastScan = 0;
@@ -61,10 +55,8 @@ export class QrWidget extends LitElement {
   }
 
   public async openCamera() {
-    if (!navigator.mediaDevices || !this.cameras.length) {
-      this.showNotification('No cameras found', 'warning');
-      return;
-    }
+    if (!navigator.mediaDevices || !this.cameras.length) return;
+
     try {
       this.stream = await navigator.mediaDevices.getUserMedia({
         video: {
@@ -77,7 +69,6 @@ export class QrWidget extends LitElement {
       await this.videoEl.play();
     } catch (err) {
       console.error('Camera access error', err);
-      this.showNotification('Camera access denied', 'danger');
     }
   }
 
@@ -163,11 +154,6 @@ export class QrWidget extends LitElement {
     if (!this.codeResult) return;
     this.onResult?.(this.codeResult.data);
 
-    this.showNotification(
-      'QR Code scanned, camera will close automatically',
-      'success'
-    );
-
     setTimeout(() => {
       this.closeCamera();
     }, 2000);
@@ -201,17 +187,8 @@ export class QrWidget extends LitElement {
         this.handleResult();
       } else {
         this.clearOverlay();
-        this.showNotification(
-          'No QR code found, please try another image',
-          'warning'
-        );
       }
     };
-  }
-
-  private showNotification(message: string, type: NotifyType) {
-    this.notify = { visible: true, message, type };
-    setTimeout(() => (this.notify = { visible: false, message, type }), 4000);
   }
 
   render() {
@@ -257,11 +234,6 @@ export class QrWidget extends LitElement {
               @on-click="${this.handleResult}"
             ></camera-button>
           </div>
-          ${this.notify.visible
-            ? html`<div class="notify ${this.notify.type}">
-                ${this.notify.message}
-              </div>`
-            : ''}
         </div>
       </div>
     `;
