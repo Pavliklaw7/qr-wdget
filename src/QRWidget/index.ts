@@ -144,7 +144,7 @@ export class QrWidget extends LitElement {
       this.codeResult = code;
 
       if (this.clearTimer) clearTimeout(this.clearTimer);
-      this.clearTimer = window.setTimeout(() => this.clearCodeResult(), 1500);
+      this.clearTimer = window.setTimeout(() => this.clearCodeResult(), 500);
     }
 
     requestAnimationFrame(this.scanLoop);
@@ -153,10 +153,7 @@ export class QrWidget extends LitElement {
   private handleResult() {
     if (!this.codeResult) return;
     this.onResult?.(this.codeResult.data);
-
-    setTimeout(() => {
-      this.closeCamera();
-    }, 2000);
+    this.closeCamera();
   }
 
   private handleFileUpload(e: Event) {
