@@ -55,6 +55,14 @@ In the same place insert:
 <qr-widget></qr-widget>
 ```
 
+#### 2.1. Attributes
+
+```html
+<qr-widget immediate></qr-widget>
+```
+
+**immediate**: if set, the scanner will close immediate after detecting qr code.
+
 ### 3. Open Scanner
 
 To open scanner by button click:

@@ -11,6 +11,7 @@ export class QrWidget extends LitElement {
   static styles = styles;
 
   @property({ type: Function }) onResult?: (data: string) => void;
+  @property({ type: Boolean, reflect: true }) immediate: boolean = false;
 
   @query('video') private videoEl!: HTMLVideoElement;
   @query('canvas') private canvasEl!: HTMLCanvasElement;
@@ -126,6 +127,11 @@ export class QrWidget extends LitElement {
     });
 
     if (code) {
+      this.codeResult = code;
+
+      if (this.immediate) {
+        this.handleResult();
+      }
       const shift = (p: any) => ({ x: p.x + x, y: p.y + y });
       const loc = code.location;
       const pts = [
@@ -141,7 +147,6 @@ export class QrWidget extends LitElement {
       ctx.lineWidth = 3;
       ctx.strokeStyle = 'orange';
       ctx.stroke();
-      this.codeResult = code;
 
       if (this.clearTimer) clearTimeout(this.clearTimer);
       this.clearTimer = window.setTimeout(() => this.clearCodeResult(), 500);
