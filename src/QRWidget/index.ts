@@ -23,7 +23,7 @@ export class QrWidget extends LitElement {
   @state() private uploadSrc: string | null = null;
 
   private lastScan = 0;
-  private scanInterval = 50;
+  private scanInterval = 75;
   private clearTimer: number | null = null;
 
   firstUpdated() {
@@ -231,10 +231,12 @@ export class QrWidget extends LitElement {
               <p class="controls__text">Upload</p>
             </button>
 
-            <camera-button
-              .disabled="${!this.codeResult}"
-              @on-click="${this.handleResult}"
-            ></camera-button>
+            ${this.immediate
+              ? ''
+              : html` <camera-button
+                  .disabled="${!this.codeResult}"
+                  @on-click="${this.handleResult}"
+                ></camera-button>`}
           </div>
         </div>
       </div>
