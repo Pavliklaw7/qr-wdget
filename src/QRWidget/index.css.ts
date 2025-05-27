@@ -121,12 +121,19 @@ export const styles = css`
     position: absolute;
     top: 10px;
     right: 10px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     background: rgba(0, 0, 0, 0.5);
     border: none;
-    color: white;
-    font-size: 20px;
-    padding: 6px 10px;
     cursor: pointer;
+
+    svg {
+      width: 75%;
+    }
   }
 
   .scan-area {
@@ -141,6 +148,10 @@ export const styles = css`
     border: 2px solid #fff;
     pointer-events: none;
     z-index: 2;
+  }
+
+  .scan-area.immediate {
+    transform: translate(-50%, -50%);
   }
 
   .scan-area.active {
